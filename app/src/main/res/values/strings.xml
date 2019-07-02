@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">EduAssets</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="facebook_app_id">413034322797194</string>
+    <string name="fb_login_protocol_scheme">fb413034322797194</string>
+
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_login">Sign in</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="textWelcomeBack">Welcome Back</string>
+    <string name="textTagline">Transforming Your Future Into Asset</string>
+    <string name="textSignup">Sign Up</string>
+    <string name="textForgotpwd">Forget Password</string>
+    <string name="textEmail">Email</string>
+    <string name="textSignIn">Sign In</string>
+    <string name="textPassword">Password</string>
+    <string name="textEnterSomeDetails">Enter Some Details</string>
+    <string name="EnterCourse">Enter Persuing Course</string>
+    <string name="Entername">Enter your Name</string>
+    <string name="EnterCollege">Enter your College Name</string>
+    <string name="EnterSem">Enter your current Semester</string>
+    <string name="Done">Done</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--<string name="default_web_client_id">592629978872-ua2gnpmquvs6bamqop7redls9e4kvufv.apps.googleusercontent.com</string>-->
+</resources>
