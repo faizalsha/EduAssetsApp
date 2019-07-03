@@ -1,20 +1,32 @@
 package com.example.krishbhatia.eduassets.ui.activities;
 
+
+import android.animation.Animator;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
-import com.facebook.login.Login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -22,11 +34,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "LoginActivity";
+
+    public static boolean animation =true;
 
     private Context mContext;
-    private EditText editTextEmailLogin;
-    private EditText editTextPasswordLogin;
+    private RelativeLayout rootview, afteranimation;
+    private ImageView logoTransition;
+    private ProgressBar loadingProgressBar;
+    private EditText emailEditText;
+    private EditText passwordEditText;
     private Button buttonLogin;
     private TextView textViewRegister;
 
@@ -37,17 +58,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.loginlayout);
         mContext = LoginActivity.this;
-        editTextEmailLogin = findViewById(R.id.emailLogin);
-        editTextPasswordLogin = findViewById(R.id.passwordLogin);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+
+
+        settingupMaterialLogin();
+        mContext = LoginActivity.this;
         buttonLogin = findViewById(R.id.loginButton);
-        textViewRegister = findViewById(R.id.link_signup);
+        textViewRegister = findViewById(R.id.textsignup);
         mAuth = FirebaseAuth.getInstance();
 
-        editTextPasswordLogin.setOnClickListener(this);
-        editTextEmailLogin.setOnClickListener(this);
+        passwordEditText.setOnClickListener(this);
+        emailEditText.setOnClickListener(this);
         buttonLogin.setOnClickListener(this);
         textViewRegister.setOnClickListener(this);
 
@@ -58,10 +84,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.loginbutton:
+            case R.id.loginButton:
                 login();
                 break;
-            case R.id.link_signup:
+            case R.id.textsignup:
                 sendToRegisterActivity();
         }
     }
@@ -69,8 +95,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void login() {
-        String email = editTextEmailLogin.getText().toString();
-        String password = editTextPasswordLogin.getText().toString();
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
             Toast.makeText(mContext, "Logging In...", Toast.LENGTH_SHORT).show();
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -143,4 +169,100 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(intent);
         finish();
     }
+
+    private void settingupMaterialLogin(){
+        rootview=findViewById(R.id.rootView);
+        afteranimation=findViewById(R.id.afterAnimationView);
+        logoTransition =findViewById(R.id.bookIconImageView);
+        loadingProgressBar = findViewById(R.id.loadingProgressBar);
+
+        if(animation) {
+            final CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    Log.d(TAG, "onTick: initialising");
+                    loadingProgressBar.setVisibility(GONE);
+                    rootview.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorSplashText));
+                    logoTransition.setImageResource(R.drawable.logopng);
+                    startAnimation();
+                }
+            };
+            countDownTimer.start();
+        }
+        else {
+            Log.d(TAG, "onTick: initialising without countdown");
+//            book.setVisibility(GONE);
+            loadingProgressBar.setVisibility(GONE);
+            rootview.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorSplashText));
+            logoTransition.setImageResource(R.drawable.logopng);
+            startAnimation();
+
+        }
+
+    }
+
+    private void startAnimation(){
+        ViewPropertyAnimator viewPropertyAnimator = logoTransition.animate();
+        viewPropertyAnimator.x(50f);
+        viewPropertyAnimator.y(40f);
+        viewPropertyAnimator.setDuration(1000);
+        viewPropertyAnimator.setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                afteranimation.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Exit Application?");
+        alertDialogBuilder
+
+                .setCancelable(false)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                moveTaskToBack(true);
+                                android.os.Process.killProcess(android.os.Process.myPid());
+                                System.exit(1);
+                            }
+                        })
+
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
 }
+
+
+
+
