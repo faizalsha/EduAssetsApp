@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/eHome"
+        android:icon="@drawable/ic_homew"
+        android:iconTint="@color/white"
+        android:title="">
+
+    </item>
+    <item
+        android:id="@+id/eSearch"
+        android:icon="@drawable/ic_search"
+        android:iconTint="@color/white"
+        android:title="">
+
+    </item>
+    <!--<item-->
+        <!--android:id="@+id/eUpload"-->
+        <!--android:icon="@drawable/ic_upload"-->
+        <!--android:title="">-->
+
+    <!--</item>-->
+    <item
+        android:id="@+id/eDownloads"
+        android:icon="@drawable/ic_downloadw"
+        android:title="">
+
+    </item>
+    <item
+        android:id="@+id/eProfile"
+        android:icon="@drawable/ic_profilew"
+        android:title="">
+
+    </item>
+</menu>
