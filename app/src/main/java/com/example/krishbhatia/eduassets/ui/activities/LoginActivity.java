@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 login();
                 break;
             case R.id.signup:
+            case R.id.textsignup:
                 sendToRegisterActivity();
         }
     }
