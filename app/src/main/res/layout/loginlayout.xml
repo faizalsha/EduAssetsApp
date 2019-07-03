@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.activities.LoginActivity">
+
+    <ImageView
+        android:id="@+id/bookIconImageView"
+        android:layout_width="@dimen/dimen_162dp"
+        android:layout_height="@dimen/dimen_162dp"
+        android:layout_centerInParent="true"
+        android:contentDescription="@null"
+        android:src="@drawable/logo"
+android:scaleType="centerCrop"
+         />
+
+
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dimen_4dp"
+        android:foregroundGravity="bottom"
+        android:indeterminate="true"
+        android:padding="0dp"
+        android:theme="@style/ProgressBarStyle" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/afterAnimationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_100dp"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/WelcomeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:text="@string/textWelcomeBack"
+            android:textColor="@color/colorBackground"
+            android:textSize="@dimen/dimen_25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/readItTogetherTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/WelcomeTextView"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:text="@string/textTagline"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/dimen_15sp" />
+
+        <RelativeLayout
+            android:id="@+id/fieldsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/readItTogetherTextView"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textsignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_50dp"
+                android:text="@string/textSignup"
+                android:textColor="@color/colorTextView"
+                android:textSize="@dimen/dimen_14sp"
+                android:textStyle="bold"
+                android:transitionName="textTransition" />
+
+            <TextView
+                android:id="@+id/textForgotPwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/textsignup"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dimen_12dp"
+                android:text="@string/textForgotpwd"
+                android:textColor="@color/colorTextView"
+                android:textSize="@dimen/dimen_14sp"
+                android:textStyle="bold" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textForgotPwd"
+                android:hint="@string/textEmail"
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="@dimen/dimen_15sp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelAnimating="true"
+                app:met_floatingLabelText="@string/textEmail"
+                app:met_floatingLabelTextColor="@color/black"
+                app:met_hideUnderline="true" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_below="@id/emailEditText"
+                android:hint="@string/textPassword"
+
+                android:textColor="@color/colorTextView"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="15sp"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelAnimating="true"
+                app:met_floatingLabelText="@string/textEmail"
+                app:met_floatingLabelTextColor="@color/black"
+                app:met_hideUnderline="true" />
+
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fieldsLayout"
+            android:layout_marginTop="@dimen/dimen_50dp"
+            android:background="@drawable/login_button"
+            android:text="@string/textSignIn"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/dimen_16sp" />
+
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/gsignin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loginButton"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:gravity="center" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

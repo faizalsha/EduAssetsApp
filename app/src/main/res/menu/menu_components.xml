@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Why Us?"
+        android:id="@+id/whyus"
+        android:icon="@drawable/ic_whyus"
+        >
+
+    </item>
+    <item
+        android:title="Join Our Team"
+        android:id="@+id/joinourteam"
+        android:icon="@drawable/ic_jointeam">
+
+    </item>
+    <item
+        android:title="Contact Us"
+        android:id="@+id/contactus"
+        android:icon="@drawable/ic_contactus">
+
+    </item>
+    <item
+        android:id="@+id/requestacourse"
+        android:title="Request a Course"
+        android:icon="@drawable/ic_upload">
+
+
+    </item>
+    <item
+        android:id="@+id/rateourapp"
+        android:title="Rate our App"
+        android:icon="@drawable/ic_rate">
+    </item>
+    <item
+        android:id="@+id/shareourapp"
+        android:title="Share our App"
+        android:icon="@drawable/ic_share">
+
+
+    </item>
+    <item
+        android:id="@+id/signout"
+        android:title="Signout"
+        android:icon="@drawable/signout">
+
+
+    </item>
+
+
+
+
+
+</menu>
