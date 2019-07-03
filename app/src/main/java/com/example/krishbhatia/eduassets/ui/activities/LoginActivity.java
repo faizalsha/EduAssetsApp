@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mContext = LoginActivity.this;
         editTextEmailLogin = findViewById(R.id.emailLogin);
         editTextPasswordLogin = findViewById(R.id.passwordLogin);
-        buttonLogin = findViewById(R.id.loginButton);
+        buttonLogin = findViewById(R.id.loginbutton);
         textViewRegister = findViewById(R.id.link_signup);
         mAuth = FirebaseAuth.getInstance();
 
