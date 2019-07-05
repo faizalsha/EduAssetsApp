@@ -3,4 +3,10 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+>>>>>>> 70d8e6a4c0c0a631c07a2e77b1524c607a629b64
 </project>

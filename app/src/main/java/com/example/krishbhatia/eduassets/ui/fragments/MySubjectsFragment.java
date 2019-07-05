@@ -3,17 +3,26 @@ package com.example.krishbhatia.eduassets.ui.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.krishbhatia.eduassets.R;
+import com.example.krishbhatia.eduassets.POJO.Subject;
+import com.example.krishbhatia.eduassets.ui.adapter.SubjectAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MySubjectsFragment extends Fragment {
-
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private RecyclerView recyclerView;
+    private List<Subject> subjectList;
 
 
     private String mParam1;
@@ -47,7 +56,30 @@ public class MySubjectsFragment extends Fragment {
                              Bundle savedInstanceState) {
 //        TextView textView=container.findViewById(R.id.mycourseText);
 //        textView.setText("My courses");
-        return inflater.inflate(R.layout.fragment_my_subjects, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_subjects, container, false);
+
+        recyclerView = view.findViewById(R.id.mySubjectRecyclerView);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        subjectList = new ArrayList<>();
+
+        subjectList.add(new Subject("Physics", "B.tech 1st sem"));
+        subjectList.add(new Subject("Maths", "B.tech 1st sem"));
+        subjectList.add(new Subject("Biology", "B.tech 2nd sem"));
+        subjectList.add(new Subject("English", "B.tech 1st sem"));
+
+
+
+        //creating recyclerview adapter
+        SubjectAdapter adapter = new SubjectAdapter(getContext(), subjectList);
+
+        //setting adapter to recyclerview
+        recyclerView.setAdapter(adapter);
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
