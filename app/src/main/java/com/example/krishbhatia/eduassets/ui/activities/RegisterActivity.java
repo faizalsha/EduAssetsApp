@@ -2,6 +2,8 @@ package com.example.krishbhatia.eduassets.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,11 +11,11 @@ import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
+import com.example.krishbhatia.eduassets.Utils.NetworkUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private static final String TAG = "RegisterAcitvity";
     //UI Related
     private EditText editTextRegisterEmail;
-    private EditText editTextRegisterPhone;
+
     private EditText editTextRegisterPassword;
     private AppCompatButton buttonRegisterButton;
     private Context mContext;
@@ -41,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mContext = RegisterActivity.this;
 
         editTextRegisterEmail = findViewById(R.id.registerEmail);
-        editTextRegisterPhone = findViewById(R.id.registerPhone);
+
         editTextRegisterPassword = findViewById(R.id.registerPassword);
         buttonRegisterButton = findViewById(R.id.regbutton);
         buttonRegisterButton.setOnClickListener(this);
@@ -57,29 +59,32 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void registerUser() {
         String registerEmail = editTextRegisterEmail.getText().toString();
-        String registerPhone = editTextRegisterPhone.getText().toString();
         String registerPassword = editTextRegisterPassword.getText().toString();
 
-        if(!TextUtils.isEmpty(registerEmail) && !TextUtils.isEmpty(registerPassword) && !TextUtils.isEmpty(registerPhone)){
+        if(!TextUtils.isEmpty(registerEmail) && !TextUtils.isEmpty(registerPassword)){
 
-            mAuth.createUserWithEmailAndPassword(registerEmail, registerPassword)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(mContext,    "createUserWithEmail:success", Toast.LENGTH_SHORT).show();
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                sendEmailVerificationLink(user);
-                                updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(mContext, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                updateUI(null);
+            if (NetworkUtils.isConnectedToInternert(mContext)){
+                mAuth.createUserWithEmailAndPassword(registerEmail, registerPassword)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Toast.makeText(mContext,    "createUserWithEmail:success", Toast.LENGTH_SHORT).show();
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    sendEmailVerificationLink(user);
+                                    updateUI(user);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Toast.makeText(mContext, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                    updateUI(null);
+                                }
                             }
-                        }
-                    });
+                        });
+            } else {
+                Toast.makeText(mContext, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+            }
 
         } else{
             Toast.makeText(mContext, "Empty Fields", Toast.LENGTH_SHORT).show();
@@ -103,10 +108,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void updateUI(FirebaseUser user) {
         if(user != null){
-            //Sending user to home activity
-            Intent intent = new Intent(mContext, HomePageActivity.class);
+            Intent intent = new Intent(mContext, DetailsActivity.class);
             startActivity(intent);
             finish();
         }
     }
+
 }

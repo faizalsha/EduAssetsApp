@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.RegisterActivity"></activity>
+        <activity android:name=".ui.activities.DetailsActivity">
+        </activity>
+        <activity android:name=".ui.activities.RegisterActivity" />
         <activity
             android:name=".ui.activities.HomePageActivity"
             android:label="@string/title_activity_home_page"
@@ -50,7 +52,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <meta-data
             android:name="preloaded_fonts"

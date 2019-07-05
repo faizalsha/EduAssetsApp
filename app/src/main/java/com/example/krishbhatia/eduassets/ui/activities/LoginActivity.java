@@ -20,6 +20,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import android.animation.Animator;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.ViewPropertyAnimator;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -27,18 +37,40 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
+
+import com.example.krishbhatia.eduassets.Utils.NetworkUtils;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE
+
+;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
+
+    private static final int RC_SIGN_IN = 75;
 
     public static boolean animation =true;
 
@@ -50,10 +82,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText passwordEditText;
     private Button buttonLogin;
     private TextView textViewRegister;
+    private SignInButton googleSignInButton;
+    private GoogleSignInClient mGoogleSignInClient;
 
     //Firebase Related
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference userDatabaseReference;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,10 +110,40 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         passwordEditText.setOnClickListener(this);
         emailEditText.setOnClickListener(this);
+        mContext = LoginActivity.this;
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        buttonLogin = findViewById(R.id.loginButton);
+        textViewRegister = findViewById(R.id.textsignup);
+        googleSignInButton = findViewById(R.id.gsignin);
+
+
+        googleSignInButton.setOnClickListener(this);
+        mAuth = FirebaseAuth.getInstance();
+
         buttonLogin.setOnClickListener(this);
         textViewRegister.setOnClickListener(this);
 
+
+
+        settingupMaterialLogin();
+
+        // [START config_signin]
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        // [END config_signin]
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        mAuth = FirebaseAuth.getInstance();
+
+
+
         setupFirebaseAuth();
+
     }
 
 
@@ -87,6 +153,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.loginButton:
                 login();
                 break;
+
+            case R.id.gsignin:
+                signIn();
+                break;
             case R.id.textsignup:
                 sendToRegisterActivity();
         }
@@ -94,30 +164,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+
     private void login() {
+
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
-            Toast.makeText(mContext, "Logging In...", Toast.LENGTH_SHORT).show();
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+            if (NetworkUtils.isConnectedToInternert(mContext)){
+                Toast.makeText(mContext, "Logging In...", Toast.LENGTH_SHORT).show();
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    if (task.isSuccessful()){
-                        Toast.makeText(mContext, "Signed In", Toast.LENGTH_SHORT).show();
-                        sendToHomeActivity();
-                    }else {
-                        Toast.makeText(mContext, "Error:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()){
+                            Toast.makeText(mContext, "Signed In", Toast.LENGTH_SHORT).show();
+                            updateUI(mAuth.getCurrentUser());
+                        }else {
+                            Toast.makeText(mContext, "Error:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
+                        }
                     }
-                }
-            });
+                });
 
+            }
         }else {
             Toast.makeText(mContext, "Error: Empty Fields", Toast.LENGTH_SHORT).show();
         }
 
     }
+
+
     public void setupFirebaseAuth() {
         //mFirebaseDatabase=FirebaseDatabase.getInstance();
         //myRef=mFirebaseDatabase.getReference();
@@ -154,21 +230,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateUI(FirebaseUser user){
         if(user!=null){
-            Intent i = new Intent(mContext, HomePageActivity.class);
-            startActivity(i);
+            userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
+            userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.hasChild("name")){
+                        startActivity(new Intent(mContext, DetailsActivity.class));
+                        finish();
+                    } else {
+                        Intent i = new Intent(mContext, HomePageActivity.class);
+                        startActivity(i);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 
-    private void sendToHomeActivity() {
-        Intent intent = new Intent(this, HomePageActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
     private void sendToRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         finish();
     }
+
 
     private void settingupMaterialLogin(){
         rootview=findViewById(R.id.rootView);
@@ -260,6 +349,59 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
+
+    // [Google Signin]
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e);
+                // ...
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(mContext, "Authentication Failed.", Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                    }
+                });
+    }
+
+
 
 }
 
