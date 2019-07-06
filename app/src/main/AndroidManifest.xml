@@ -14,12 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.activities.ProfileActivity"></activity>
         <activity
             android:name=".NavigationActivity"
+            android:exported="true"
             android:label="@string/title_activity_navigation"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true"></activity>
-        <activity android:name=".ui.activities.DetailsActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activities.DetailsActivity" />
         <activity android:name=".ui.activities.RegisterActivity" />
         <activity
             android:name=".ui.activities.HomePageActivity"
