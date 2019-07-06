@@ -97,4 +97,8 @@
 	<dimen name="dimen_11sp">8.2sp</dimen>
 	<dimen name="textsize_18sp">13.5sp</dimen>
 	<dimen name="dimen_168dp">126dp</dimen>
+	<dimen name="dimen_75dp">56.2dp</dimen>
+	<dimen name="dimen_n80dp">-60dp</dimen>
+	<dimen name="dimen_25sp">18.8sp</dimen>
+	<dimen name="dimen_15sp">11.2sp</dimen>
 </resources>
