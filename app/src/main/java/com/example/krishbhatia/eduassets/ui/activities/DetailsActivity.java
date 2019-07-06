@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.NavigationActivity;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.POJO.User;
 import com.example.krishbhatia.eduassets.Utils.NetworkUtils;
@@ -68,7 +69,7 @@ public class DetailsActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(DetailsActivity.this, "Details Saved Successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(DetailsActivity.this, HomePageActivity.class));
+                                startActivity(new Intent(DetailsActivity.this, NavigationActivity.class));
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -81,7 +82,7 @@ public class DetailsActivity extends AppCompatActivity {
                         Toast.makeText(mContext, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(DetailsActivity.this, "Please Fill All Details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailsActivity.this, "Please Fill AllCourseActivity Details", Toast.LENGTH_SHORT).show();
                 }
             }
         });

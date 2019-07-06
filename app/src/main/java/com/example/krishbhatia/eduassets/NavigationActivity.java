@@ -1,10 +1,11 @@
 package com.example.krishbhatia.eduassets;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
@@ -13,30 +14,86 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
-import com.example.krishbhatia.eduassets.ui.fragments.HomeFragment;
-import com.example.krishbhatia.eduassets.ui.fragments.ProfileFragment;
-import com.example.krishbhatia.eduassets.ui.fragments.SubscribedCourseFragment;
+import com.example.krishbhatia.eduassets.ui.activities.LoginActivity;
+import com.example.krishbhatia.eduassets.ui.activities.SubscribedCourseActivity;
+import com.example.krishbhatia.eduassets.ui.adapter.ViewPagerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Toolbar toolbar;
+    private String userName;
+
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+    private TextView navName;
+    private TextView navEmail;
+
+    private View headerView;
+
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarHome);
         setSupportActionBar(toolbar);
 
+
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+//        tabLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(NavigationView.this, NavigationActivity.class));
+//            }
+//        });
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userName = dataSnapshot.child("name").getValue().toString();
+                navName = headerView.findViewById(R.id.name_nav_header);
+                navName.setText(userName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                navName.setText("Error loading username");
+            }
+        });
         navigationView.setNavigationItemSelectedListener(this);
+
+        headerView = navigationView.getHeaderView(0);
+        navName = headerView.findViewById(R.id.name_nav_header);
+        navName.setText(userName);
+        navEmail = headerView.findViewById(R.id.email_nav_header);
+        navEmail.setText(mAuth.getCurrentUser().getEmail());
+
+
     }
 
     @Override
@@ -77,31 +134,19 @@ public class NavigationActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Fragment fragment = null;
+
 
         if (id == R.id.nav_home) {
 
-            fragment = new HomeFragment();
-            toolbar.setTitle("Home");
-        } else if (id == R.id.nav_profile) {
-            fragment = new ProfileFragment();
-            toolbar.setTitle("Profile");
-
         } else if (id == R.id.nav_subscribed) {
-            fragment = new SubscribedCourseFragment();
-            toolbar.setTitle("Subscribed Courses");
+            startActivity(new Intent(NavigationActivity.this, SubscribedCourseActivity.class));
 
         }  else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_logout) {
-
-        }
-        if (fragment != null){
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            fragmentTransaction.replace(R.id.screen_area, fragment);
-            fragmentTransaction.commit();
+            mAuth.signOut();
+            startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

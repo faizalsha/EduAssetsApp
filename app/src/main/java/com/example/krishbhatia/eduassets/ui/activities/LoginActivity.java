@@ -36,6 +36,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.NavigationActivity;
 import com.example.krishbhatia.eduassets.R;
 
 import com.example.krishbhatia.eduassets.Utils.NetworkUtils;
@@ -238,7 +239,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         startActivity(new Intent(mContext, DetailsActivity.class));
                         finish();
                     } else {
-                        Intent i = new Intent(mContext, HomePageActivity.class);
+                        Intent i = new Intent(mContext, NavigationActivity.class);
                         startActivity(i);
                     }
                 }
