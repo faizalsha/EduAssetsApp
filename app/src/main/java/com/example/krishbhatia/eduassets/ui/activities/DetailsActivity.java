@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.POJO.User;
-import com.example.krishbhatia.eduassets.Utils.NetworkUtils;
+import com.example.krishbhatia.eduassets.pojo.User;
+import com.example.krishbhatia.eduassets.utils.NetworkUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,7 +81,7 @@ public class DetailsActivity extends AppCompatActivity {
                         Toast.makeText(mContext, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(DetailsActivity.this, "Please Fill All Details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailsActivity.this, "Please Fill AllCourseActivity Details", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -2,8 +2,6 @@ package com.example.krishbhatia.eduassets.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.Utils.NetworkUtils;
+import com.example.krishbhatia.eduassets.utils.NetworkUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
