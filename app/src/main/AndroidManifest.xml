@@ -14,18 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".NavigationActivity"
-            android:label="@string/title_activity_navigation"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true"></activity>
-        <activity android:name=".ui.activities.DetailsActivity"></activity>
-        <activity android:name=".ui.activities.RegisterActivity" />
+        <activity android:name=".ui.activities.LoginActivity"></activity>
+        <activity android:name=".ui.activities.SubscribedCourseActivity" />
+        <activity android:name=".ui.activities.ProfileActivity" />
         <activity
             android:name=".ui.activities.HomePageActivity"
+            android:exported="true"
             android:label="@string/title_activity_home_page"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity android:name=".ui.activities.DetailsActivity" />
+        <activity android:name=".ui.activities.RegisterActivity" /> <!-- <activity -->
+        <!-- android:name=".ui.activities.HomePageActivity" -->
+        <!-- android:label="@string/title_activity_home_page" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -49,7 +50,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.LoginActivity">
+        <activity android:name=".ui.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

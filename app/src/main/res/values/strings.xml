@@ -52,5 +52,13 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="semester">Semester</string>
+    <string name="course">course</string>
+    <string name="name">name</string>
+    <string name="edit_details">Edit Details</string>
+    <string name="college">college</string>
+    <string name="enrolled_course">enrolled course</string>
+    <string name="username">Username</string>
+    <string name="user_example_com">user@example.com</string>
     <!--<string name="default_web_client_id">592629978872-ua2gnpmquvs6bamqop7redls9e4kvufv.apps.googleusercontent.com</string>-->
 </resources>

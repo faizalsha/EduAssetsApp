@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.krishbhatia.eduassets.POJO.Course;
+import com.example.krishbhatia.eduassets.pojo.Course;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
 

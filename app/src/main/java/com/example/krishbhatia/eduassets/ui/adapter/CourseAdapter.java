@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.krishbhatia.eduassets.POJO.Course;
+import com.example.krishbhatia.eduassets.pojo.Course;
 import com.example.krishbhatia.eduassets.R;
 
 import java.util.List;

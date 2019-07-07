@@ -1,4 +1,4 @@
-package com.example.krishbhatia.eduassets.Utils;
+package com.example.krishbhatia.eduassets.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

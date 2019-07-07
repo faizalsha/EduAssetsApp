@@ -1,4 +1,4 @@
-package com.example.krishbhatia.eduassets.POJO;
+package com.example.krishbhatia.eduassets.pojo;
 
 public class User {
     String name;

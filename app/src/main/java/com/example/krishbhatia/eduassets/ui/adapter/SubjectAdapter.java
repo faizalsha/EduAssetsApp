@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.POJO.Subject;
+import com.example.krishbhatia.eduassets.pojo.Subject;
 
 import java.util.List;
 

@@ -12,6 +12,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+    dataBinding {
+        enabled = true
+    }
     buildTypes {
         debug {
 //            buildConfigField 'String' , "ApiKey" ,MY_API_KEY

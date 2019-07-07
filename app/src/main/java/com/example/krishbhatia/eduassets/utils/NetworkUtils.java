@@ -1,6 +1,5 @@
-package com.example.krishbhatia.eduassets.Utils;
+package com.example.krishbhatia.eduassets.utils;
 
-import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

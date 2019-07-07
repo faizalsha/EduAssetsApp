@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.POJO.Subject;
+import com.example.krishbhatia.eduassets.pojo.Subject;
 import com.example.krishbhatia.eduassets.ui.adapter.SubjectAdapter;
 
 import java.util.ArrayList;
