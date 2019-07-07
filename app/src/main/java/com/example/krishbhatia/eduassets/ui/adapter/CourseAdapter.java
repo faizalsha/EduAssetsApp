@@ -2,6 +2,7 @@ package com.example.krishbhatia.eduassets.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +18,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     //this context we will use to inflate the layout
     private Context mCtx;
+    private OnCourseClickListener onCourseClickListener;
 
     //we are storing all the courses in a list
     private List<Course> courseList;
 
 
     //getting the context and course list with constructor
-    public CourseAdapter(Context mCtx, List<Course> courseList) {
+    public CourseAdapter(Context mCtx, List<Course> courseList, OnCourseClickListener onCourseClickListener) {
         this.mCtx = mCtx;
         this.courseList = courseList;
+        this.onCourseClickListener = onCourseClickListener;
     }
 
 
@@ -35,7 +38,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.course_layout, null);
-        return new CourseViewHolder(view);
+        return new CourseViewHolder(view, onCourseClickListener);
     }
 
     @Override
@@ -53,15 +56,27 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         return courseList.size();
     }
 
-    class CourseViewHolder extends RecyclerView.ViewHolder{
+    class CourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textViewTitle, textViewDesc;
+        CardView cardView;
 
-        public CourseViewHolder(@NonNull View itemView) {
+        public CourseViewHolder(@NonNull View itemView, OnCourseClickListener onCourseClickListener) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewDesc = itemView.findViewById(R.id.textViewDesc);
+            cardView = itemView.findViewById(R.id.card_view_course);
+            cardView.setOnClickListener(CourseViewHolder.this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onCourseClickListener.onCourseClick();
+        }
+    }
+
+    public interface OnCourseClickListener{
+        void onCourseClick();
     }
 }

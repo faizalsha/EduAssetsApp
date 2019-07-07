@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.krishbhatia.eduassets.ui.activities.LoginActivity;
 import com.example.krishbhatia.eduassets.ui.activities.SubscribedCourseActivity;
+import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
 import com.example.krishbhatia.eduassets.ui.adapter.ViewPagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -61,7 +62,6 @@ public class NavigationActivity extends AppCompatActivity
 //                startActivity(new Intent(NavigationView.this, NavigationActivity.class));
 //            }
 //        });
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -153,4 +153,6 @@ public class NavigationActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

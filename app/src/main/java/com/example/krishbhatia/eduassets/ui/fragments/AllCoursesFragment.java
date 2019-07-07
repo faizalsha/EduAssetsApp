@@ -1,6 +1,7 @@
 package com.example.krishbhatia.eduassets.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,13 +13,14 @@ import android.view.ViewGroup;
 
 import com.example.krishbhatia.eduassets.POJO.Course;
 import com.example.krishbhatia.eduassets.R;
+import com.example.krishbhatia.eduassets.ui.activities.CourseActivity;
 import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class AllCoursesFragment extends Fragment {
+public class AllCoursesFragment extends Fragment implements CourseAdapter.OnCourseClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -87,7 +89,7 @@ public class AllCoursesFragment extends Fragment {
         courseList.add(new Course("C++", "B.tech 1st sem"));
 
         //creating recyclerview adapter
-        CourseAdapter adapter = new CourseAdapter(getContext(), courseList);
+        CourseAdapter adapter = new CourseAdapter(getContext(), courseList, this);
 
         //setting adapter to recyclerview
         recyclerView.setAdapter(adapter);
@@ -119,4 +121,9 @@ public class AllCoursesFragment extends Fragment {
     }
 
 
+    @Override
+    public void onCourseClick() {
+        Intent intent = new Intent(getActivity(), CourseActivity.class);
+        startActivity(intent);
+    }
 }
