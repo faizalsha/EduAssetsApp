@@ -63,10 +63,6 @@ import com.google.firebase.database.ValueEventListener;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-
-
-
-
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
 
@@ -401,9 +397,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
     }
-
-
-
 }
 
 
