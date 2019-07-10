@@ -2,11 +2,13 @@ package com.example.krishbhatia.eduassets;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.ui.activities.HomePageActivity;
 import com.example.krishbhatia.eduassets.utils.NetworkUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -74,17 +76,24 @@ public class FirebaseMethods {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isSuccessful()){
-                            Toast.makeText(mContext, "Signed In", Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
+                            if (mAuth.getCurrentUser().isEmailVerified()) {
+                                Toast.makeText(mContext, "Signed In", Toast.LENGTH_SHORT).show();
 //                            updateUI(mAuth.getCurrentUser());
 //                            SharedPreferenceImpl.getSharedPreferences(mContext).edit().putString(Constants.USER_ID,task.getResult().getUser().getUid());
-                                SharedPreferenceImpl.setSomeStringValue(mContext,Constants.USER_ID,task.getResult().getUser().getUid());
-                            SharedPreferenceImpl.setSomeStringValue(mContext,Constants.EMAIL,task.getResult().getUser().getEmail());
+                                SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, task.getResult().getUser().getUid());
+                                SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, task.getResult().getUser().getEmail());
+                                mContext.startActivity(new Intent(mContext, HomePageActivity.class));
 
-                        }else {
-                            Toast.makeText(mContext, "Error:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
+                            } else {
+                                Toast.makeText(mContext, "Your email is not verified", Toast.LENGTH_SHORT).show();
+                            }
                         }
+                        else{
+                                Toast.makeText(mContext, "Error:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
+
                     }
                 });
 

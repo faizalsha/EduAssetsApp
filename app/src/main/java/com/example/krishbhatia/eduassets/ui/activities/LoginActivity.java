@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
 
@@ -49,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference userDatabaseReference;
     private FirebaseMethods firebaseMethods;
-    private SignInButton googleSignInButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                loginWithEmailPwd();
                 firebaseMethods.loginWithEmailPwd(loginlayoutBinding.emailEditText.getText().toString(),loginlayoutBinding.passwordEditText.getText().toString());
+                finish();
             }
         });
         loginlayoutBinding.textsignup.setOnClickListener(new View.OnClickListener() {
@@ -117,15 +118,20 @@ public class LoginActivity extends AppCompatActivity {
             userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!dataSnapshot.hasChild("name")){
-                        SharedPreferenceImpl.setSomeStringValue(mContext,Constants.USER_ID,user.getUid());
-                        SharedPreferenceImpl.setSomeStringValue(mContext,Constants.EMAIL,user.getEmail());
+                    if(user.isEmailVerified()) {
+                        if (!dataSnapshot.hasChild("name")) {
+                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, user.getUid());
+                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, user.getEmail());
 
-                        startActivity(new Intent(mContext, DetailsActivity.class));
-                        finish();
-                    } else {
-                        Intent i = new Intent(mContext, HomePageActivity.class);
-                        startActivity(i);
+                            startActivity(new Intent(mContext, DetailsActivity.class));
+                            finish();
+                        } else {
+                            Intent i = new Intent(mContext, HomePageActivity.class);
+                            startActivity(i);
+                        }
+                    }
+                    else {
+                        Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
                     }
                 }
 
