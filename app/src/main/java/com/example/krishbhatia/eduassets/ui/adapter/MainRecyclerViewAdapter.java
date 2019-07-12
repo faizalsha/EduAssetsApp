@@ -9,14 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.krishbhatia.eduassets.POJO.ResourcePOJO;
 import com.example.krishbhatia.eduassets.R;
+
+import java.util.List;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.MainRecyclerViewHolder> {
 
-    Context mContext;
+    private Context mContext;
+    private List<ResourcePOJO> mList;
 
-    public MainRecyclerViewAdapter(Context mContext) {
+    public MainRecyclerViewAdapter(Context mContext, List<ResourcePOJO> mList) {
         this.mContext = mContext;
+        this.mList = mList;
     }
 
     @NonNull
@@ -30,7 +35,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull MainRecyclerViewHolder mainRecyclerViewHolder, int i) {
 
-        InnerRecyclerViewAdapter innerRecyclerViewAdapter = new InnerRecyclerViewAdapter(mContext);
+        InnerRecyclerViewAdapter innerRecyclerViewAdapter = new InnerRecyclerViewAdapter(mContext, mList);
         mainRecyclerViewHolder.innerRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mainRecyclerViewHolder.innerRecyclerView.setAdapter(innerRecyclerViewAdapter);
 

@@ -9,8 +9,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alespero.expandablecardview.ExpandableCardView;
+import com.example.krishbhatia.eduassets.POJO.ResourcePOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.MainRecyclerViewAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CourseActivity extends AppCompatActivity {
 
@@ -25,9 +29,14 @@ public class CourseActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        List<ResourcePOJO> resourcePOJOList = new ArrayList<>();
+
+        resourcePOJOList.add(new ResourcePOJO("pdf", "Foundatation of Computer Science", "url", "OOP using C++", "211"));
+        resourcePOJOList.add(new ResourcePOJO("video", "Computer Science", "url", "OOP using C++", "211"));
+
         RecyclerView recyclerView = findViewById(R.id.main_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        MainRecyclerViewAdapter adapter = new MainRecyclerViewAdapter(this);
+        MainRecyclerViewAdapter adapter = new MainRecyclerViewAdapter(this, resourcePOJOList);
         recyclerView.setAdapter(adapter);
     }
 }
