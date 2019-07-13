@@ -3,10 +3,12 @@ package com.example.krishbhatia.eduassets.ui.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,19 @@ import com.example.krishbhatia.eduassets.POJO.Course;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.CourseActivity;
 import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
+import com.google.android.exoplayer2.C;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class AllCoursesFragment extends Fragment implements CourseAdapter.OnCourseClickListener {
+public class AllCoursesFragment extends Fragment {
+    private static final String TAG = "AllCoursesFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -65,34 +74,31 @@ public class AllCoursesFragment extends Fragment implements CourseAdapter.OnCour
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.VERTICAL,false));
 
+
         courseList = new ArrayList<>();
 
-        courseList.add(new Course("Physics", "B.tech 1st sem"));
-        courseList.add(new Course("Math", "B.tech 1st sem"));
-        courseList.add(new Course("Chemistry", "B.tech 1st sem"));
-        courseList.add(new Course("English", "B.tech 1st sem"));
-        courseList.add(new Course("C++", "B.tech 1st sem"));
-        courseList.add(new Course("Physics", "B.tech 1st sem"));
-        courseList.add(new Course("Math", "B.tech 1st sem"));
-        courseList.add(new Course("Chemistry", "B.tech 1st sem"));
-        courseList.add(new Course("English", "B.tech 1st sem"));
-        courseList.add(new Course("C++", "B.tech 1st sem"));
-        courseList.add(new Course("Physics", "B.tech 1st sem"));
-        courseList.add(new Course("Math", "B.tech 1st sem"));
-        courseList.add(new Course("Chemistry", "B.tech 1st sem"));
-        courseList.add(new Course("English", "B.tech 1st sem"));
-        courseList.add(new Course("C++", "B.tech 1st sem"));
-        courseList.add(new Course("Physics", "B.tech 1st sem"));
-        courseList.add(new Course("Math", "B.tech 1st sem"));
-        courseList.add(new Course("Chemistry", "B.tech 1st sem"));
-        courseList.add(new Course("English", "B.tech 1st sem"));
-        courseList.add(new Course("C++", "B.tech 1st sem"));
+        final DatabaseReference courseRef = FirebaseDatabase.getInstance().getReference().child("shadab/courses");
 
-        //creating recyclerview adapter
-        CourseAdapter adapter = new CourseAdapter(getContext(), courseList, this);
 
-        //setting adapter to recyclerview
-        recyclerView.setAdapter(adapter);
+        courseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Course course;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    course = snapshot.getValue(Course.class);
+                    Log.d(TAG, "onDataChange: snapshot is " + course.getTitle());
+                    courseList.add(course);
+                }
+                CourseAdapter adapter = new CourseAdapter(getContext(), courseList);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         return view;
     }
@@ -121,9 +127,4 @@ public class AllCoursesFragment extends Fragment implements CourseAdapter.OnCour
     }
 
 
-    @Override
-    public void onCourseClick() {
-        Intent intent = new Intent(getActivity(), CourseActivity.class);
-        startActivity(intent);
-    }
 }

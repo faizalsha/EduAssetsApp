@@ -38,20 +38,8 @@ public class PdfViewerActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.pdf_loading_progress);
 
         pdfView = findViewById(R.id.pdf_view);
-        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("url");
-        mRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Toast.makeText(PdfViewerActivity.this, "Changed", Toast.LENGTH_SHORT).show();
-                String url = dataSnapshot.getValue(String.class);
-                new RetrievePdfStream().execute(url);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(PdfViewerActivity.this, "Failed to load", Toast.LENGTH_SHORT).show();
-            }
-        });
+        String url = getIntent().getStringExtra("url");
+        new RetrievePdfStream().execute(url);
     }
 
     class RetrievePdfStream extends AsyncTask<String, Void, InputStream> {

@@ -34,7 +34,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     SimpleExoPlayerView exoPlayerView;
     SimpleExoPlayer exoPlayer;
     ProgressBar progressBar;
-    String videoUrl = "https://firebasestorage.googleapis.com/v0/b/expandingcard.appspot.com/o/SampleVideo_1280x720_1mb.mp4?alt=media&token=1f7d888c-5e67-4db0-9d40-7f4f90c570a8";
+    String videoUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video_player);
         exoPlayerView = findViewById(R.id.exo_player_view);
         progressBar = findViewById(R.id.progressBar);
+        videoUrl = getIntent().getStringExtra("url");
         initializePlayer();
     }
 

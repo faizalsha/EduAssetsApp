@@ -11,21 +11,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.engine.Resource;
 import com.example.krishbhatia.eduassets.POJO.ResourcePOJO;
+import com.example.krishbhatia.eduassets.POJO.Topic;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.PdfViewerActivity;
 import com.example.krishbhatia.eduassets.ui.activities.VideoPlayerActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecyclerViewAdapter.InnerRecyclerViewHolder> {
 
     Context mContext;
-    private List<ResourcePOJO> mList;
+    //private List<ResourcePOJO> mList;
+    private ArrayList<ResourcePOJO> resourceList;
 
-    public InnerRecyclerViewAdapter(Context mContext, List<ResourcePOJO> mList) {
+    public InnerRecyclerViewAdapter(Context mContext, ArrayList<ResourcePOJO> resourcePOJOS) {
         this.mContext = mContext;
-        this.mList = mList;
+        this.resourceList = resourcePOJOS;
     }
 
     @NonNull
@@ -37,23 +41,26 @@ public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecycler
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final InnerRecyclerViewHolder innerRecyclerViewHolder, int position) {
-        final ResourcePOJO res = mList.get(position);
-        innerRecyclerViewHolder.textView.setText(res.getName());
-        if (res.getResType() == "pdf"){
-            innerRecyclerViewHolder.imageView.setImageResource(R.drawable.ic_pdf);
-        } else if (res.getResType() == "video"){
-            innerRecyclerViewHolder.imageView.setImageResource(R.drawable.ic_video);
+    public void onBindViewHolder(@NonNull final InnerRecyclerViewHolder holder, int position) {
+        final ResourcePOJO res = resourceList.get(position);
+        holder.textView.setText(res.getName());
+        if (res.getResType().equals("pdf")){
+            holder.imageView.setImageResource(R.drawable.ic_pdf);
+        } else {
+            holder.imageView.setImageResource(R.drawable.ic_video);
         }
 
-        innerRecyclerViewHolder.view.setOnClickListener(new View.OnClickListener() {
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (res.getResType() == "pdf"){
+                if (res.getResType().equals("pdf")){
                     Intent intent = new Intent(mContext, PdfViewerActivity.class);
+                    intent.putExtra("url", res.getUrl());
                     mContext.startActivity(intent);
-                } else if (res.getResType() == "video"){
-                    mContext.startActivity(new Intent(mContext, VideoPlayerActivity.class));
+                } else if (res.getResType().equals("video")){
+                    Intent intent = new Intent(mContext, VideoPlayerActivity.class);
+                    intent.putExtra("url", res.getUrl());
+                    mContext.startActivity(intent);
                 }
             }
         });
@@ -61,7 +68,7 @@ public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecycler
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return resourceList.size();
     }
 
     class InnerRecyclerViewHolder extends RecyclerView.ViewHolder {
