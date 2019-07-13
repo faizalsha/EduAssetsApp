@@ -61,5 +61,13 @@ dependencies {
 
     implementation 'com.alespero:expandable-cardview:0.8'
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+
+    implementation 'com.google.android.exoplayer:exoplayer:r2.4.0'
+    implementation 'com.google.android.exoplayer:exoplayer-core:r2.4.0'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:r2.4.0'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.0'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:r2.4.0'
 }
 apply plugin: 'com.google.gms.google-services'

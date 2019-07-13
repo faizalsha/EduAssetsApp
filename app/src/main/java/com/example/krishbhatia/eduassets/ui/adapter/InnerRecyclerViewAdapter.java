@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.krishbhatia.eduassets.POJO.ResourcePOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.PdfViewerActivity;
+import com.example.krishbhatia.eduassets.ui.activities.VideoPlayerActivity;
 
 import java.util.List;
 
@@ -51,8 +52,8 @@ public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecycler
                 if (res.getResType() == "pdf"){
                     Intent intent = new Intent(mContext, PdfViewerActivity.class);
                     mContext.startActivity(intent);
-                } else{
-                    Toast.makeText(mContext, "This is a video resource: implementation required", Toast.LENGTH_SHORT).show();
+                } else if (res.getResType() == "video"){
+                    mContext.startActivity(new Intent(mContext, VideoPlayerActivity.class));
                 }
             }
         });
