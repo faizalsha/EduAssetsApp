@@ -38,8 +38,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+<<<<<<< HEAD
 
 public class LoginActivity extends AppCompatActivity {
+=======
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+>>>>>>> 2ffb7195bd915b9c8ab69a61826e1fc23d227b08
     private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 75;
     public  boolean animation =true;
@@ -208,9 +215,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+<<<<<<< HEAD
 
 
 
+=======
+                    }
+                });
+    }
+>>>>>>> 2ffb7195bd915b9c8ab69a61826e1fc23d227b08
 }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.krishbhatia.eduassets">
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -13,8 +14,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.LoginActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory">
+        <activity android:name=".ui.activities.LoginActivity"/>
+        <activity android:name=".ui.activities.VideoPlayerActivity"/>
+        <activity android:name=".ui.activities.PdfViewerActivity" />
+        <activity
+            android:name=".ui.activities.CourseActivity" />
         <activity android:name=".ui.activities.SubscribedCourseActivity" />
         <activity android:name=".ui.activities.ProfileActivity" />
         <activity
@@ -23,10 +29,7 @@
             android:label="@string/title_activity_home_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.activities.DetailsActivity" />
-        <activity android:name=".ui.activities.RegisterActivity" /> <!-- <activity -->
-        <!-- android:name=".ui.activities.HomePageActivity" -->
-        <!-- android:label="@string/title_activity_home_page" -->
-        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
+        <activity android:name=".ui.activities.RegisterActivity" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
