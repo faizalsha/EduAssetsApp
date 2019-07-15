@@ -101,4 +101,6 @@
 	<dimen name="dimen_n80dp">-68dp</dimen>
 	<dimen name="dimen_25sp">21.2sp</dimen>
 	<dimen name="dimen_15sp">12.8sp</dimen>
+    <dimen name="dimen_300dp">300dp</dimen>
+	<dimen name="dimen_250">250dp</dimen>
 </resources>

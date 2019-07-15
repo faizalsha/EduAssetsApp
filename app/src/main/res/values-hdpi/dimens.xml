@@ -3,12 +3,12 @@
 	<dimen name="dimen_15dp">11.2dp</dimen>
 	<dimen name="dimen_2dp">1.5dp</dimen>
 	<dimen name="dimen_4dp">3dp</dimen>
-	<dimen name="dimen_11dp">8.2dp</dimen>
+	<dimen name="dimen_11dp">8.3dp</dimen>
 	<dimen name="dimen_6dp">4.5dp</dimen>
 	<dimen name="dimen_34dp">25.5dp</dimen>
 	<dimen name="dimen_32dp">24dp</dimen>
 	<dimen name="dimen_8dp">6dp</dimen>
-	<dimen name="dimen_17p7dp">13.3dp</dimen>
+	<dimen name="dimen_17p7dp">13.2dp</dimen>
 	<dimen name="dimen_30dp">22.5dp</dimen>
 	<dimen name="dimen_n17dp">-12.8dp</dimen>
 	<dimen name="dimen_n15dp">-11.2dp</dimen>
@@ -27,8 +27,8 @@
 	<dimen name="dimen_270dp">202.5dp</dimen>
 	<dimen name="dimen_66dp">49.5dp</dimen>
 	<dimen name="dimen_48dp">36dp</dimen>
-	<dimen name="dimen_27dp">20.2dp</dimen>
-	<dimen name="dimen_25dp">18.8dp</dimen>
+	<dimen name="dimen_27dp">20.3dp</dimen>
+	<dimen name="dimen_25dp">18.7dp</dimen>
 	<dimen name="dimen_44dp">33dp</dimen>
 	<dimen name="dimen_328dp">246dp</dimen>
 	<dimen name="dimen_40dp">30dp</dimen>
@@ -46,7 +46,7 @@
 	<dimen name="dimen_440dp">330dp</dimen>
 	<dimen name="dimen_16dp">12dp</dimen>
 	<dimen name="dimen_14dp">10.5dp</dimen>
-	<dimen name="dimen_35dp">26.2dp</dimen>
+	<dimen name="dimen_35dp">26.3dp</dimen>
 	<dimen name="dimen_56dp">42dp</dimen>
 	<dimen name="dimen_7dp">5.2dp</dimen>
 	<dimen name="dimen_12dp">9dp</dimen>
@@ -70,7 +70,7 @@
 	<dimen name="dimen_45dp">33.8dp</dimen>
 	<dimen name="dimen_20dp">15dp</dimen>
 	<dimen name="dimen_n96dp">-72dp</dimen>
-	<dimen name="dimen_163dp">122.2dp</dimen>
+	<dimen name="dimen_163dp">122.3dp</dimen>
 	<dimen name="dimen_304dp">228dp</dimen>
 	<dimen name="dimen_144dp">108dp</dimen>
 	<dimen name="dimen_323dp">242.2dp</dimen>
@@ -97,8 +97,9 @@
 	<dimen name="dimen_11sp">8.2sp</dimen>
 	<dimen name="textsize_18sp">13.5sp</dimen>
 	<dimen name="dimen_168dp">126dp</dimen>
-	<dimen name="dimen_75dp">56.2dp</dimen>
+	<dimen name="dimen_75dp">56.3dp</dimen>
 	<dimen name="dimen_n80dp">-60dp</dimen>
-	<dimen name="dimen_25sp">18.8sp</dimen>
-	<dimen name="dimen_15sp">11.2sp</dimen>
+	<dimen name="dimen_25sp">18.7sp</dimen>
+	<dimen name="dimen_15sp">11.3sp</dimen>
+	<dimen name="dimen_300dp">264.7dp</dimen>
 </resources>

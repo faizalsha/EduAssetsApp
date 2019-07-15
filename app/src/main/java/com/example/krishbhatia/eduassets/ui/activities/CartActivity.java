@@ -4,19 +4,21 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.POJO.Course;
 import com.example.krishbhatia.eduassets.R;
+import com.example.krishbhatia.eduassets.ui.adapter.CartAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -26,31 +28,47 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        TextView textView = findViewById(R.id.cart_product_title_view);
-        final String extraString = getIntent().getStringExtra("course");
-        textView.setText(extraString);
+
+        final String intentExtraString = getIntent().getStringExtra("course");
+
+        ArrayList<Course> list = new ArrayList<>();
+
+        list.add(new Course(101,"economics", "just read this description",100.00));
+        list.add(new Course(103,"business", "Start your own business",200.00));
+        list.add(new Course(105,"accounts", "maintain your account",259.00));
+        list.add(new Course(107,"law", "follow the law",399.00));
+        list.add(new Course(109,"taxation", "pay your tax",129.00));
+
+
+        CartAdapter adapter = new CartAdapter(CartActivity.this, list);
+
+        RecyclerView recyclerView = findViewById(R.id.cart_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
+
+        recyclerView.setAdapter(adapter);
+
 
         Button checkoutButton = findViewById(R.id.checkout_button);
 
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("shadab/user/purchased_course");
-        checkoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                databaseReference.child("new_child").setValue(extraString).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(CartActivity.this, "Course Added", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(CartActivity.this, PurchasedCourseActivity.class));
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CartActivity.this, "Some error occured in checking out", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+//        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("shadab/user/purchased_course");
+//        checkoutButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                databaseReference.child("new_child").setValue(intentExtraString).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Toast.makeText(CartActivity.this, "Course Added", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(CartActivity.this, PurchasedCourseActivity.class));
+//                        finish();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(CartActivity.this, "Some error occured in checking out", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        });
     }
 }

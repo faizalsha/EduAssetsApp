@@ -78,31 +78,29 @@
 	<dimen name="dimen_n96dp">-96dp</dimen>
 	<dimen name="dimen_7dp">6.9dp</dimen>
 	<dimen name="dimen_328dp">328dp</dimen>
-	<dimen name="dimen_27dp">27dp</dimen>
+	<dimen name="dimen_27dp">27.1dp</dimen>
 	<dimen name="dimen_18dp">24dp</dimen>
 	<dimen name="dimen_11p2dp">14.9dp</dimen>
 	<dimen name="dimen_103p1dp">137.5dp</dimen>
-	<dimen name="dimen_17p7dp">17.7dp</dimen>
+	<dimen name="dimen_17p7dp">17.6dp</dimen>
 	<dimen name="dimen_116p7dp">116.7dp</dimen>
 	<dimen name="dimen_12sp">12sp</dimen>
-	<dimen name="dimen_25dp">25dp</dimen>
-	<dimen name="dimen_0p17sp">0.17sp</dimen>
+	<dimen name="dimen_25dp">24.9dp</dimen>
+	<dimen name="dimen_0p17sp">0.1sp</dimen>
 	<dimen name="dimen_98dp">98dp</dimen>
 	<dimen name="dimen_100dp">100dp</dimen>
-	<dimen name="dimen_35dp">35dp</dimen>
+	<dimen name="dimen_35dp">35.1dp</dimen>
 	<dimen name="dimen_304dp">304dp</dimen>
 	<dimen name="dimen_576dp">576dp</dimen>
-	<dimen name="dimen_11dp">11dp</dimen>
+	<dimen name="dimen_11dp">11.1dp</dimen>
 	<dimen name="dimens_176dp">176dp</dimen>
-	<dimen name="dimen_163dp">163dp</dimen>
+	<dimen name="dimen_163dp">163.1dp</dimen>
 	<dimen name="dimen_180dp">180dp</dimen>
 	<dimen name="dimen_112dp">112dp</dimen>
-	<dimen name="dimen_n17dp">-17dp</dimen>
-	<item name="dimen_0p4" type="dimen" format="float">0.4</item>
-	<item name="alpha_0p7" type="dimen" format="float">0.7</item>
-	<item name="alpha_text" type="dimen" format="float">0.1</item>
+	<dimen name="dimen_n17dp">-17.1dp</dimen>
 	<dimen name="dimen_168dp">168dp</dimen>
-	<dimen name="dimen_15sp">15sp</dimen>
-	<dimen name="dimen_75dp">75dp</dimen>
-	<dimen name="dimen_25sp">25sp</dimen>
+	<dimen name="dimen_15sp">15.1sp</dimen>
+	<dimen name="dimen_75dp">75.1dp</dimen>
+	<dimen name="dimen_25sp">24.9sp</dimen>
+	<dimen name="dimen_300dp">352.9dp</dimen>
 </resources>
