@@ -35,7 +35,7 @@ public class CourseActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.course_toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         topicList = new ArrayList<>();
@@ -43,9 +43,9 @@ public class CourseActivity extends AppCompatActivity {
         DatabaseReference resRef = FirebaseDatabase.getInstance().getReference().child("shadab/res/" + clickedCourse);
 
         recyclerView = findViewById(R.id.main_recycler_view);
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
         resRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -62,11 +62,5 @@ public class CourseActivity extends AppCompatActivity {
 
             }
         });
-
-//        List<ResourcePOJO> resourcePOJOList = new ArrayList<>();
-//
-//        resourcePOJOList.add(new ResourcePOJO("pdf", "Foundatation of Computer Science", "url", "OOP using C++", "211"));
-//        resourcePOJOList.add(new ResourcePOJO("video", "Computer Science", "url", "OOP using C++", "211"));
-//
     }
 }

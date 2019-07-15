@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.krishbhatia.eduassets.POJO.Course;
 import com.example.krishbhatia.eduassets.R;
+import com.example.krishbhatia.eduassets.ui.activities.CartActivity;
 import com.example.krishbhatia.eduassets.ui.activities.CourseActivity;
 import com.google.firebase.database.DatabaseReference;
 
@@ -54,7 +55,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         courseViewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mCtx, CourseActivity.class);
+                Intent intent = new Intent(mCtx, CartActivity.class);
                 intent.putExtra("course", course.getTitle());
                 mCtx.startActivity(intent);
             }

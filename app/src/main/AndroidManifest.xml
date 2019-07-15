@@ -14,7 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.VideoPlayerActivity"></activity>
+        <activity android:name=".ui.activities.PurchasedCourseActivity"></activity>
+        <activity
+            android:name=".ui.activities.CartActivity"
+            android:exported="true" />
+        <activity android:name=".ui.activities.VideoPlayerActivity" />
         <activity android:name=".ui.activities.PdfViewerActivity" />
         <activity
             android:name=".ui.activities.CourseActivity"

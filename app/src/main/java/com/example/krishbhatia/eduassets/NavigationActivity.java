@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.krishbhatia.eduassets.ui.activities.LoginActivity;
+import com.example.krishbhatia.eduassets.ui.activities.PurchasedCourseActivity;
 import com.example.krishbhatia.eduassets.ui.activities.SubscribedCourseActivity;
 import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
 import com.example.krishbhatia.eduassets.ui.adapter.ViewPagerAdapter;
@@ -56,12 +57,6 @@ public class NavigationActivity extends AppCompatActivity
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-//        tabLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(NavigationView.this, NavigationActivity.class));
-//            }
-//        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -134,19 +129,16 @@ public class NavigationActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
-
-        if (id == R.id.nav_home) {
-
-        } else if (id == R.id.nav_subscribed) {
-            startActivity(new Intent(NavigationActivity.this, SubscribedCourseActivity.class));
-
-        }  else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_logout) {
-            mAuth.signOut();
-            startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
-            finish();
+        switch (id){
+            case R.id.nav_home:
+                break;
+            case R.id.nav_purchased_course:
+                startActivity(new Intent(NavigationActivity.this, PurchasedCourseActivity.class));
+                break;
+            case R.id.nav_logout:
+                mAuth.signOut();
+                finish();
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -12,6 +12,11 @@
             android:id="@+id/nav_subscribed"
             android:icon="@drawable/ic_subscribed_course_nav"
             android:title="Subscribed Course" />
+        <item
+            android:id="@+id/nav_purchased_course"
+            android:icon="@drawable/ic_subscribed_course_nav"
+            android:title="Purchased Course" />
+
     </group>
 
     <item android:title="Links">
