@@ -1,6 +1,7 @@
 package com.example.krishbhatia.eduassets.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.krishbhatia.eduassets.pojo.Course;
 import com.example.krishbhatia.eduassets.R;
+import com.example.krishbhatia.eduassets.ui.activities.CourseActivity;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public CourseAdapter(Context mCtx, List<Course> courseList) {
         this.mCtx = mCtx;
         this.courseList = courseList;
+
     }
 
 
@@ -41,11 +45,19 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder courseViewHolder, int position) {
         //getting the course of the specified position
-        Course course = courseList.get(position);
+        final Course course = courseList.get(position);
 
-        //binding the data with the viewholder views
+        //binding the data with the viewHolder views
         courseViewHolder.textViewTitle.setText(course.getTitle());
-        courseViewHolder.textViewDesc.setText(course.getDesc());
+        courseViewHolder.textViewCode.setText(String.valueOf(course.getCode()));
+        courseViewHolder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mCtx, CourseActivity.class);
+                intent.putExtra("course", course.getTitle());
+                mCtx.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -56,12 +68,26 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     class CourseViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewTitle, textViewDesc;
-
+        TextView /*textViewTitle*/ textViewCode;
+        View view;
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
-
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
-            textViewDesc = itemView.findViewById(R.id.textViewDesc);
+//            textViewDesc = itemView.findViewById(R.id.textViewDesc);
+
+
+//            textViewCode = itemView.findViewById(R.id.text);
+            view = itemView;
         }
+
+
+//        @Override
+//        public void onClick(View v) {
+//            onCourseClickListener.onCourseClick();
+//        }
     }
+
+//    public interface OnCourseClickListener{
+//        void onCourseClick();
+//    }
 }

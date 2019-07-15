@@ -38,18 +38,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-<<<<<<< HEAD
 
 public class LoginActivity extends AppCompatActivity {
-=======
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
->>>>>>> 2ffb7195bd915b9c8ab69a61826e1fc23d227b08
     private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 75;
-    public  boolean animation =true;
+    public boolean animation = true;
     private LoginlayoutBinding loginlayoutBinding;
     private Context mContext;
     private GoogleSignInClient mGoogleSignInClient;
@@ -62,13 +55,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        loginlayoutBinding=DataBindingUtil.setContentView(this,R.layout.loginlayout);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        loginlayoutBinding = DataBindingUtil.setContentView(this, R.layout.loginlayout);
 
         mContext = LoginActivity.this;
 
-        firebaseMethods=new FirebaseMethods(mContext);
-        if(SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID)!=null && !SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID).equals(Constants.NOT_FOUND)){
+        firebaseMethods = new FirebaseMethods(mContext);
+        if (SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID) != null && !SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID).equals(Constants.NOT_FOUND)) {
             Intent i = new Intent(mContext, HomePageActivity.class);
             startActivity(i);
         }
@@ -87,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
 //                loginWithEmailPwd();
-                firebaseMethods.loginWithEmailPwd(loginlayoutBinding.emailEditText.getText().toString(),loginlayoutBinding.passwordEditText.getText().toString());
+                firebaseMethods.loginWithEmailPwd(loginlayoutBinding.emailEditText.getText().toString(), loginlayoutBinding.passwordEditText.getText().toString());
                 finish();
             }
         });
@@ -119,13 +112,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void updateUI(final FirebaseUser user){
-        if(user!=null){
+    private void updateUI(final FirebaseUser user) {
+        if (user != null) {
             userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
             userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(user.isEmailVerified()) {
+                    if (user.isEmailVerified()) {
                         if (!dataSnapshot.hasChild("name")) {
                             SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, user.getUid());
                             SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, user.getEmail());
@@ -136,8 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent i = new Intent(mContext, HomePageActivity.class);
                             startActivity(i);
                         }
-                    }
-                    else {
+                    } else {
                         Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -155,9 +147,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
-
-
-
 
 
     @Override
@@ -188,8 +177,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-
-
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -208,23 +195,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 firebaseMethods.signinWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed"+ e.getStatusCode(), e);
+                Log.w(TAG, "Google sign in failed" + e.getStatusCode(), e);
                 // ...
             }
         }
     }
-
-
-<<<<<<< HEAD
-
-
-
-=======
-                    }
-                });
-    }
->>>>>>> 2ffb7195bd915b9c8ab69a61826e1fc23d227b08
 }
+
+
 
 
 

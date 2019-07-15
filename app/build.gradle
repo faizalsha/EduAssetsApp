@@ -13,7 +13,7 @@ android {
 
     }
     dataBinding {
-        enabled = true
+        enabled true
     }
     buildTypes {
         debug {
@@ -56,7 +56,7 @@ dependencies {
     implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
 
-    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
 
@@ -67,7 +67,7 @@ dependencies {
 
 
     implementation 'com.google.android.exoplayer:exoplayer:r2.4.0'
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.9.1'
+    implementation 'com.google.android.exoplayer:exoplayer-core:r2.4.0'
     implementation 'com.google.android.exoplayer:exoplayer-dash:r2.4.0'
     implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.0'
     implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'

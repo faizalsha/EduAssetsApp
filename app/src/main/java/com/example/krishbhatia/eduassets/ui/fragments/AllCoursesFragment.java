@@ -2,10 +2,12 @@ package com.example.krishbhatia.eduassets.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +15,20 @@ import android.view.ViewGroup;
 import com.example.krishbhatia.eduassets.pojo.Course;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
+import com.google.android.exoplayer2.C;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AllCoursesFragment extends Fragment {
+
+    private static final String TAG = "AllCoursesFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -63,6 +73,7 @@ public class AllCoursesFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.VERTICAL,false));
 
+
         courseList = new ArrayList<>();
 
         courseList.add(new Course("Physics", "B.tech 1st sem"));
@@ -91,6 +102,28 @@ public class AllCoursesFragment extends Fragment {
 
         //setting adapter to recyclerview
         recyclerView.setAdapter(adapter);
+        final DatabaseReference courseRef = FirebaseDatabase.getInstance().getReference().child("shadab/courses");
+
+
+        courseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Course course;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    course = snapshot.getValue(Course.class);
+                    Log.d(TAG, "onDataChange: snapshot is " + course.getTitle());
+                    courseList.add(course);
+                }
+                CourseAdapter adapter = new CourseAdapter(getContext(), courseList);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         return view;
     }

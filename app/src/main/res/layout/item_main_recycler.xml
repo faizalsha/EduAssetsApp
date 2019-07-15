@@ -17,7 +17,7 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/topText"
+                android:id="@+id/top_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -34,7 +34,7 @@
                 android:id="@+id/inner_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/topText"
+                android:layout_below="@+id/top_text"
                 android:visibility="gone"></android.support.v7.widget.RecyclerView>
         </RelativeLayout>
 

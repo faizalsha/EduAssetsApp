@@ -44,7 +44,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 
         //binding the data with the viewholder views
         subjectViewHolder.textViewTitle.setText(subject.getTitle());
-        subjectViewHolder.textViewDesc.setText(subject.getDesc());
+        subjectViewHolder.textViewCode.setText(subject.getDesc());
     }
 
     @Override
@@ -54,13 +54,13 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 
     class SubjectViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textViewTitle, textViewDesc;
+        TextView textViewTitle, textViewCode;
 
         public SubjectViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
-            textViewDesc = itemView.findViewById(R.id.textViewDesc);
+            textViewCode = itemView.findViewById(R.id.textViewCode);
         }
     }
 }
