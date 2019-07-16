@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp">
 
-      <android.support.v7.widget.AppCompatButton
+      <androidx.appcompat.widget.AppCompatButton
           android:id="@+id/nobutton"
           android:layout_width="140dp"
           android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
           android:padding="12dp"
           android:text="no" />
 
-      <android.support.v7.widget.AppCompatButton
+      <androidx.appcompat.widget.AppCompatButton
           android:id="@+id/yesbutton"
           android:layout_width="140dp"
           android:layout_height="wrap_content"

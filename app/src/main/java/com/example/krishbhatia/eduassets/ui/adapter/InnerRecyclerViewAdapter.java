@@ -2,24 +2,20 @@ package com.example.krishbhatia.eduassets.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.load.engine.Resource;
 import com.example.krishbhatia.eduassets.POJO.ResourcePOJO;
-import com.example.krishbhatia.eduassets.POJO.Topic;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.PdfViewerActivity;
 import com.example.krishbhatia.eduassets.ui.activities.VideoPlayerActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecyclerViewAdapter.InnerRecyclerViewHolder> {
 

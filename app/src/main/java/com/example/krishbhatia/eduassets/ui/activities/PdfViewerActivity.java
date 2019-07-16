@@ -1,21 +1,14 @@
 package com.example.krishbhatia.eduassets.ui.activities;
 
-import android.app.MediaRouteButton;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
 import com.github.barteksc.pdfviewer.PDFView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

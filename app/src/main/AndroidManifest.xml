@@ -21,6 +21,11 @@
 <!--        <activity-->
 <!--            android:name=".ui.activities.CartActivity"-->
 <!--            android:exported="true" />-->
+
+        <activity android:name=".ui.activities.PurchasedCourseActivity"/>
+        <activity
+            android:name=".ui.activities.CartActivity"
+            android:exported="true" />
         <activity android:name=".ui.activities.VideoPlayerActivity" />
         <activity android:name=".ui.activities.PdfViewerActivity" />
 <!--        <activity-->

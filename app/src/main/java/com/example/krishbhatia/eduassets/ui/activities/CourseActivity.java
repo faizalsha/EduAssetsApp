@@ -1,16 +1,12 @@
 package com.example.krishbhatia.eduassets.ui.activities;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Toast;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 
-import com.alespero.expandablecardview.ExpandableCardView;
-import com.example.krishbhatia.eduassets.POJO.ResourcePOJO;
 import com.example.krishbhatia.eduassets.POJO.Topic;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.MainRecyclerViewAdapter;
@@ -21,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CourseActivity extends AppCompatActivity {
     private String clickedCourse;
@@ -35,7 +30,7 @@ public class CourseActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.course_toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         topicList = new ArrayList<>();
@@ -43,9 +38,9 @@ public class CourseActivity extends AppCompatActivity {
         DatabaseReference resRef = FirebaseDatabase.getInstance().getReference().child("shadab/res/" + clickedCourse);
 
         recyclerView = findViewById(R.id.main_recycler_view);
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
         resRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -62,11 +57,5 @@ public class CourseActivity extends AppCompatActivity {
 
             }
         });
-
-//        List<ResourcePOJO> resourcePOJOList = new ArrayList<>();
-//
-//        resourcePOJOList.add(new ResourcePOJO("pdf", "Foundatation of Computer Science", "url", "OOP using C++", "211"));
-//        resourcePOJOList.add(new ResourcePOJO("video", "Computer Science", "url", "OOP using C++", "211"));
-//
     }
 }

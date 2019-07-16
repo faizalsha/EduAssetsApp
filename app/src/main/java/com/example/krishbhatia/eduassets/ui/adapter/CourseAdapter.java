@@ -2,8 +2,8 @@ package com.example.krishbhatia.eduassets.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +11,7 @@ import android.widget.TextView;
 
 import com.example.krishbhatia.eduassets.pojo.Course;
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.ui.activities.CourseActivity;
-import com.google.firebase.database.DatabaseReference;
+import com.example.krishbhatia.eduassets.ui.activities.CartActivity;
 
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         courseViewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mCtx, CourseActivity.class);
+                Intent intent = new Intent(mCtx, CartActivity.class);
                 intent.putExtra("course", course.getTitle());
                 mCtx.startActivity(intent);
             }
