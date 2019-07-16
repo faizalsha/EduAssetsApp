@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.krishbhatia.eduassets.POJO.Course;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.PurchasedCourseAdapter;
 import com.google.firebase.database.DataSnapshot;
