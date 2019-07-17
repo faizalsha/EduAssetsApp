@@ -34,7 +34,7 @@
             android:layout_below="@+id/WelcomeTextView"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:text="@string/textTagline"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/dimen_15sp" />
 
         <RelativeLayout
@@ -45,41 +45,21 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textsignup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_50dp"
-                android:text="@string/textSignup"
-                android:textColor="@color/colorTextView"
-                android:textSize="@dimen/dimen_14sp"
-                android:textStyle="bold"
-                android:transitionName="textTransition" />
 
-            <TextView
-                android:id="@+id/textForgotPwd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/textsignup"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dimen_12dp"
-                android:text="@string/textForgotpwd"
-                android:textColor="@color/colorTextView"
-                android:textSize="@dimen/dimen_14sp"
-                android:textStyle="bold" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_marginTop="@dimen/dimen_50dp"
 
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textForgotPwd"
+
                 android:hint="@string/textEmail"
                 android:textColor="@color/colorTextView"
                 android:textColorHint="@color/colorAccent"
                 android:textSize="@dimen/dimen_15sp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                app:met_floatingLabel="normal"
+           style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+                app:met_floatingLabel="highlight"
                 app:met_floatingLabelAnimating="true"
                 app:met_floatingLabelText="@string/textEmail"
                 app:met_floatingLabelTextColor="@color/black"
@@ -93,16 +73,40 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_below="@id/emailEditText"
                 android:hint="@string/textPassword"
-
+                android:layout_marginTop="@dimen/dimen_10dp"
                 android:textColor="@color/colorTextView"
                 android:textColorHint="@color/colorAccent"
-                android:textSize="15sp"
-                app:met_floatingLabel="normal"
+                android:textSize="@dimen/dimen_15sp"
+                app:met_floatingLabel="highlight"
                 app:met_floatingLabelAnimating="true"
-                app:met_floatingLabelText="@string/textEmail"
+                app:met_floatingLabelText="@string/textPassword"
                 app:met_floatingLabelTextColor="@color/black"
-                app:met_hideUnderline="true" />
 
+                app:met_hideUnderline="true" />
+            <TextView
+                android:id="@+id/textsignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textSignup"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:textColor="@color/colorTextView"
+                android:textSize="@dimen/dimen_14sp"
+                android:textStyle="bold"
+                android:layout_below="@id/passwordEditText"
+                android:transitionName="textTransition"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dimen_12dp"/>
+
+            <TextView
+                android:id="@+id/textForgotPwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/textsignup"
+
+                android:text="@string/textForgotpwd"
+                android:textColor="@color/colorTextView"
+                android:textSize="@dimen/dimen_14sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -115,18 +119,30 @@
             android:background="@drawable/login_button"
             android:text="@string/textSignIn"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
+            android:textColor="#0B3D48"
             android:textSize="@dimen/dimen_16sp" />
 
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/google_sign_in_button"
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/google_sign_in"
             android:layout_below="@id/loginButton"
+            android:id="@+id/google_sign_in_button"
             android:layout_marginTop="@dimen/dimen_25dp"
-            android:gravity="center" />
+            android:background="@drawable/btn_google_signin_light_pressed"
+        />
 
 
     </RelativeLayout>
 </layout>
+
+
+
+<!--<com.google.android.gms.common.SignInButton-->
+<!--android:id="@+id/google_sign_in_button"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_below="@id/loginButton"-->
+<!--android:layout_marginTop="@dimen/dimen_25dp"-->
+
+<!--android:gravity="center" />-->

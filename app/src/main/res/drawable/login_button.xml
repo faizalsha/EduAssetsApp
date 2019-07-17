@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
-        <shape android:shape="rectangle">
-            <corners android:radius="3dip" />
-            <stroke android:width="1dip" android:color="@color/colorBackground" />
-            <gradient android:angle="-90" android:endColor="@color/colorBackground" android:startColor="@color/colorBackground" />
-        </shape>
-    </item>
-    <item android:state_focused="true">
-        <shape android:shape="rectangle">
-            <corners android:radius="3dip" />
-            <stroke android:width="1dip" android:color="@color/colorBackground" />
-            <solid android:color="@color/colorBackground" />
-        </shape>
-    </item>
-    <item>
-        <shape android:shape="rectangle">
-            <corners android:radius="3dip" />
-            <stroke android:width="1dip" android:color="@color/colorBackground" />
-            <gradient android:angle="-90" android:endColor="@color/colorBackground" android:startColor="@color/colorBackground" />
-        </shape>
-    </item>
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#65E8F2"></solid>
+    <corners android:topRightRadius="@dimen/dimen_15dp"
+        android:topLeftRadius="@dimen/dimen_15dp"
+        android:bottomLeftRadius="@dimen/dimen_15dp"
+        android:bottomRightRadius="@dimen/dimen_15dp">
+    </corners>
+</shape>

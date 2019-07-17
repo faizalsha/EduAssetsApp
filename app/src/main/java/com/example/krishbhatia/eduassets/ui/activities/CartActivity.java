@@ -23,7 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
-
+    private  RecyclerView coursesCheckoutCart;
+    private  CartAdapter cartAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
 
-        final String intentExtraString = getIntent().getStringExtra("course");
+//        final String intentExtraString = getIntent().getStringExtra("course");
 
         ArrayList<Course> list = new ArrayList<>();
 
@@ -42,15 +43,15 @@ public class CartActivity extends AppCompatActivity {
         list.add(new Course(109,"taxation", "pay your tax",129.00));
 
 
-        CartAdapter adapter = new CartAdapter(CartActivity.this, list);
+         cartAdapter = new CartAdapter(CartActivity.this, list);
 
-        RecyclerView recyclerView = findViewById(R.id.cart_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
+         coursesCheckoutCart = findViewById(R.id.cart_recycler_view);
+        coursesCheckoutCart.setLayoutManager(new LinearLayoutManager(CartActivity.this));
 
-        recyclerView.setAdapter(adapter);
+        coursesCheckoutCart.setAdapter(cartAdapter);
 
 
-        Button checkoutButton = findViewById(R.id.checkout_button);
+//        Button checkoutButton = findViewById(R.id.checkout_button);
 
 
 //        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("shadab/user/purchased_course");

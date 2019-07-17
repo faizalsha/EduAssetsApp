@@ -9,78 +9,21 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/cart_recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/dimen_250"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:maxHeight="@dimen/dimen_200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cart_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_8dp">
-
-            <ImageView
-                android:id="@+id/cart_image_view"
-                android:layout_width="@dimen/dimen_150dp"
-                android:layout_height="@dimen/dimen_150dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_subscribed_course_nav"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/cart_product_title_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_toRightOf="@id/cart_image_view"
-                android:text="Foundation of Computer Science"
-                android:textSize="@dimen/dimen_24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@id/cart_image_view"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/cart_product_desc_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cart_product_title_view"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_toRightOf="@id/cart_image_view"
-                android:text="Book by Alfred Aho and Jeffrey Ullman"
-                android:textSize="@dimen/dimen_14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cart_image_view"
-                app:layout_constraintTop_toBottomOf="@+id/cart_product_title_view" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cart_product_desc_view"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_toRightOf="@id/cart_image_view"
-                android:text="Rs. 500"
-                android:textSize="@dimen/dimen_24sp"
-                app:layout_constraintStart_toEndOf="@+id/cart_image_view"
-                app:layout_constraintTop_toBottomOf="@+id/cart_product_desc_view" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="@dimen/dimen_250"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:maxHeight="@dimen/dimen_200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView

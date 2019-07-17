@@ -75,7 +75,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 //            textViewDesc = itemView.findViewById(R.id.textViewDesc);
 
 
-//            textViewCode = itemView.findViewById(R.id.text);
+            textViewCode = itemView.findViewById(R.id.textViewCode);
             view = itemView;
         }
 

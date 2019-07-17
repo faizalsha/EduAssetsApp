@@ -46,26 +46,7 @@ public class AllCoursesFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.VERTICAL,false));
         courseList = new ArrayList<>();
 
-        courseList.add(new Course("Physics", "B.tech 1st sem"));
-        courseList.add(new Course("Math", "B.tech 1st sem"));
-        courseList.add(new Course("Chemistry", "B.tech 1st sem"));
-        courseList.add(new Course("English", "B.tech 1st sem"));
-        courseList.add(new Course("C++", "B.tech 1st sem"));
-        courseList.add(new Course("Physics", "B.tech 1st sem"));
-        courseList.add(new Course("Math", "B.tech 1st sem"));
-        courseList.add(new Course("Chemistry", "B.tech 1st sem"));
-        courseList.add(new Course("English", "B.tech 1st sem"));
-        courseList.add(new Course("C++", "B.tech 1st sem"));
-        courseList.add(new Course("Physics", "B.tech 1st sem"));
-        courseList.add(new Course("Math", "B.tech 1st sem"));
-        courseList.add(new Course("Chemistry", "B.tech 1st sem"));
-        courseList.add(new Course("English", "B.tech 1st sem"));
-        courseList.add(new Course("C++", "B.tech 1st sem"));
-        courseList.add(new Course("Physics", "B.tech 1st sem"));
-        courseList.add(new Course("Math", "B.tech 1st sem"));
-        courseList.add(new Course("Chemistry", "B.tech 1st sem"));
-        courseList.add(new Course("English", "B.tech 1st sem"));
-        courseList.add(new Course("C++", "B.tech 1st sem"));
+
 
         //creating recyclerview adapter
         CourseAdapter adapter = new CourseAdapter(getContext(), courseList);
