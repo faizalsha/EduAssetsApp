@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.NavigationActivity;
 import com.example.krishbhatia.eduassets.R;
 
 import com.example.krishbhatia.eduassets.databinding.LoginlayoutBinding;
@@ -61,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseMethods = new FirebaseMethods(mContext);
         if (SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID) != null && !SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID).equals(Constants.NOT_FOUND)) {
-            Intent i = new Intent(mContext, HomePageActivity.class);
+            Intent i = new Intent(mContext, NavigationActivity.class);
             startActivity(i);
         }
 

@@ -29,7 +29,8 @@
         <activity android:name=".ui.activities.ProfileActivity" />
 
         <activity android:name=".ui.activities.DetailsActivity" />
-        <activity android:name=".ui.activities.RegisterActivity" />
+        <activity android:name=".NavigationActivity"/>
+
          <activity
          android:name=".ui.activities.HomePageActivity"
          android:label="@string/title_activity_home_page"

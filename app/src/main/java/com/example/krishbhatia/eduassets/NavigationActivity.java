@@ -134,6 +134,8 @@ public class NavigationActivity extends AppCompatActivity
                 break;
             case R.id.nav_logout:
                 mAuth.signOut();
+                SharedPreferenceImpl.s
+                SharedPreferenceImpl.setSomeStringValue(this,Constants.USER_ID,Constants.NOT_FOUND);
                 finish();
                 break;
         }
