@@ -18,15 +18,15 @@ import java.util.List;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
 
     //this context we will use to inflate the layout
-    private Context mCtx;
+    private Context mContext;
 
     //we are storing all the courses in a list
     private List<Course> courseList;
 
 
     //getting the context and course list with constructor
-    public CourseAdapter(Context mCtx, List<Course> courseList) {
-        this.mCtx = mCtx;
+    public CourseAdapter(Context mContext, List<Course> courseList) {
+        this.mContext = mContext;
         this.courseList = courseList;
 
     }
@@ -36,7 +36,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         //inflating and returning our view holder
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.course_layout, null);
         return new CourseViewHolder(view);
     }
@@ -52,9 +52,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         courseViewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mCtx, CartActivity.class);
+                Intent intent = new Intent(mContext, CartActivity.class);
                 intent.putExtra("course", course.getTitle());
-                mCtx.startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
     }
@@ -71,11 +71,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         View view;
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewTitle = itemView.findViewById(R.id.textViewTitle);
+            textViewTitle = itemView.findViewById(R.id.all_courses_fragment_title_text_view);
 //            textViewDesc = itemView.findViewById(R.id.textViewDesc);
 
 
-            textViewCode = itemView.findViewById(R.id.textViewCode);
+            textViewCode = itemView.findViewById(R.id.all_courses_fragment_course_code_text_view);
             view = itemView;
         }
 

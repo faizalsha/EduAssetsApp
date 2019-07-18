@@ -58,7 +58,7 @@ public class MySubjectsFragment extends Fragment {
 //        textView.setText("My courses");
         View view = inflater.inflate(R.layout.fragment_my_subjects, container, false);
 
-        recyclerView = view.findViewById(R.id.mySubjectRecyclerView);
+        recyclerView = view.findViewById(R.id.mySubject_fragment_recycler_view);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

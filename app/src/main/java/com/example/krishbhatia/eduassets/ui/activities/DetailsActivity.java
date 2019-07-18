@@ -41,15 +41,15 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         mContext = DetailsActivity.this;
 
-        nameEditText = findViewById(R.id.nameEditText);
-        courseEditText = findViewById(R.id.courseEditText);
-        collegeEditText = findViewById(R.id.collegeEditText);
-        semesterEditText = findViewById(R.id.semEditText);
+        nameEditText = findViewById(R.id.details_name_edit_text);
+        courseEditText = findViewById(R.id.details_college_edit_text);
+        collegeEditText = findViewById(R.id.details_college_edit_text);
+        semesterEditText = findViewById(R.id.details_sem_edit_text);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        doneButton = findViewById(R.id.doneButton);
+        doneButton = findViewById(R.id.details_done_button);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

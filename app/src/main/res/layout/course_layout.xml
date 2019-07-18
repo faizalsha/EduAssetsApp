@@ -17,7 +17,7 @@
 
 
             <TextView
-                android:id="@+id/textViewTitle"
+                android:id="@+id/all_courses_fragment_title_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -27,11 +27,11 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/textViewCode"
+                android:id="@+id/all_courses_fragment_course_code_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:layout_below="@id/textViewTitle"
+                android:layout_below="@id/all_courses_fragment_title_text_view"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:text="B.Tech Computer Science and Engineering"

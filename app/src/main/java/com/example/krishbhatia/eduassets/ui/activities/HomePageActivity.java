@@ -2,7 +2,7 @@ package com.example.krishbhatia.eduassets.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import com.google.android.material.tabs.TabLayout;
 import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -35,7 +35,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation);
+        setContentView(R.layout.activity_home_page);
         toolbar = findViewById(R.id.toolbarHome);
         setSupportActionBar(toolbar);
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -75,9 +75,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         headerView = navigationView.getHeaderView(0);
-        navName = headerView.findViewById(R.id.name_nav_header);
+        navName = headerView.findViewById(R.id.nav_header_username_text_view);
         navName.setText(userName);
-        navEmail = headerView.findViewById(R.id.email_nav_header);
+        navEmail = headerView.findViewById(R.id.nav_header_email_text_view);
         navEmail.setText(mAuth.getCurrentUser().getEmail());
 
 

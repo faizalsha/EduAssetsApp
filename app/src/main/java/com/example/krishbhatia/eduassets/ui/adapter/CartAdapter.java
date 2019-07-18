@@ -49,9 +49,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
         public CartHolder( View itemView) {
             super(itemView);
-            courseTitle = itemView.findViewById(R.id.cart_product_title_view);
-            courseDesc = itemView.findViewById(R.id.cart_product_desc_view);
-            coursePrice = itemView.findViewById(R.id.cart_product_price_view);
+            courseTitle = itemView.findViewById(R.id.cart_product_title_text_view);
+            courseDesc = itemView.findViewById(R.id.cart_product_desc_text_view);
+            coursePrice = itemView.findViewById(R.id.cart_product_price_text_view);
         }
     }
 }

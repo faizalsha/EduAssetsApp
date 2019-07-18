@@ -34,11 +34,11 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        nameEditText = findViewById(R.id.profile_name_edit);
-        courseEditText = findViewById(R.id.profile_course_edit);
-        semesterEditText = findViewById(R.id.profile_semester_edit);
-        collegeEditText = findViewById(R.id.profile_college_edit);
-        enrolledCourseEditText = findViewById(R.id.profile_enrolled_course_edit);
+        nameEditText = findViewById(R.id.profile_name_edit_text);
+        courseEditText = findViewById(R.id.profile_course_edit_text);
+        semesterEditText = findViewById(R.id.profile_semester_edit_text);
+        collegeEditText = findViewById(R.id.profile_college_edit_text);
+        enrolledCourseEditText = findViewById(R.id.profile_enrolled_course_edit_text);
 
         mAuth = FirebaseAuth.getInstance();
 

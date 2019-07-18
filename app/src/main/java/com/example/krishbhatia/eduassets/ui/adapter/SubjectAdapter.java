@@ -59,8 +59,8 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         public SubjectViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewTitle = itemView.findViewById(R.id.textViewTitle);
-            textViewCode = itemView.findViewById(R.id.textViewCode);
+            textViewTitle = itemView.findViewById(R.id.all_courses_fragment_title_text_view);
+            textViewCode = itemView.findViewById(R.id.all_courses_fragment_course_code_text_view);
         }
     }
 }

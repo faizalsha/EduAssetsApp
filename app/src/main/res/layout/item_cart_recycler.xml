@@ -11,7 +11,7 @@
         android:padding="@dimen/dimen_8dp">
 
         <ImageView
-            android:id="@+id/cart_course_image_view"
+            android:id="@+id/cart_product_image_view"
             android:layout_width="@dimen/dimen_150dp"
             android:layout_height="@dimen/dimen_150dp"
             android:layout_marginStart="8dp"
@@ -27,13 +27,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_toRightOf="@id/cart_course_image_view"
+            android:layout_toRightOf="@id/cart_product_image_view"
             android:text="Foundation of Computer Science"
             android:textSize="@dimen/dimen_24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/cart_course_image_view"
+            app:layout_constraintStart_toEndOf="@id/cart_product_image_view"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -43,11 +43,11 @@
             android:layout_below="@id/cart_product_title_text_view"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_toRightOf="@id/cart_course_image_view"
+            android:layout_toRightOf="@id/cart_product_image_view"
             android:text="Book by Alfred Aho and Jeffrey Ullman"
             android:textSize="@dimen/dimen_14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cart_course_image_view"
+            app:layout_constraintStart_toEndOf="@+id/cart_product_image_view"
             app:layout_constraintTop_toBottomOf="@+id/cart_product_title_text_view" />
 
         <TextView
@@ -57,10 +57,10 @@
             android:layout_below="@id/cart_product_desc_text_view"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@id/cart_course_image_view"
+            android:layout_toRightOf="@id/cart_product_image_view"
             android:text="INR 300"
             android:textSize="@dimen/dimen_24sp"
-            app:layout_constraintStart_toEndOf="@+id/cart_course_image_view"
+            app:layout_constraintStart_toEndOf="@+id/cart_product_image_view"
             app:layout_constraintTop_toBottomOf="@+id/cart_product_desc_text_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
