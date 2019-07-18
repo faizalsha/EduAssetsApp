@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.krishbhatia.eduassets.POJO.SubjectPOJO;
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.pojo.Subject;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     private Context mCtx;
 
     //we are storing all the courses in a list
-    private List<Subject> subjectList;
+    private List<SubjectPOJO> subjectList;
 
 
     //getting the context and course list with constructor
-    public SubjectAdapter(Context mCtx, List<Subject> subjectList) {
+    public SubjectAdapter(Context mCtx, List<SubjectPOJO> subjectList) {
         this.mCtx = mCtx;
         this.subjectList = subjectList;
     }
@@ -40,7 +40,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     @Override
     public void onBindViewHolder(@NonNull SubjectViewHolder subjectViewHolder, int position) {
         //getting the course of the specified position
-        Subject subject = subjectList.get(position);
+        SubjectPOJO subject = subjectList.get(position);
 
         //binding the data with the viewholder views
         subjectViewHolder.textViewTitle.setText(subject.getTitle());

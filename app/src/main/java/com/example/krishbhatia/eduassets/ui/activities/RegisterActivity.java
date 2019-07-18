@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity{
 
     private static final String TAG = "RegisterAcitvity";
     //UI Related
@@ -44,16 +44,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         editTextRegisterPassword = findViewById(R.id.registerPassword);
         buttonRegisterButton = findViewById(R.id.regbutton);
-        buttonRegisterButton.setOnClickListener(this);
+        buttonRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerUser();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.regbutton)
-            registerUser();
-    }
 
     private void registerUser() {
         String registerEmail = editTextRegisterEmail.getText().toString();
@@ -71,13 +71,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     Toast.makeText(mContext,    "createUserWithEmail:success", Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     sendEmailVerificationLink(user);
+                                    Toast.makeText(mContext, "Email Verification link has been sent. Verify your email then login", Toast.LENGTH_LONG).show();
 //                                    updateUI(user);
                                     finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(mContext, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
+                                    //updateUI(null);
                                 }
                             }
                         });
@@ -105,12 +106,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 });
     }
 
-    private void updateUI(FirebaseUser user) {
-        if(user != null){
-            Intent intent = new Intent(mContext, DetailsActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
+//    private void updateUI(FirebaseUser user) {
+//        if(user != null){
+//            Intent intent = new Intent(mContext, DetailsActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
 
 }

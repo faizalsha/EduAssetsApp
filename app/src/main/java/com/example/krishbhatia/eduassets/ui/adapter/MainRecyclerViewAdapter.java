@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.krishbhatia.eduassets.POJO.Topic;
+import com.example.krishbhatia.eduassets.POJO.TopicPOJO;
 import com.example.krishbhatia.eduassets.R;
 
 import java.util.ArrayList;
@@ -19,9 +19,9 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     private Context mContext;
     //private List<ResourcePOJO> mList;
-    private ArrayList<Topic> topicList;
+    private ArrayList<TopicPOJO> topicList;
 
-    public MainRecyclerViewAdapter(Context mContext, ArrayList<Topic> topicList) {
+    public MainRecyclerViewAdapter(Context mContext, ArrayList<TopicPOJO> topicList) {
         this.mContext = mContext;
         this.topicList = topicList;
     }
@@ -37,7 +37,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull MainRecyclerViewHolder holder, int position) {
 
-        Topic topic = topicList.get(position);
+        TopicPOJO topic = topicList.get(position);
         InnerRecyclerViewAdapter innerRecyclerViewAdapter = new InnerRecyclerViewAdapter(mContext, topic.getResources());
         holder.innerRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         holder.innerRecyclerView.setAdapter(innerRecyclerViewAdapter);

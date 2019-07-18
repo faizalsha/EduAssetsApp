@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.krishbhatia.eduassets.POJO.SubjectPOJO;
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.pojo.Subject;
 import com.example.krishbhatia.eduassets.ui.adapter.SubjectAdapter;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class MySubjectsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView recyclerView;
-    private List<Subject> subjectList;
+    private List<SubjectPOJO> subjectList;
 
 
     private String mParam1;
@@ -65,10 +65,10 @@ public class MySubjectsFragment extends Fragment {
 
         subjectList = new ArrayList<>();
 
-        subjectList.add(new Subject("Physics", "B.tech 1st sem"));
-        subjectList.add(new Subject("Maths", "B.tech 1st sem"));
-        subjectList.add(new Subject("Biology", "B.tech 2nd sem"));
-        subjectList.add(new Subject("English", "B.tech 1st sem"));
+        subjectList.add(new SubjectPOJO("Physics", "B.tech 1st sem"));
+        subjectList.add(new SubjectPOJO("Maths", "B.tech 1st sem"));
+        subjectList.add(new SubjectPOJO("Biology", "B.tech 2nd sem"));
+        subjectList.add(new SubjectPOJO("English", "B.tech 1st sem"));
 
 
 

@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.krishbhatia.eduassets.pojo.Course;
+import com.example.krishbhatia.eduassets.POJO.CoursePOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +29,7 @@ public class AllCoursesFragment extends Fragment {
     private static final String TAG = "AllCoursesFragment";
 
     private RecyclerView recyclerView;
-    private List<Course> courseList;
+    private List<CoursePOJO> courseList;
 
     public AllCoursesFragment() {
     }
@@ -58,9 +58,9 @@ public class AllCoursesFragment extends Fragment {
         courseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Course course;
+                CoursePOJO course;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    course = snapshot.getValue(Course.class);
+                    course = snapshot.getValue(CoursePOJO.class);
                     courseList.add(course);
                 }
                 CourseAdapter adapter = new CourseAdapter(getContext(), courseList);

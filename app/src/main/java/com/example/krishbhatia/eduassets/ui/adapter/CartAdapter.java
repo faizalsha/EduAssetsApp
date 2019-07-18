@@ -8,16 +8,16 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.krishbhatia.eduassets.POJO.CoursePOJO;
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.pojo.Course;
 
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     private Context mContext;
-    private ArrayList<Course> mCartList;
+    private ArrayList<CoursePOJO> mCartList;
 
-    public CartAdapter(Context mContext, ArrayList<Course> mCartList) {
+    public CartAdapter(Context mContext, ArrayList<CoursePOJO> mCartList) {
         this.mContext = mContext;
         this.mCartList = mCartList;
     }
@@ -31,7 +31,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     @Override
     public void onBindViewHolder( CartHolder holder, int position) {
-        Course course = mCartList.get(position);
+        CoursePOJO course = mCartList.get(position);
         holder.courseTitle.setText(course.getTitle());
         holder.courseDesc.setText(course.getDesc());
         holder.coursePrice.setText(Double.toString(course.getPrice()) + " INR");

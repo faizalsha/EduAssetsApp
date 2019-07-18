@@ -60,15 +60,17 @@ public class LoginActivity extends AppCompatActivity {
         mContext = LoginActivity.this;
 
         firebaseMethods = new FirebaseMethods(mContext);
-        if (SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID) != null && !SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID).equals(Constants.NOT_FOUND)) {
-            Intent i = new Intent(mContext, HomePageActivity.class);
-            startActivity(i);
-        }
+//        if (SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID) != null && !SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID).equals(Constants.NOT_FOUND)) {
+//            Intent i = new Intent(mContext, HomePageActivity.class);
+//            startActivity(i);
+//        }
 
 
         mAuth = FirebaseAuth.getInstance();
 
-        mAuth = FirebaseAuth.getInstance();
+        updateUI(mAuth.getCurrentUser());
+
+
         loginlayoutBinding.googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                loginWithEmailPwd();
                 firebaseMethods.loginWithEmailPwd(loginlayoutBinding.emailEditText.getText().toString(), loginlayoutBinding.passwordEditText.getText().toString());
-                finish();
             }
         });
         loginlayoutBinding.textsignup.setOnClickListener(new View.OnClickListener() {
@@ -99,9 +100,11 @@ public class LoginActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        mAuth = FirebaseAuth.getInstance();
+
 
     }
+
+
 
     @Override
     public void onStop() {
@@ -118,9 +121,11 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (user.isEmailVerified()) {
+
+                        Log.d(TAG, "onDataChange: " + dataSnapshot);
                         if (!dataSnapshot.hasChild("name")) {
-                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, user.getUid());
-                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, user.getEmail());
+//                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, user.getUid());
+//                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, user.getEmail());
 
                             startActivity(new Intent(mContext, DetailsActivity.class));
                             finish();

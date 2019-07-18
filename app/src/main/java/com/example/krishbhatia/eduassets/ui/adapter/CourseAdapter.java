@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.krishbhatia.eduassets.pojo.Course;
+import com.example.krishbhatia.eduassets.POJO.CoursePOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.CartActivity;
 
@@ -21,11 +21,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     private Context mContext;
 
     //we are storing all the courses in a list
-    private List<Course> courseList;
+    private List<CoursePOJO> courseList;
 
 
     //getting the context and course list with constructor
-    public CourseAdapter(Context mContext, List<Course> courseList) {
+    public CourseAdapter(Context mContext, List<CoursePOJO> courseList) {
         this.mContext = mContext;
         this.courseList = courseList;
 
@@ -44,7 +44,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder courseViewHolder, int position) {
         //getting the course of the specified position
-        final Course course = courseList.get(position);
+        final CoursePOJO course = courseList.get(position);
 
         //binding the data with the viewHolder views
         courseViewHolder.textViewTitle.setText(course.getTitle());

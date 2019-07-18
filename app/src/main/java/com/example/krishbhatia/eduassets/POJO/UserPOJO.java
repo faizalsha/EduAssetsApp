@@ -1,6 +1,6 @@
-package com.example.krishbhatia.eduassets.pojo;
+package com.example.krishbhatia.eduassets.POJO;
 
-public class User {
+public class UserPOJO {
     String name;
     String course;
     String college;
@@ -34,11 +34,11 @@ public class User {
     }
 
     //Default Constructor
-    public User(){
+    public UserPOJO(){
 
     }
 
-    public User(String name, String course, String college, String semester, String userId, String email, String enrolledCourse) {
+    public UserPOJO(String name, String course, String college, String semester, String userId, String email, String enrolledCourse) {
         this.name = name;
         this.course = course;
         this.college = college;
