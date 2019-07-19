@@ -28,7 +28,7 @@ public class PdfViewerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf_viewer);
 
-        progressBar = findViewById(R.id.pdf_loading_progress);
+        progressBar = findViewById(R.id.pdf_loading_progress_bar);
 
         pdfView = findViewById(R.id.pdf_view);
         String url = getIntent().getStringExtra("url");

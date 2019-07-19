@@ -1,20 +1,20 @@
-package com.example.krishbhatia.eduassets.pojo;
+package com.example.krishbhatia.eduassets.POJO;
 
-public class Course {
+public class CoursePOJO {
     private int code;
     private String title;
     private String desc;
     private Double price;
 
-    public Course() {
+    public CoursePOJO() {
     }
 
-    public Course(String title, String desc) {
+    public CoursePOJO(String title, String desc) {
         this.title = title;
         this.desc = desc;
     }
 
-    public Course(int code, String title, String desc, Double price) {
+    public CoursePOJO(int code, String title, String desc, Double price) {
         this.code = code;
         this.title = title;
         this.desc = desc;

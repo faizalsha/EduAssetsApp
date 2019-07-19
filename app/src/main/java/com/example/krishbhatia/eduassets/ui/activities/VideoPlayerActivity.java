@@ -41,7 +41,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
         exoPlayerView = findViewById(R.id.exo_player_view);
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.video_player_progress_bar);
         videoUrl = getIntent().getStringExtra("url");
         initializePlayer();
     }

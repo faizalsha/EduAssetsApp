@@ -10,24 +10,26 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.krishbhatia.eduassets.NavigationActivity;
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.R;
 
-import com.example.krishbhatia.eduassets.databinding.LoginlayoutBinding;
-import com.example.krishbhatia.eduassets.Constants;
-import com.example.krishbhatia.eduassets.FirebaseMethods;
 import com.example.krishbhatia.eduassets.SharedPreferenceImpl;
+import com.example.krishbhatia.eduassets.databinding.LoginlayoutBinding;
+import com.example.krishbhatia.eduassets.FirebaseMethods;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference userDatabaseReference;
     private FirebaseMethods firebaseMethods;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,14 +65,20 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseMethods = new FirebaseMethods(mContext);
         if (SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID) != null && !SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID).equals(Constants.NOT_FOUND)) {
-            Intent i = new Intent(mContext, NavigationActivity.class);
+            Intent i = new Intent(mContext, HomePageActivity.class);
             startActivity(i);
         }
 
+//        if (SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID) != null && !SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID).equals(Constants.NOT_FOUND)) {
+//            Intent i = new Intent(mContext, HomePageActivity.class);
+//            startActivity(i);
+//        }
 
         mAuth = FirebaseAuth.getInstance();
 
-        mAuth = FirebaseAuth.getInstance();
+        updateUI(mAuth.getCurrentUser());
+
+
         loginlayoutBinding.googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,13 +90,18 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                loginWithEmailPwd();
                 firebaseMethods.loginWithEmailPwd(loginlayoutBinding.emailEditText.getText().toString(), loginlayoutBinding.passwordEditText.getText().toString());
-                finish();
             }
         });
         loginlayoutBinding.textsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendToRegisterActivity();
+            }
+        });
+        loginlayoutBinding.textForgotPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showForgotPasswordDialog();
             }
         });
 
@@ -100,9 +114,47 @@ public class LoginActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        mAuth = FirebaseAuth.getInstance();
+
 
     }
+
+    private void showForgotPasswordDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("Recover Password");
+
+        builder.setView(R.layout.forgot_pwd_layout);
+        builder.setPositiveButton("Recover", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                EditText editText = alertDialog.findViewById(R.id.forgotEmail);
+                String email = editText.getText().toString().trim();
+
+                if (!email.isEmpty()){
+                    mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(mContext, "Email Sent", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(mContext, "" + task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                            alertDialog.dismiss();
+
+                        }
+                    });
+                } else {
+                    Toast.makeText(mContext, "Please enter your registered Email", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        alertDialog = builder.create();
+        alertDialog.show();
+
+
+    }
+
 
     @Override
     public void onStop() {
@@ -119,15 +171,18 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (user.isEmailVerified()) {
+
+                        Log.d(TAG, "onDataChange: " + dataSnapshot);
                         if (!dataSnapshot.hasChild("name")) {
-                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, user.getUid());
-                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, user.getEmail());
+//                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, user.getUid());
+//                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, user.getEmail());
 
                             startActivity(new Intent(mContext, DetailsActivity.class));
                             finish();
                         } else {
                             Intent i = new Intent(mContext, HomePageActivity.class);
                             startActivity(i);
+                            finish();
                         }
                     } else {
                         Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();

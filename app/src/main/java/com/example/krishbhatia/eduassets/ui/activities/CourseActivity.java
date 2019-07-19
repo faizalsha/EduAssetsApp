@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.krishbhatia.eduassets.POJO.Topic;
+import com.example.krishbhatia.eduassets.POJO.TopicPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.MainRecyclerViewAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class CourseActivity extends AppCompatActivity {
     private String clickedCourse;
-    private ArrayList<Topic> topicList;
+    private ArrayList<TopicPOJO> topicList;
     private RecyclerView recyclerView;
 
     @Override
@@ -45,7 +45,7 @@ public class CourseActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Topic topic = snapshot.getValue(Topic.class);
+                    TopicPOJO topic = snapshot.getValue(TopicPOJO.class);
                     topicList.add(topic);
                 }
                 MainRecyclerViewAdapter adapter = new MainRecyclerViewAdapter(CourseActivity.this, topicList);

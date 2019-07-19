@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.POJO.UserPOJO;
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.pojo.User;
 import com.example.krishbhatia.eduassets.utils.NetworkUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,15 +41,16 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         mContext = DetailsActivity.this;
 
-        nameEditText = findViewById(R.id.nameEditText);
-        courseEditText = findViewById(R.id.courseEditText);
-        collegeEditText = findViewById(R.id.collegeEditText);
-        semesterEditText = findViewById(R.id.semEditText);
+        nameEditText = findViewById(R.id.details_name_edit_text);
+        courseEditText = findViewById(R.id.details_college_edit_text);
+        collegeEditText = findViewById(R.id.details_college_edit_text);
+        semesterEditText = findViewById(R.id.details_sem_edit_text);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        doneButton = findViewById(R.id.doneButton);
+        doneButton = findViewById(R.id.details_done_button);
+
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,26 +63,26 @@ public class DetailsActivity extends AppCompatActivity {
 
                     if (NetworkUtils.isConnectedToInternert(mContext)){
 
-                        User user = new User(name, course, college, semester, mAuth.getUid(), mAuth.getCurrentUser().getEmail(), null);
+                        UserPOJO user = new UserPOJO(name, course, college, semester, mAuth.getUid(), mAuth.getCurrentUser().getEmail(), null);
 
                         mDatabaseReference.child("users").child(mAuth.getUid()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(DetailsActivity.this, "Details Saved Successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(DetailsActivity.this, HomePageActivity.class));
+                                Toast.makeText(mContext, "Details Saved Successfully", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(mContext, HomePageActivity.class));
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(DetailsActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     } else {
                         Toast.makeText(mContext, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(DetailsActivity.this, "Please Fill AllCourseActivity Details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Please Fill AllCourseActivity Details", Toast.LENGTH_SHORT).show();
                 }
             }
         });

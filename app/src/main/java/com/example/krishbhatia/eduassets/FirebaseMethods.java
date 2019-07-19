@@ -8,7 +8,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.ui.activities.DetailsActivity;
 import com.example.krishbhatia.eduassets.ui.activities.HomePageActivity;
+import com.example.krishbhatia.eduassets.ui.activities.LoginActivity;
 import com.example.krishbhatia.eduassets.utils.NetworkUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -19,6 +21,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class FirebaseMethods {
     private Context mContext;
@@ -37,7 +44,7 @@ public class FirebaseMethods {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Toast.makeText(mContext, "User Logged in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "UserPOJO Logged in", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(mContext, "Not Logged in", Toast.LENGTH_SHORT).show();
                 }
@@ -68,7 +75,7 @@ public class FirebaseMethods {
                     }
                 });
     }
-    public void loginWithEmailPwd(  String email,String password ) {
+    public void loginWithEmailPwd(String email, String password ) {
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
             if (NetworkUtils.isConnectedToInternert(mContext)){
                 Toast.makeText(mContext, "Logging In...", Toast.LENGTH_SHORT).show();
@@ -81,9 +88,12 @@ public class FirebaseMethods {
                                 Toast.makeText(mContext, "Signed In", Toast.LENGTH_SHORT).show();
 //                            updateUI(mAuth.getCurrentUser());
 //                            SharedPreferenceImpl.getSharedPreferences(mContext).edit().putString(Constants.USER_ID,task.getResult().getUser().getUid());
-                                SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, task.getResult().getUser().getUid());
-                                SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, task.getResult().getUser().getEmail());
-                                mContext.startActivity(new Intent(mContext, HomePageActivity.class));
+//                                SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, task.getResult().getUser().getUid());
+//                                SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, task.getResult().getUser().getEmail());
+
+                                updateUI(mAuth.getCurrentUser());
+//                                mContext.startActivity(new Intent(mContext, HomePageActivity.class));
+//                                ((Activity)mContext).finish();
 
                             } else {
                                 Toast.makeText(mContext, "Your email is not verified", Toast.LENGTH_SHORT).show();
@@ -102,6 +112,39 @@ public class FirebaseMethods {
             Toast.makeText(mContext, "Error: Empty Fields", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void updateUI(final FirebaseUser user) {
+        if (user != null) {
+            DatabaseReference userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
+            userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (user.isEmailVerified()) {
+
+                        Log.d(TAG, "onDataChange: " + dataSnapshot);
+                        if (!dataSnapshot.hasChild("name")) {
+//                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, user.getUid());
+//                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, user.getEmail());
+
+                            mContext.startActivity(new Intent(mContext,DetailsActivity.class));
+                            ((Activity)mContext).finish();
+
+                        } else {
+                            Intent intent = new Intent(mContext, HomePageActivity.class);
+                            mContext.startActivity(intent);
+                        }
+                    } else {
+                        Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
 

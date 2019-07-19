@@ -40,7 +40,7 @@
                 android:text="Sign Up"
                 android:textColor="@color/colorTextView"
                 android:transitionName="textTransition"
-                android:textSize="@dimen/dimen_34sp"
+                android:textSize="@dimen/dimen_32sp"
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:id="@+id/signup"/>

@@ -1,12 +1,12 @@
-package com.example.krishbhatia.eduassets.pojo;
+package com.example.krishbhatia.eduassets.POJO;
 
-public class Subject {
+public class SubjectPOJO {
     private String title;
     private String desc;
 
-    public Subject(){}
+    public SubjectPOJO(){}
 
-    public Subject(String title, String desc) {
+    public SubjectPOJO(String title, String desc) {
         this.title = title;
         this.desc = desc;
     }
