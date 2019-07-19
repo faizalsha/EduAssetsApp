@@ -1,5 +1,6 @@
 package com.example.krishbhatia.eduassets.ui.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -31,6 +32,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private View headerView;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_home_page);
         toolbar = findViewById(R.id.toolbarHome);
         setSupportActionBar(toolbar);
+
+        context = HomePageActivity.this;
+
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -126,13 +131,14 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_subscribed) {
-            startActivity(new Intent(HomePageActivity.this, SubscribedCourseActivity.class));
+            startActivity(new Intent(context, SubscribedCourseActivity.class));
 
-        }  else if (id == R.id.nav_share) {
+        }  else if (id == R.id.nav_purchased_course) {
+            startActivity(new Intent(context, PurchasedCourseActivity.class));
 
         } else if (id == R.id.nav_logout) {
             mAuth.signOut();
-            startActivity(new Intent(HomePageActivity.this, LoginActivity.class));
+            startActivity(new Intent(context, LoginActivity.class));
             finish();
         }
 

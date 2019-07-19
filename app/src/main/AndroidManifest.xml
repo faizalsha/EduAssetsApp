@@ -40,7 +40,7 @@
             android:name="tutorialwing.com.glidelibrarytutorial.GlideConfiguration"
             android:value="GlideModule" />
 
-
+        <activity android:name=".ui.activities.RegisterActivity"/>
 
         <activity android:name=".ui.activities.LoginActivity">
             <intent-filter>
