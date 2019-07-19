@@ -18,7 +18,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity{
 
@@ -56,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity{
 
 
     private void registerUser() {
-        String registerEmail = editTextRegisterEmail.getText().toString();
+        final String registerEmail = editTextRegisterEmail.getText().toString();
         String registerPassword = editTextRegisterPassword.getText().toString();
 
         if(!TextUtils.isEmpty(registerEmail) && !TextUtils.isEmpty(registerPassword)){
@@ -75,10 +82,35 @@ public class RegisterActivity extends AppCompatActivity{
 //                                    updateUI(user);
                                     finish();
                                 } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(mContext, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    //updateUI(null);
+
+                                    try{
+                                        throw task.getException();
+                                    }catch (FirebaseAuthUserCollisionException e){
+                                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users");
+                                        Query query = userRef.orderByChild("email").equalTo(registerEmail);
+                                        query.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.exists()){
+                                                    Toast.makeText(mContext, "Already a user: Go to login page", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(mContext, "Verification Email has been SENT. if didn't get the mail try 'resetting password'", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                        // If sign in fails, display a message to the user.
+                                        Toast.makeText(mContext, "Authentication failed: " + task.getException().getMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                        Log.d(TAG, "onComplete: " + task.getException().getMessage());
+                                        //updateUI(null);
+                                    }
                                 }
                             }
                         });

@@ -10,23 +10,24 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
 
 import com.example.krishbhatia.eduassets.databinding.LoginlayoutBinding;
-import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.FirebaseMethods;
-import com.example.krishbhatia.eduassets.SharedPreferenceImpl;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference userDatabaseReference;
     private FirebaseMethods firebaseMethods;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
 //            Intent i = new Intent(mContext, HomePageActivity.class);
 //            startActivity(i);
 //        }
-
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -90,6 +91,12 @@ public class LoginActivity extends AppCompatActivity {
                 sendToRegisterActivity();
             }
         });
+        loginlayoutBinding.textForgotPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showForgotPasswordDialog();
+            }
+        });
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -104,6 +111,42 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void showForgotPasswordDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("Recover Password");
+
+        builder.setView(R.layout.forgot_pwd_layout);
+        builder.setPositiveButton("Recover", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                EditText editText = alertDialog.findViewById(R.id.forgotEmail);
+                String email = editText.getText().toString().trim();
+
+                if (!email.isEmpty()){
+                    mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(mContext, "Email Sent", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(mContext, "" + task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                            alertDialog.dismiss();
+
+                        }
+                    });
+                } else {
+                    Toast.makeText(mContext, "Please enter your registered Email", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        alertDialog = builder.create();
+        alertDialog.show();
+
+
+    }
 
 
     @Override
@@ -132,6 +175,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             Intent i = new Intent(mContext, HomePageActivity.class);
                             startActivity(i);
+                            finish();
                         }
                     } else {
                         Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
