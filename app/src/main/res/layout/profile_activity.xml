@@ -1,95 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    >
+<RelativeLayout
+    android:paddingRight="@dimen/dimen_20dp"
+    android:paddingLeft="@dimen/dimen_20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.ProfileActivity">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_alignTop="@id/profile_text"
+        android:src="@drawable/ic_arrow_left_black_48dp"/>
 
     <TextView
         android:id="@+id/profile_text"
         android:layout_width="wrap_content"
+        android:paddingTop="@dimen/dimen_5dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_32dp"
-        android:layout_marginTop="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
         android:text="@string/edit_details"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
         android:textSize="@dimen/dimen_24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold|italic" />
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_alignTop="@id/profile_text"
+        android:src="@drawable/ic_edit"/>
 
-    <EditText
-        android:id="@+id/profile_name_edit_text"
+    <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_below="@id/profile_text"
+        android:editable="false"
+        android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_32dp"
-        android:layout_marginTop="@dimen/dimen_32dp"
-        android:layout_marginEnd="@dimen/dimen_32dp"
-        android:ems="10"
-        android:hint="@string/name"
-        android:inputType="textPersonName"
-        android:textSize="@dimen/dimen_12sp"
-        android:layout_below="@id/profile_text" />
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:hint="@string/textEnterName"
+        android:textColor="@color/colorTextView"
+        android:textColorHint="@color/colorAccent"
+        android:textSize="@dimen/dimen_15sp"
+        style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelAnimating="true"
+        app:met_floatingLabelText="@string/textName"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_hideUnderline="true" />
 
-    <EditText
-        android:id="@+id/profile_course_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_32dp"
-        android:layout_marginTop="@dimen/dimen_24dp"
-        android:layout_marginEnd="@dimen/dimen_32dp"
-        android:ems="10"
-        android:hint="@string/course"
-        android:inputType="textPersonName"
-        android:textSize="@dimen/dimen_12sp"
-        android:layout_below="@id/profile_name_edit_text"/>
 
-    <EditText
-        android:id="@+id/profile_semester_edit_text"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_below="@id/nameEditText"
+        android:id="@+id/courseEdit"
+        android:editable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_32dp"
-        android:layout_marginTop="@dimen/dimen_24dp"
-        android:layout_marginEnd="@dimen/dimen_32dp"
-        android:ems="10"
-        android:hint="@string/semester"
-        android:inputType="textPersonName"
-        android:textSize="@dimen/dimen_12sp"
-        android:layout_below="@id/profile_course_edit_text"/>
-    <EditText
-        android:id="@+id/profile_college_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_32dp"
-        android:layout_marginTop="@dimen/dimen_24dp"
-        android:layout_marginEnd="@dimen/dimen_32dp"
-        android:ems="10"
-        android:hint="@string/college"
-        android:inputType="textPersonName"
-        android:textSize="@dimen/dimen_12sp"
-        android:layout_below="@id/profile_semester_edit_text"/>
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:hint="@string/textEnterCourse"
+        android:textColor="@color/colorTextView"
+        android:textColorHint="@color/colorAccent"
+        android:textSize="@dimen/dimen_15sp"
+        style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelAnimating="true"
+        app:met_floatingLabelText="@string/textCourse"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_hideUnderline="true" />
 
-    <EditText
-        android:id="@+id/profile_enrolled_course_edit_text"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_below="@id/courseEdit"
+        android:id="@+id/collegeEdit"
+        android:editable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_32dp"
-        android:layout_marginTop="@dimen/dimen_24dp"
-        android:layout_marginEnd="@dimen/dimen_32dp"
-        android:ems="10"
-        android:hint="@string/enrolled_course"
-        android:inputType="textPersonName"
-        android:textSize="@dimen/dimen_12sp"
-        android:layout_below="@id/profile_college_edit_text" />
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:hint="@string/textEnterCollege"
+        android:textColor="@color/colorTextView"
+        android:textColorHint="@color/colorAccent"
+        android:textSize="@dimen/dimen_15sp"
+        style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelAnimating="true"
+        app:met_floatingLabelText="@string/college"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_hideUnderline="true" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_below="@id/collegeEdit"
+        android:id="@+id/semesterEdit"
+        android:editable="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:hint="@string/EnterSem"
+        android:textColor="@color/colorTextView"
+        android:textColorHint="@color/colorAccent"
+        android:textSize="@dimen/dimen_15sp"
+        style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelAnimating="true"
+        app:met_floatingLabelText="@string/semester"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_hideUnderline="true" />
 
     <Button
-        android:id="@+id/profile_save_button"
+        android:id="@+id/doneButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_32dp"
         android:layout_marginTop="@dimen/dimen_32dp"
         android:layout_marginEnd="@dimen/dimen_32dp"
-        android:text="Save"
-        android:textColor="@color/white"
-        android:textSize="@dimen/dimen_14sp"
-        android:layout_below="@id/profile_enrolled_course_edit_text"/>
-
+        android:background="@drawable/login_button"
+        android:text="@string/Done"
+        android:layout_below="@id/semesterEdit" />
 </RelativeLayout>
+</layout>

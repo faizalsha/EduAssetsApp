@@ -64,10 +64,6 @@ public class LoginActivity extends AppCompatActivity {
         mContext = LoginActivity.this;
 
         firebaseMethods = new FirebaseMethods(mContext);
-//        if (SharedPreferenceImpl.getInstance().get(Constants.USER_ID,this) != null && !SharedPreferenceImpl.getInstance().get(Constants.USER_ID,this).equals(Constants.NOT_FOUND)) {
-//            Intent i = new Intent(mContext, HomePageActivity.class);
-//            startActivity(i);
-//        }
 
 
         mAuth = FirebaseAuth.getInstance();

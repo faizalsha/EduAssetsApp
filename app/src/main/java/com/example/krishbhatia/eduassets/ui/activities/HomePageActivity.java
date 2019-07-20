@@ -124,6 +124,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             startActivity(new Intent(context, LoginActivity.class));
             finish();
         }
+        else if(id== R.id.nav_header_image_view){
+            startActivity(new Intent(context, SubscribedCourseActivity.class));
+
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -174,6 +178,12 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         mAuth = FirebaseAuth.getInstance();
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
+        headerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context,ProfileActivity.class));
+            }
+        });
         navName = headerView.findViewById(R.id.nav_header_username_text_view);
         navName.setText(userPOJO.getName());
         navEmail = headerView.findViewById(R.id.nav_header_email_text_view);

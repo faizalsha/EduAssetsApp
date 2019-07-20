@@ -104,4 +104,5 @@
 	<dimen name="dimen_75dp">75.1dp</dimen>
 	<dimen name="dimen_25sp">24.9sp</dimen>
 	<dimen name="dimen_300dp">352.9dp</dimen>
+    <dimen name="dimen_5dp">5dp</dimen>
 </resources>
