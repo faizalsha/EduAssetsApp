@@ -45,7 +45,7 @@
     android:layout_height="@dimen/dimen_40dp"
     android:layout_below="@id/editCourse"
     android:layout_marginTop="@dimen/dimen_15dp"
-    android:hint="@string/EnterCollege"
+    android:hint="@string/textEnterCollege"
     app:met_underlineColor="@color/black"
     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     android:id="@+id/editCollege"

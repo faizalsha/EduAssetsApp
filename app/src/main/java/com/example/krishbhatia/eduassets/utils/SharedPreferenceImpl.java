@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.example.krishbhatia.eduassets.Constants;
+import com.example.krishbhatia.eduassets.POJO.UserPOJO;
+import com.google.gson.Gson;
+
 
 public class SharedPreferenceImpl {
 
@@ -45,5 +49,14 @@ public class SharedPreferenceImpl {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPref.contains(key);
     }
+    public void addUserPojo(UserPOJO userPOJO, Context context){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = sharedPref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(userPOJO);
+        prefsEditor.putString(Constants.USERPOJO, json);
+        prefsEditor.apply();
+    }
+
 
 }

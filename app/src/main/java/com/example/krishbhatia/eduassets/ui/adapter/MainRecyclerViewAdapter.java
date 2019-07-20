@@ -66,7 +66,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
                 public void onClick(View v) {
                     if(innerRecyclerView.getVisibility() == View.VISIBLE){
                         innerRecyclerView.setVisibility(View.GONE);
-                        arrow.setImageResource(R.drawable.arrow_down);
+                        arrow.setImageResource(R.drawable.arrow_up);
                     }else {
                         innerRecyclerView.setVisibility(View.VISIBLE);
                         arrow.setImageResource(R.drawable.arrow_up);

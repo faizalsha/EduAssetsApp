@@ -32,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.profile_activity);
 
         nameEditText = findViewById(R.id.profile_name_edit_text);
         courseEditText = findViewById(R.id.profile_course_edit_text);

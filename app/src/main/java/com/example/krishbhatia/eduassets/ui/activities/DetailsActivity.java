@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,7 +15,9 @@ import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.POJO.UserPOJO;
 import com.example.krishbhatia.eduassets.R;
+import com.example.krishbhatia.eduassets.databinding.DetailsActivityBinding;
 import com.example.krishbhatia.eduassets.utils.NetworkUtils;
+import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,52 +27,41 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    private EditText nameEditText;
-    private EditText courseEditText;
-    private EditText collegeEditText;
-    private EditText semesterEditText;
 
-    private Button doneButton;
-
+    private DetailsActivityBinding detailsActivityBinding;
     private Context mContext;
-
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
         mContext = DetailsActivity.this;
-
-        nameEditText = findViewById(R.id.details_name_edit_text);
-        courseEditText = findViewById(R.id.details_college_edit_text);
-        collegeEditText = findViewById(R.id.details_college_edit_text);
-        semesterEditText = findViewById(R.id.details_sem_edit_text);
+        detailsActivityBinding= DataBindingUtil.setContentView(this, R.layout.details_activity);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        doneButton = findViewById(R.id.details_done_button);
 
-        doneButton.setOnClickListener(new View.OnClickListener() {
+        detailsActivityBinding.doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = nameEditText.getText().toString();
-                String course = courseEditText.getText().toString();
-                String college = collegeEditText.getText().toString();
-                String semester = semesterEditText.getText().toString();
+                String name = detailsActivityBinding.nameEditText.getText().toString();
+                String course = detailsActivityBinding.courseEdit.getText().toString();
+                String college = detailsActivityBinding.collegeEdit.getText().toString();
+                String semester = detailsActivityBinding.semesterEdit.getText().toString();
 
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(college) && !TextUtils.isEmpty(semester)){
 
                     if (NetworkUtils.isConnectedToInternert(mContext)){
 
-                        UserPOJO user = new UserPOJO(name, course, college, semester, mAuth.getUid(), mAuth.getCurrentUser().getEmail(), null);
+                        final UserPOJO user = new UserPOJO(name, course, college, semester, mAuth.getUid(), mAuth.getCurrentUser().getEmail(), null);
 
                         mDatabaseReference.child("users").child(mAuth.getUid()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(mContext, "Details Saved Successfully", Toast.LENGTH_SHORT).show();
+                                SharedPreferenceImpl.getInstance().addUserPojo(user,DetailsActivity.this);
                                 startActivity(new Intent(mContext, HomePageActivity.class));
                                 finish();
                             }
