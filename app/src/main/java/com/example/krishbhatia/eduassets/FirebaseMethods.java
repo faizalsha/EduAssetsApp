@@ -12,6 +12,8 @@ import com.example.krishbhatia.eduassets.ui.activities.DetailsActivity;
 import com.example.krishbhatia.eduassets.ui.activities.HomePageActivity;
 import com.example.krishbhatia.eduassets.ui.activities.LoginActivity;
 import com.example.krishbhatia.eduassets.utils.NetworkUtils;
+import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
+import com.example.krishbhatia.eduassets.utils.SharedPreferencesService;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -63,8 +65,8 @@ public class FirebaseMethods {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            SharedPreferenceImpl.setSomeStringValue(mContext,Constants.USER_ID,user.getUid());
-                            SharedPreferenceImpl.setSomeStringValue(mContext,Constants.EMAIL,user.getEmail());
+                           SharedPreferenceImpl.getInstance().save(Constants.USER_ID,user.getUid(),mContext);
+                            SharedPreferenceImpl.getInstance().save(Constants.EMAIL,user.getEmail(),mContext);
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -86,11 +88,8 @@ public class FirebaseMethods {
                         if (task.isSuccessful()) {
                             if (mAuth.getCurrentUser().isEmailVerified()) {
                                 Toast.makeText(mContext, "Signed In", Toast.LENGTH_SHORT).show();
-//                            updateUI(mAuth.getCurrentUser());
-//                            SharedPreferenceImpl.getSharedPreferences(mContext).edit().putString(Constants.USER_ID,task.getResult().getUser().getUid());
-//                                SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, task.getResult().getUser().getUid());
-//                                SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, task.getResult().getUser().getEmail());
-
+                            SharedPreferenceImpl.getInstance().save(Constants.USER_ID,mAuth.getUid(),mContext);
+                            SharedPreferenceImpl.getInstance().save(Constants.EMAIL,mAuth.getCurrentUser().getEmail(),mContext);
                                 updateUI(mAuth.getCurrentUser());
 //                                mContext.startActivity(new Intent(mContext, HomePageActivity.class));
 //                                ((Activity)mContext).finish();

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.krishbhatia.eduassets.Constants;
+import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
 import com.google.android.material.tabs.TabLayout;
 import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -138,6 +140,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
         } else if (id == R.id.nav_logout) {
             mAuth.signOut();
+            SharedPreferenceImpl.getInstance().save(Constants.USER_ID,Constants.NOT_FOUND,context);
             startActivity(new Intent(context, LoginActivity.class));
             finish();
         }
