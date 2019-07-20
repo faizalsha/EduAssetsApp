@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,79 +10,69 @@
         android:id="@+id/enter_details_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_32dp"
         android:text="@string/textEnterSomeDetails"
         android:textSize="@dimen/dimen_24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
     <EditText
         android:id="@+id/details_name_edit_text"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_32dp"
+        android:layout_marginEnd="@dimen/dimen_32dp"
         android:ems="10"
         android:hint="@string/Entername"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_details_text" />
+        android:layout_below="@id/enter_details_text"
+         />
 
     <EditText
         android:id="@+id/details_course_edit_text"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_32dp"
+        android:layout_marginEnd="@dimen/dimen_32dp"
         android:ems="10"
         android:hint="@string/EnterCourse"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/details_name_edit_text" />
+        android:layout_below="@id/details_name_edit_text"/>
 
     <EditText
         android:id="@+id/details_college_edit_text"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_32dp"
+        android:layout_marginEnd="@dimen/dimen_32dp"
         android:ems="10"
         android:hint="@string/EnterCollege"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/details_course_edit_text" />
+        android:layout_below="@id/details_course_edit_text"/>
 
     <EditText
         android:id="@+id/details_sem_edit_text"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_32dp"
+        android:layout_marginEnd="@dimen/dimen_32dp"
         android:ems="10"
         android:hint="@string/EnterSem"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/details_college_edit_text" />
+        android:layout_below="@id/details_college_edit_text"/>
 
     <Button
         android:id="@+id/details_done_button"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_32dp"
+        android:layout_marginEnd="@dimen/dimen_32dp"
         android:text="@string/Done"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/details_sem_edit_text" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_below="@id/details_sem_edit_text" />
+</RelativeLayout>

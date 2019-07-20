@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dimen_8dp">
@@ -17,38 +17,30 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+             />
 
         <TextView
             android:id="@+id/cart_product_title_text_view"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_toRightOf="@id/cart_product_image_view"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
             android:text="Foundation of Computer Science"
             android:textSize="@dimen/dimen_24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/cart_product_image_view"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_toEndOf="@id/cart_product_image_view" />
 
         <TextView
             android:id="@+id/cart_product_desc_text_view"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cart_product_title_text_view"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_toRightOf="@id/cart_product_image_view"
             android:text="Book by Alfred Aho and Jeffrey Ullman"
             android:textSize="@dimen/dimen_14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cart_product_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/cart_product_title_text_view" />
+            android:layout_toEndOf="@id/cart_product_image_view"/>
 
         <TextView
             android:id="@+id/cart_product_price_text_view"
@@ -57,12 +49,10 @@
             android:layout_below="@id/cart_product_desc_text_view"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@id/cart_product_image_view"
             android:text="INR 300"
             android:textSize="@dimen/dimen_24sp"
-            app:layout_constraintStart_toEndOf="@+id/cart_product_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/cart_product_desc_text_view" />
+            android:layout_toEndOf="@id/cart_product_image_view" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
