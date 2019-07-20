@@ -21,9 +21,9 @@ import android.widget.Toast;
 import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.R;
 
-import com.example.krishbhatia.eduassets.SharedPreferenceImpl;
 import com.example.krishbhatia.eduassets.databinding.LoginlayoutBinding;
 import com.example.krishbhatia.eduassets.FirebaseMethods;
+import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -64,15 +64,11 @@ public class LoginActivity extends AppCompatActivity {
         mContext = LoginActivity.this;
 
         firebaseMethods = new FirebaseMethods(mContext);
-        if (SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID) != null && !SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID).equals(Constants.NOT_FOUND)) {
-            Intent i = new Intent(mContext, HomePageActivity.class);
-            startActivity(i);
-        }
-
-//        if (SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID) != null && !SharedPreferenceImpl.getSomeStringValue(LoginActivity.this, Constants.USER_ID).equals(Constants.NOT_FOUND)) {
+//        if (SharedPreferenceImpl.getInstance().get(Constants.USER_ID,this) != null && !SharedPreferenceImpl.getInstance().get(Constants.USER_ID,this).equals(Constants.NOT_FOUND)) {
 //            Intent i = new Intent(mContext, HomePageActivity.class);
 //            startActivity(i);
 //        }
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -88,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         loginlayoutBinding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                loginWithEmailPwd();
+//     a           loginWithEmailPwd();
                 firebaseMethods.loginWithEmailPwd(loginlayoutBinding.emailEditText.getText().toString(), loginlayoutBinding.passwordEditText.getText().toString());
             }
         });
@@ -174,8 +170,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         Log.d(TAG, "onDataChange: " + dataSnapshot);
                         if (!dataSnapshot.hasChild("name")) {
-//                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, user.getUid());
-//                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, user.getEmail());
 
                             startActivity(new Intent(mContext, DetailsActivity.class));
                             finish();

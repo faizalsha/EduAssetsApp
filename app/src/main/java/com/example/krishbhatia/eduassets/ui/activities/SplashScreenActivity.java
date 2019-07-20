@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.Constants;
-import com.example.krishbhatia.eduassets.SharedPreferenceImpl;
+import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
 
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = "SplashScreenActivity";
@@ -36,12 +37,14 @@ proceedingIntent();
         countDownTimer.start();
     }
     private void proceedingIntent(){
-        if(SharedPreferenceImpl.getSomeStringValue(this,Constants.USER_ID)!=null && SharedPreferenceImpl.getSomeStringValue(this,Constants.USER_ID).equals(Constants.NOT_FOUND)){
+        if(SharedPreferenceImpl.getInstance().get(Constants.USER_ID,this)!=null && !SharedPreferenceImpl.getInstance().get(Constants.USER_ID,this).equals(Constants.NOT_FOUND)){
             Log.d(TAG, "proceedingIntent: user is logged in");
+
             startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
         }
         else {
             Log.d(TAG, "proceedingIntent: user is not logged in");
+
             startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
 
         }

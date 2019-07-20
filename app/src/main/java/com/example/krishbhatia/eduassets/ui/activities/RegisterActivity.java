@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity{
     private EditText editTextRegisterEmail;
 
     private EditText editTextRegisterPassword;
-    private AppCompatButton buttonRegisterButton;
+    private Button buttonRegisterButton;
     private Context mContext;
 
     //Firebase Related
