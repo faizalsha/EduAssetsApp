@@ -196,6 +196,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        exitApplication();
+    }
+
+    private void exitApplication() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Exit Application?");
         alertDialogBuilder

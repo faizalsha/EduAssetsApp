@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,56 +24,58 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
     private ProfileActivityBinding profileActivityBinding;
-    private EditText nameEditText;
-    private EditText courseEditText;
-    private EditText semesterEditText;
-    private EditText collegeEditText;
-    private EditText enrolledCourseEditText;
-    private Button saveButton;
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
+    private boolean somethingChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_activity);
-        profileActivityBinding= DataBindingUtil.setContentView(this,R.layout.profile_activity);
-//        nameEditText = findViewById(R.id.profile_name_edit_text);
-//        courseEditText = findViewById(R.id.profile_course_edit_text);
-//        semesterEditText = findViewById(R.id.profile_semester_edit_text);
-//        collegeEditText = findViewById(R.id.profile_college_edit_text);
-//        enrolledCourseEditText = findViewById(R.id.profile_enrolled_course_edit_text);
+
+        profileActivityBinding = DataBindingUtil.setContentView(this, R.layout.profile_activity);
+        clearFocus();
 
         mAuth = FirebaseAuth.getInstance();
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
 
-//        saveButton = findViewById(R.id.profile_save_button);
         profileActivityBinding.doneButton.setOnClickListener(new View.OnClickListener() {
+
+                                                                 @Override
+                                                                 public void onClick(View v) {
+                                                                     if (somethingChanged) {
+                                                                         applyDetailsChanges();
+                                                                     } else {
+                                                                         Toast.makeText(ProfileActivity.this, "Fields must not be empty", Toast.LENGTH_SHORT).show();
+                                                                     }
+                                                                     finish();
+                                                                 }
+
+                                                             }
+
+
+        );
+
+        profileActivityBinding.backImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = profileActivityBinding.nameEditText.getText().toString();
-                String course = profileActivityBinding.courseEdit.getText().toString();
-                String semester = profileActivityBinding.semesterEdit.getText().toString();
-                String college = profileActivityBinding.collegeEdit.getText().toString();
-//                String enrolledCourse = profileActivityBinding.nameEditText.getText().toString();
-                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(semester)
-                            && !TextUtils.isEmpty(college)/* && !TextUtils.isEmpty(enrolledCourse)*/){
-
-                    mDatabaseReference.child("name").setValue(name);
-                    mDatabaseReference.child("course").setValue(course);
-                    mDatabaseReference.child("semester").setValue(semester);
-                    mDatabaseReference.child("college").setValue(college);
-//                    mDatabaseReference.child("enrolledCourse").setValue(enrolledCourse);
-
-                } else{
-                    Toast.makeText(ProfileActivity.this, "Fields must not be empty", Toast.LENGTH_SHORT).show();
+                if (somethingChanged) {
+                    saveChangesDialog();
+                } else {
+                    finish();
                 }
             }
         });
-
-
+        profileActivityBinding.editDetailsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                somethingChanged = true;
+                profileActivityBinding.nameEditText.setEnabled(true);
+                profileActivityBinding.courseEdit.setEnabled(true);
+                profileActivityBinding.semesterEdit.setEnabled(true);
+                profileActivityBinding.collegeEdit.setEnabled(true);
+            }
+        });
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -93,6 +97,63 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void applyDetailsChanges() {
+        String name = profileActivityBinding.nameEditText.getText().toString();
+        String course = profileActivityBinding.courseEdit.getText().toString();
+        String semester = profileActivityBinding.semesterEdit.getText().toString();
+        String college = profileActivityBinding.collegeEdit.getText().toString();
+//                String enrolledCourse = profileActivityBinding.nameEditText.getText().toString();
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(semester)
+                && !TextUtils.isEmpty(college)/* && !TextUtils.isEmpty(enrolledCourse)*/) {
+
+            mDatabaseReference.child("name").setValue(name);
+            mDatabaseReference.child("course").setValue(course);
+            mDatabaseReference.child("semester").setValue(semester);
+            mDatabaseReference.child("college").setValue(college);
+//                    mDatabaseReference.child("enrolledCourse").setValue(enrolledCourse);
+
+        }
+
+    }
+    private void saveChangesDialog() {
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Save Changes?");
+        alertDialogBuilder
+
+                .setCancelable(false)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                applyDetailsChanges();
+                                dialog.cancel();
+                                finish();
+                            }
+                        })
+
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    dialog.cancel();
+                    finish();
+
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+    }
+
+
+    private void clearFocus() {
+        View current = getCurrentFocus();
+        if (current != null) {
+            current.clearFocus();
+        }
 
     }
 }
