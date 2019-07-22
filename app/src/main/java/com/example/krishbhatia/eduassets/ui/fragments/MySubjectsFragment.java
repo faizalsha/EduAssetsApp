@@ -2,6 +2,8 @@ package com.example.krishbhatia.eduassets.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,9 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.krishbhatia.eduassets.POJO.SubjectPOJO;
+import com.example.krishbhatia.eduassets.POJO.CourseBasicDetails;
+import com.example.krishbhatia.eduassets.POJO.SubjectBasicDetail;
+
 import com.example.krishbhatia.eduassets.R;
+import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
 import com.example.krishbhatia.eduassets.ui.adapter.SubjectAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,40 +32,14 @@ public class MySubjectsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView recyclerView;
-    private List<SubjectPOJO> subjectList;
+    private ArrayList<SubjectBasicDetail> subjectList;
 
 
-    private String mParam1;
-    private String mParam2;
-
-
-    public MySubjectsFragment() {
-    }
-
-
-    public static MySubjectsFragment newInstance(String param1, String param2) {
-        MySubjectsFragment fragment = new MySubjectsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        TextView textView=container.findViewById(R.id.mycourseText);
-//        textView.setText("My courses");
+
         View view = inflater.inflate(R.layout.fragment_my_subjects, container, false);
 
         recyclerView = view.findViewById(R.id.mySubject_fragment_recycler_view);
@@ -65,56 +49,25 @@ public class MySubjectsFragment extends Fragment {
 
         subjectList = new ArrayList<>();
 
-        subjectList.add(new SubjectPOJO("Physics", "B.tech 1st sem"));
-        subjectList.add(new SubjectPOJO("Maths", "B.tech 1st sem"));
-        subjectList.add(new SubjectPOJO("Biology", "B.tech 2nd sem"));
-        subjectList.add(new SubjectPOJO("English", "B.tech 1st sem"));
+        DatabaseReference subjectRef = FirebaseDatabase.getInstance().getReference().child("subjectDB/BBA/subjects");
+        subjectRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                SubjectBasicDetail subject;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    subject = snapshot.getValue(SubjectBasicDetail.class);
+                    subjectList.add(subject);
+                }
+                SubjectAdapter adapter = new SubjectAdapter(getContext(), subjectList);
+                recyclerView.setAdapter(adapter);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-        //creating recyclerview adapter
-        SubjectAdapter adapter = new SubjectAdapter(getContext(), subjectList);
-
-        //setting adapter to recyclerview
-        recyclerView.setAdapter(adapter);
-
+            }
+        });
 
         return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-//        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
 }
