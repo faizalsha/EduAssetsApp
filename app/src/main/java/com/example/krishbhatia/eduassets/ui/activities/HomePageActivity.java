@@ -26,7 +26,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.ViewPagerAdapter;
@@ -112,10 +111,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
         if (id == R.id.nav_home) {
 
-        } else if (id == R.id.nav_subscribed) {
+        } else if (id == R.id.cart) {
 
 
-        } else if (id == R.id.nav_purchased_course) {
+        } else if (id == R.id.purchasedCourses) {
             startActivity(new Intent(context, PurchasedCourseActivity.class));
 
         } else if (id == R.id.nav_logout) {

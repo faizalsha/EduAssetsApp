@@ -67,5 +67,6 @@
     <color name="colorTextView">#83898E</color>
     <color name="cherry">#3B0B17</color>
     <color name="selectedTab">#10b3bc</color>
+    <color name="profileOuter">#556080</color>
 
 </resources>

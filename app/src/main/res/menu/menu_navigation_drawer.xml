@@ -9,13 +9,13 @@
             android:icon="@drawable/ic_home_nav"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_subscribed"
-            android:icon="@drawable/ic_subscribed_course_nav"
-            android:title="Subscribed Course" />
+            android:id="@+id/cart"
+            android:icon="@drawable/ic_cart"
+            android:title="@string/cart" />
         <item
-            android:id="@+id/nav_purchased_course"
+            android:id="@+id/purchasedCourses"
             android:icon="@drawable/ic_subscribed_course_nav"
-            android:title="Purchased Course" />
+            android:title="@string/purchasedCourse" />
 
     </group>
 
