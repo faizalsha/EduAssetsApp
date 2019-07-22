@@ -1,13 +1,13 @@
 package com.example.krishbhatia.eduassets.POJO;
 
-class SubjectBasicDetail {
+public class SubjectBasicDetail {
     private String subjectName;
-    private float subjectCode;
+    private Integer subjectCode;
 
     public SubjectBasicDetail() {
     }
 
-    public SubjectBasicDetail(String subjectName, float subjectCode) {
+    public SubjectBasicDetail(String subjectName, Integer subjectCode) {
         this.subjectName = subjectName;
         this.subjectCode = subjectCode;
     }
@@ -20,11 +20,11 @@ class SubjectBasicDetail {
         this.subjectName = subjectName;
     }
 
-    public float getSubjectCode() {
+    public Integer getSubjectCode() {
         return subjectCode;
     }
 
-    public void setSubjectCode(float subjectCode) {
+    public void setSubjectCode(Integer subjectCode) {
         this.subjectCode = subjectCode;
     }
 }
