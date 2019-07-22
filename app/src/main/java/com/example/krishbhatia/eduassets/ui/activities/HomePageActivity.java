@@ -113,7 +113,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_subscribed) {
-            startActivity(new Intent(context, SubscribedCourseActivity.class));
+
 
         } else if (id == R.id.nav_purchased_course) {
             startActivity(new Intent(context, PurchasedCourseActivity.class));
@@ -125,7 +125,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             finish();
         }
         else if(id== R.id.nav_header_image_view){
-            startActivity(new Intent(context, SubscribedCourseActivity.class));
 
         }
 

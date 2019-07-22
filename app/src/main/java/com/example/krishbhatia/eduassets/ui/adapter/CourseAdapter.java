@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.POJO.CoursePOJO;
 import com.example.krishbhatia.eduassets.R;
@@ -52,6 +53,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         courseViewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(mContext, "njocsnaphndcpa", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, CartActivity.class);
                 intent.putExtra("course", course.getTitle());
                 mContext.startActivity(intent);

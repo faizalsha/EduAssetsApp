@@ -25,7 +25,6 @@
         <activity android:name=".ui.activities.VideoPlayerActivity" />
         <activity android:name=".ui.activities.PdfViewerActivity" />
 
-        <activity android:name=".ui.activities.SubscribedCourseActivity" />
         <activity android:name=".ui.activities.ProfileActivity" />
 
         <activity android:name=".ui.activities.DetailsActivity" />

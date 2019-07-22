@@ -37,7 +37,7 @@ public class PurchasedCourseActivity extends AppCompatActivity {
                     arrayList.add(s);
                 }
 
-                recyclerView = findViewById(R.id.purchased_course_recycler_view);
+                recyclerView = findViewById(R.id.addedCoursesRecyclerView);
                 recyclerView.setLayoutManager(new LinearLayoutManager(PurchasedCourseActivity.this));
                 PurchasedCourseAdapter adapter = new PurchasedCourseAdapter(PurchasedCourseActivity.this, arrayList);
                 recyclerView.setAdapter(adapter);

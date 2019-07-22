@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import com.example.krishbhatia.eduassets.POJO.CoursePOJO;
 import com.example.krishbhatia.eduassets.R;
@@ -36,7 +35,7 @@ public class CartActivity extends AppCompatActivity {
 
          cartAdapter = new CartAdapter(CartActivity.this, list);
 
-         coursesCheckoutCart = findViewById(R.id.cart_recycler_view);
+         coursesCheckoutCart = findViewById(R.id.cartRecyclerView);
 
          coursesCheckoutCart.setNestedScrollingEnabled(false);
 
