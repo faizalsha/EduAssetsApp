@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.krishbhatia.eduassets.POJO.CourseBasicDetails;
-import com.example.krishbhatia.eduassets.POJO.CoursePOJO;
+
+import com.example.krishbhatia.eduassets.POJO.CourseBasicInfoPOJO;
+
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.CartActivity;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
 
@@ -23,11 +25,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     private Context mContext;
 
     //we are storing all the courses in a list
-    private List<CourseBasicDetails> courseList;
+    private ArrayList<CourseBasicInfoPOJO> courseList;
 
 
     //getting the context and course list with constructor
-    public CourseAdapter(Context mContext, List<CourseBasicDetails> courseList) {
+    public CourseAdapter(Context mContext, ArrayList<CourseBasicInfoPOJO> courseList) {
         this.mContext = mContext;
         this.courseList = courseList;
 
@@ -46,11 +48,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder courseViewHolder, int position) {
         //getting the course of the specified position
-        final CourseBasicDetails course = courseList.get(position);
+        final CourseBasicInfoPOJO course = courseList.get(position);
 
         //binding the data with the viewHolder views
         courseViewHolder.textViewTitle.setText(course.getCourseName());
-        courseViewHolder.textViewCode.setText(String.valueOf((int)course.getCourseId()));
+        courseViewHolder.textViewCode.setText(String.valueOf(course.getCourseId()));
         courseViewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,15 +83,5 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             textViewCode = itemView.findViewById(R.id.all_courses_fragment_course_code_text_view);
             view = itemView;
         }
-
-
-//        @Override
-//        public void onClick(View v) {
-//            onCourseClickListener.onCourseClick();
-//        }
     }
-
-//    public interface OnCourseClickListener{
-//        void onCourseClick();
-//    }
 }

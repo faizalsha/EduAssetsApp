@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.krishbhatia.eduassets.POJO.SubjectBasicDetail;
 
+
+import com.example.krishbhatia.eduassets.POJO.SubjectBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectViewHolder>{
 
@@ -21,11 +22,11 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     private Context mCtx;
 
     //we are storing all the courses in a list
-    private ArrayList<SubjectBasicDetail> subjectList;
+    private ArrayList<SubjectBasicInfoPOJO> subjectList;
 
 
     //getting the context and course list with constructor
-    public SubjectAdapter(Context mCtx, ArrayList<SubjectBasicDetail> subjectList) {
+    public SubjectAdapter(Context mCtx, ArrayList<SubjectBasicInfoPOJO> subjectList) {
         this.mCtx = mCtx;
         this.subjectList = subjectList;
     }
@@ -42,7 +43,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     @Override
     public void onBindViewHolder(@NonNull SubjectViewHolder subjectViewHolder, int position) {
         //getting the course of the specified position
-        SubjectBasicDetail subject = subjectList.get(position);
+        SubjectBasicInfoPOJO subject = subjectList.get(position);
 
         //binding the data with the viewholder views
         subjectViewHolder.textViewTitle.setText(subject.getSubjectName());

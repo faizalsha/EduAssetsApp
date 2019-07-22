@@ -1,13 +1,13 @@
 package com.example.krishbhatia.eduassets.POJO;
 
 public class UserPOJO {
-    String name;
-    String course;
-    String college;
-    String semester;
-    String userId;
-    String email;
-    String enrolledCourse;
+    private String name;
+    private String course;
+    private String college;
+    private String semester;
+    private String userId;
+    private String email;
+    private String enrolledCourse;
 
     public void setEnrolledCourse(String enrolledCourse) {
         this.enrolledCourse = enrolledCourse;

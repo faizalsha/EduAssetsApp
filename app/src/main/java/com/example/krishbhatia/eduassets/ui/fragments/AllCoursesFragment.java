@@ -11,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.krishbhatia.eduassets.POJO.CourseBasicDetails;
-import com.example.krishbhatia.eduassets.POJO.CoursePOJO;
+
+import com.example.krishbhatia.eduassets.POJO.CourseBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +30,7 @@ public class AllCoursesFragment extends Fragment {
     private static final String TAG = "AllCoursesFragment";
 
     private RecyclerView recyclerView;
-    private ArrayList<CourseBasicDetails> courseList;
+    private ArrayList<CourseBasicInfoPOJO> courseList;
 
     public AllCoursesFragment() {
     }
@@ -49,15 +49,15 @@ public class AllCoursesFragment extends Fragment {
 
 
 
-        final DatabaseReference courseRef = FirebaseDatabase.getInstance().getReference().child("AllCoursesData");
+        final DatabaseReference courseRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/courseBasicInfo");
 
         courseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                CourseBasicDetails courseBasicDetails;
+                CourseBasicInfoPOJO course;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    courseBasicDetails = snapshot.getValue(CourseBasicDetails.class);
-                    courseList.add(courseBasicDetails);
+                    course = snapshot.getValue(CourseBasicInfoPOJO.class);
+                    courseList.add(course);
                 }
                 CourseAdapter adapter = new CourseAdapter(getContext(), courseList);
                 recyclerView.setAdapter(adapter);
