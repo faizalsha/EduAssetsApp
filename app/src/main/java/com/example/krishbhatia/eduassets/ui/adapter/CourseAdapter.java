@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.POJO.CourseBasicDetails;
 import com.example.krishbhatia.eduassets.POJO.CoursePOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.CartActivity;
@@ -22,11 +23,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     private Context mContext;
 
     //we are storing all the courses in a list
-    private List<CoursePOJO> courseList;
+    private List<CourseBasicDetails> courseList;
 
 
     //getting the context and course list with constructor
-    public CourseAdapter(Context mContext, List<CoursePOJO> courseList) {
+    public CourseAdapter(Context mContext, List<CourseBasicDetails> courseList) {
         this.mContext = mContext;
         this.courseList = courseList;
 
@@ -45,17 +46,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder courseViewHolder, int position) {
         //getting the course of the specified position
-        final CoursePOJO course = courseList.get(position);
+        final CourseBasicDetails course = courseList.get(position);
 
         //binding the data with the viewHolder views
-        courseViewHolder.textViewTitle.setText(course.getTitle());
-        courseViewHolder.textViewCode.setText(String.valueOf(course.getCode()));
+        courseViewHolder.textViewTitle.setText(course.getCourseName());
+        courseViewHolder.textViewCode.setText(String.valueOf((int)course.getCourseId()));
         courseViewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "njocsnaphndcpa", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, CartActivity.class);
-                intent.putExtra("course", course.getTitle());
+                intent.putExtra("course", course.getCourseName());
                 mContext.startActivity(intent);
             }
         });
@@ -68,8 +69,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     class CourseViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textViewTitle, textViewDesc;
-        TextView /*textViewTitle*/ textViewCode;
+        TextView textViewTitle;
+        TextView textViewCode;
         View view;
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
