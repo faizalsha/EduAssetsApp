@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
@@ -25,6 +27,8 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
     private boolean somethingChanged = false;
+    String name ,course,college,semester;
+    private ArrayAdapter<CharSequence> courseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,9 @@ public class ProfileActivity extends AppCompatActivity {
         clearFocus();
 
         mAuth = FirebaseAuth.getInstance();
-
+        courseAdapter= ArrayAdapter.createFromResource(this,R.array.courses,android.R.layout.simple_spinner_item);
+        courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        profileActivityBinding.courseSpinner.setAdapter(courseAdapter);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
 
         profileActivityBinding.doneButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +59,19 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         );
+        profileActivityBinding.courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==5){
+                    profileActivityBinding.courseEdit.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         profileActivityBinding.backImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,9 +88,9 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 somethingChanged = true;
                 profileActivityBinding.nameEditText.setEnabled(true);
-                profileActivityBinding.courseEdit.setEnabled(true);
                 profileActivityBinding.semesterEdit.setEnabled(true);
                 profileActivityBinding.collegeEdit.setEnabled(true);
+                profileActivityBinding.courseSpinner.setEnabled(true);
             }
         });
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -99,10 +118,15 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void applyDetailsChanges() {
-        String name = profileActivityBinding.nameEditText.getText().toString();
-        String course = profileActivityBinding.courseEdit.getText().toString();
-        String semester = profileActivityBinding.semesterEdit.getText().toString();
-        String college = profileActivityBinding.collegeEdit.getText().toString();
+         name = profileActivityBinding.nameEditText.getText().toString();
+         semester = profileActivityBinding.semesterEdit.getText().toString();
+         college = profileActivityBinding.collegeEdit.getText().toString();
+         if(profileActivityBinding.courseSpinner.getSelectedItemPosition()==5){
+             course=profileActivityBinding.courseEdit.getText().toString();
+         }
+         else {
+             course = profileActivityBinding.courseSpinner.getSelectedItem().toString();
+         }
 //                String enrolledCourse = profileActivityBinding.nameEditText.getText().toString();
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(semester)
                 && !TextUtils.isEmpty(college)/* && !TextUtils.isEmpty(enrolledCourse)*/) {

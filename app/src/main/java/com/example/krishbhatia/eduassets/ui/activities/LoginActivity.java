@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signIn();
+                loginlayoutBinding.googleSignInButton.setEnabled(false);
             }
         });
         loginlayoutBinding.loginButton.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 //     a           loginWithEmailPwd();
                 firebaseMethods.loginWithEmailPwd(loginlayoutBinding.emailEditText.getText().toString(), loginlayoutBinding.passwordEditText.getText().toString());
+                loginlayoutBinding.loginButton.setEnabled(false);
             }
         });
         loginlayoutBinding.textsignup.setOnClickListener(new View.OnClickListener() {

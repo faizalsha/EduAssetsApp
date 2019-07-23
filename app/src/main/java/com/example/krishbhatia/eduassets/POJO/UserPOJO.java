@@ -8,6 +8,15 @@ public class UserPOJO {
     String userId;
     String email;
     String enrolledCourse;
+    int courseId;
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
 
     public void setEnrolledCourse(String enrolledCourse) {
         this.enrolledCourse = enrolledCourse;
@@ -46,6 +55,17 @@ public class UserPOJO {
         this.userId = userId;
         this.email = email;
         this.enrolledCourse = enrolledCourse;
+    }
+
+    public UserPOJO(String name, String course, String college, String semester, String userId, String email, String enrolledCourse, int courseId) {
+        this.name = name;
+        this.course = course;
+        this.college = college;
+        this.semester = semester;
+        this.userId = userId;
+        this.email = email;
+        this.enrolledCourse = enrolledCourse;
+        this.courseId = courseId;
     }
 
     public void setName(String name) {
