@@ -13,14 +13,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.Constants;
+import com.example.krishbhatia.eduassets.POJO.UserPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.databinding.ProfileActivityBinding;
+import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 public class ProfileActivity extends AppCompatActivity {
     private ProfileActivityBinding profileActivityBinding;
@@ -28,7 +32,9 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private boolean somethingChanged = false;
     String name ,course,college,semester;
+    private UserPOJO userPOJO;
     private ArrayAdapter<CharSequence> courseAdapter;
+    private int courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +42,30 @@ public class ProfileActivity extends AppCompatActivity {
 
         profileActivityBinding = DataBindingUtil.setContentView(this, R.layout.profile_activity);
         clearFocus();
-
         mAuth = FirebaseAuth.getInstance();
         courseAdapter= ArrayAdapter.createFromResource(this,R.array.courses,android.R.layout.simple_spinner_item);
         courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        profileActivityBinding.courseSpinner.setEnabled(false);
         profileActivityBinding.courseSpinner.setAdapter(courseAdapter);
+        getUserPojo();
+
+        profileActivityBinding.courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==5) {
+                    profileActivityBinding.courseEdit.setVisibility(View.VISIBLE);
+                }
+                else {
+                    profileActivityBinding.courseEdit.setVisibility(View.GONE);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
 
         profileActivityBinding.doneButton.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
                                                                  public void onClick(View v) {
                                                                      if (somethingChanged) {
                                                                          applyDetailsChanges();
+                                                                         getUserPojo();
                                                                      } else {
                                                                          Toast.makeText(ProfileActivity.this, "Fields must not be empty", Toast.LENGTH_SHORT).show();
                                                                      }
@@ -63,7 +89,12 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==5){
+                    profileActivityBinding.courseEdit.setVisibility(View.VISIBLE);
+
                     profileActivityBinding.courseEdit.setEnabled(true);
+                }
+                else {
+                    profileActivityBinding.courseEdit.setVisibility(View.GONE);
                 }
             }
 
@@ -91,43 +122,53 @@ public class ProfileActivity extends AppCompatActivity {
                 profileActivityBinding.semesterEdit.setEnabled(true);
                 profileActivityBinding.collegeEdit.setEnabled(true);
                 profileActivityBinding.courseSpinner.setEnabled(true);
+                profileActivityBinding.courseSpinner.setEnabled(true);
             }
         });
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name = dataSnapshot.child("name").getValue().toString();
-                String course = dataSnapshot.child("course").getValue().toString();
-                String semester = dataSnapshot.child("semester").getValue().toString();
-                String college = dataSnapshot.child("college").getValue().toString();
-//                String enrolledCourse = dataSnapshot.child("enrolledCourse").getValue().toString();
 
-                profileActivityBinding.nameEditText.setText(name);
-                profileActivityBinding.courseEdit.setText(course);
+
+    }
+
+    private void initStrings() {
+        name=userPOJO.getName();
+        course=userPOJO.getCourse();
+        semester=userPOJO.getSemester();
+        college=userPOJO.getCollege();
+        courseId=userPOJO.getCourseId();
+        settingUpComponents();
+    }
+
+    private void settingUpComponents(){
+        profileActivityBinding.nameEditText.setText(name);
                 profileActivityBinding.semesterEdit.setText(semester);
                 profileActivityBinding.collegeEdit.setText(college);
-//                enrolledCourseEditText.setText(enrolledCourse);
-            }
+        profileActivityBinding.courseSpinner.setSelection(courseId);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
 
+        if(courseId==5){
+                    profileActivityBinding.courseEdit.setEnabled(true);
+                    profileActivityBinding.courseEdit.setVisibility(View.VISIBLE);
+                    profileActivityBinding.courseEdit.setText(course);
+                }
+                else {
+                    profileActivityBinding.courseEdit.setVisibility(View.GONE);
+                }
     }
 
     private void applyDetailsChanges() {
          name = profileActivityBinding.nameEditText.getText().toString();
          semester = profileActivityBinding.semesterEdit.getText().toString();
          college = profileActivityBinding.collegeEdit.getText().toString();
-         if(profileActivityBinding.courseSpinner.getSelectedItemPosition()==5){
+         courseId=profileActivityBinding.courseSpinner.getSelectedItemPosition();
+         if(courseId==5){
              course=profileActivityBinding.courseEdit.getText().toString();
          }
          else {
              course = profileActivityBinding.courseSpinner.getSelectedItem().toString();
          }
-//                String enrolledCourse = profileActivityBinding.nameEditText.getText().toString();
+
+////                String enrolledCourse = profileActivityBinding.nameEditText.getText().toString();
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(semester)
                 && !TextUtils.isEmpty(college)/* && !TextUtils.isEmpty(enrolledCourse)*/) {
 
@@ -135,8 +176,18 @@ public class ProfileActivity extends AppCompatActivity {
             mDatabaseReference.child("course").setValue(course);
             mDatabaseReference.child("semester").setValue(semester);
             mDatabaseReference.child("college").setValue(college);
-//                    mDatabaseReference.child("enrolledCourse").setValue(enrolledCourse);
+            mDatabaseReference.child("courseId").setValue(courseId);
+            userPOJO.setCollege(college);
+            userPOJO.setCourse(course);
+            userPOJO.setCourseId(profileActivityBinding.courseSpinner.getSelectedItemPosition());
+            userPOJO.setSemester(semester);
+            userPOJO.setName(name);
+            SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,ProfileActivity.this);
+            //          mDatabaseReference.child("enrolledCourse").setValue(enrolledCourse);
+            Toast.makeText(this, "jlnvpanpndpa", Toast.LENGTH_SHORT).show();
 
+        }
+        else {
         }
 
     }
@@ -177,5 +228,10 @@ public class ProfileActivity extends AppCompatActivity {
             current.clearFocus();
         }
 
+    }
+    private void getUserPojo() {
+        Gson gson = new Gson();
+        userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
+        initStrings();
     }
 }

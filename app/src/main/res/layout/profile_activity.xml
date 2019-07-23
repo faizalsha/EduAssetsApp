@@ -63,8 +63,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
         android:id="@+id/courseSpinner"
-        android:enabled="false"
-
         android:layout_below="@id/nameEditText"
         android:layout_marginTop="@dimen/dimen_15dp"
         />

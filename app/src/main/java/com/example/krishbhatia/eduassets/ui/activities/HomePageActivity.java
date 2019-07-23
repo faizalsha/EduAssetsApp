@@ -26,6 +26,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.ViewPagerAdapter;
@@ -132,6 +133,15 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+getNewUserDetails();
+        navEmail.setText(SharedPreferenceImpl.getInstance().get(Constants.EMAIL, context));
+        navName.setText(userPOJO.getName());
+
+    }
+
     private void getOldUserDetails() {
         userPOJO = new UserPOJO();
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -140,6 +150,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userPOJO = dataSnapshot.child("users").child(mAuth.getUid()).getValue(UserPOJO.class);
                 SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, context);
+                Toast.makeText(context, "cvjckdckjfifog", Toast.LENGTH_SHORT).show();
+                
 
             }
 
@@ -183,10 +195,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             }
         });
         navName = headerView.findViewById(R.id.nav_header_username_text_view);
-        navName.setText(userPOJO.getName());
+
         navEmail = headerView.findViewById(R.id.nav_header_email_text_view);
         navEmail.setText(SharedPreferenceImpl.getInstance().get(Constants.EMAIL, context));
-
+        navName.setText(userPOJO.getName());
     }
 }
 //        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
