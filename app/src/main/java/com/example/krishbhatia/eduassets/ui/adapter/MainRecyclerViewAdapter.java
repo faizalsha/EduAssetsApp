@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.krishbhatia.eduassets.POJO.TopicPOJO;
+import com.example.krishbhatia.eduassets.POJO.SectionPOJO;
+import com.example.krishbhatia.eduassets.POJO.SubjectResPOJO;
 import com.example.krishbhatia.eduassets.R;
 
 import java.util.ArrayList;
@@ -19,11 +20,13 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     private Context mContext;
     //private List<ResourcePOJO> mList;
-    private ArrayList<TopicPOJO> topicList;
+    private SubjectResPOJO subjectRes;
+    private ArrayList<SectionPOJO> sectionList;
 
-    public MainRecyclerViewAdapter(Context mContext, ArrayList<TopicPOJO> topicList) {
+    public MainRecyclerViewAdapter(Context mContext, SubjectResPOJO subjectRes) {
         this.mContext = mContext;
-        this.topicList = topicList;
+        this.subjectRes = subjectRes;
+        this.sectionList = this.subjectRes.getSection();
     }
 
     @NonNull
@@ -37,17 +40,17 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull MainRecyclerViewHolder holder, int position) {
 
-        TopicPOJO topic = topicList.get(position);
-        InnerRecyclerViewAdapter innerRecyclerViewAdapter = new InnerRecyclerViewAdapter(mContext, topic.getResources());
+        SectionPOJO section = sectionList.get(position);
+        InnerRecyclerViewAdapter innerRecyclerViewAdapter = new InnerRecyclerViewAdapter(mContext, section.getResource());
         holder.innerRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         holder.innerRecyclerView.setAdapter(innerRecyclerViewAdapter);
 
-        holder.topText.setText(topic.getTitle());
+        holder.topText.setText(section.getSectionName());
     }
 
     @Override
     public int getItemCount() {
-        return topicList.size();
+        return sectionList.size();
     }
 
     class MainRecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -66,7 +69,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
                 public void onClick(View v) {
                     if(innerRecyclerView.getVisibility() == View.VISIBLE){
                         innerRecyclerView.setVisibility(View.GONE);
-                        arrow.setImageResource(R.drawable.arrow_up);
+                        arrow.setImageResource(R.drawable.arrow_down);
                     }else {
                         innerRecyclerView.setVisibility(View.VISIBLE);
                         arrow.setImageResource(R.drawable.arrow_up);

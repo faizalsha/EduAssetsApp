@@ -2,12 +2,20 @@ package com.example.krishbhatia.eduassets.POJO;
 
 public class ResourcePOJO {
     private String resType;
-    private String name;
-    private String url;
+    private String resName;
+    private String resUrl;
     private String course;
     private String subjectCode;
 
     public ResourcePOJO() {
+    }
+
+    public ResourcePOJO(String resType, String resName, String resUrl, String course, String subjectCode) {
+        this.resType = resType;
+        this.resName = resName;
+        this.resUrl = resUrl;
+        this.course = course;
+        this.subjectCode = subjectCode;
     }
 
     public String getResType() {
@@ -18,28 +26,20 @@ public class ResourcePOJO {
         this.resType = resType;
     }
 
-    public ResourcePOJO(String resType, String name, String url, String course, String subjectCode) {
-        this.resType = resType;
-        this.name = name;
-        this.url = url;
-        this.course = course;
-        this.subjectCode = subjectCode;
+    public String getResName() {
+        return resName;
     }
 
-    public String getName() {
-        return name;
+    public void setResName(String resName) {
+        this.resName = resName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getResUrl() {
+        return resUrl;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setResUrl(String resUrl) {
+        this.resUrl = resUrl;
     }
 
     public String getCourse() {

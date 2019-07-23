@@ -39,7 +39,7 @@ public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecycler
     @Override
     public void onBindViewHolder(@NonNull final InnerRecyclerViewHolder holder, int position) {
         final ResourcePOJO res = resourceList.get(position);
-        holder.textView.setText(res.getName());
+        holder.textView.setText(res.getResName());
         if (res.getResType().equals("pdf")){
             holder.imageView.setImageResource(R.drawable.ic_pdf);
         } else {
@@ -51,11 +51,11 @@ public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecycler
             public void onClick(View v) {
                 if (res.getResType().equals("pdf")){
                     Intent intent = new Intent(mContext, PdfViewerActivity.class);
-                    intent.putExtra("url", res.getUrl());
+                    intent.putExtra("url", res.getResUrl());
                     mContext.startActivity(intent);
                 } else if (res.getResType().equals("video")){
                     Intent intent = new Intent(mContext, VideoPlayerActivity.class);
-                    intent.putExtra("url", res.getUrl());
+                    intent.putExtra("url", res.getResUrl());
                     mContext.startActivity(intent);
                 }
             }

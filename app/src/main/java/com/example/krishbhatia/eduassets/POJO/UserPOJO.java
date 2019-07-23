@@ -18,6 +18,7 @@ public class UserPOJO {
         this.courseId = courseId;
     }
 
+
     public void setEnrolledCourse(String enrolledCourse) {
         this.enrolledCourse = enrolledCourse;
     }
