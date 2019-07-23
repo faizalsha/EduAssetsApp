@@ -3,6 +3,8 @@ package com.example.krishbhatia.eduassets.ui.adapter;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.krishbhatia.eduassets.POJO.SubjectBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
+import com.example.krishbhatia.eduassets.ui.activities.SubjectResourceActivity;
 
 import java.util.ArrayList;
 
@@ -43,11 +46,19 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     @Override
     public void onBindViewHolder(@NonNull SubjectViewHolder subjectViewHolder, int position) {
         //getting the course of the specified position
-        SubjectBasicInfoPOJO subject = subjectList.get(position);
+        final SubjectBasicInfoPOJO subject = subjectList.get(position);
 
         //binding the data with the viewholder views
         subjectViewHolder.textViewTitle.setText(subject.getSubjectName());
         subjectViewHolder.textViewCode.setText(String.valueOf(subject.getSubjectCode()));
+        subjectViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mCtx, SubjectResourceActivity.class);
+                intent.putExtra("SELECTED_SUBJECT", subject.getSubjectName());
+                mCtx.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.CourseActivity">
+    tools:context=".ui.activities.SubjectResourceActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -32,7 +32,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/course_toolbar"
-                app:title="Course Name"
+                app:title="Subject Name"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"

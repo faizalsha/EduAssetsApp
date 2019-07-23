@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.ui.activities.CourseActivity;
+import com.example.krishbhatia.eduassets.ui.activities.SubjectResourceActivity;
 
 import java.util.ArrayList;
 
@@ -41,7 +41,7 @@ public class PurchasedCourseAdapter extends RecyclerView.Adapter<PurchasedCourse
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CourseActivity.class);
+                Intent intent = new Intent(mContext, SubjectResourceActivity.class);
                 intent.putExtra("course", holder.textView.getText().toString());
                 mContext.startActivity(intent);
             }
