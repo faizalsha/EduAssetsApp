@@ -15,6 +15,7 @@ import com.example.krishbhatia.eduassets.POJO.CourseBasicInfoPOJO;
 
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.CartActivity;
+import com.example.krishbhatia.eduassets.ui.activities.CourseSubjectsActivity;
 
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "njocsnaphndcpa", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, CartActivity.class);
+                Intent intent = new Intent(mContext, CourseSubjectsActivity.class);
                 intent.putExtra("course", course.getCourseName());
                 mContext.startActivity(intent);
             }

@@ -74,9 +74,9 @@
     <string-array name="courses">
         <item> Select Course</item>
         <item> BBA</item>
-        <item >BCom</item>
-        <item >BCA</item>
-        <item >BA</item>
+        <item>BCom</item>
+        <item>BCA</item>
+        <item>BA</item>
         <item> Other</item>
 
 
