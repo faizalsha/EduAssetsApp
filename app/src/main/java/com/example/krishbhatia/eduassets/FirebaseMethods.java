@@ -67,6 +67,7 @@ public class FirebaseMethods {
                             FirebaseUser user = mAuth.getCurrentUser();
                            SharedPreferenceImpl.getInstance().save(Constants.USER_ID,user.getUid(),mContext);
                             SharedPreferenceImpl.getInstance().save(Constants.EMAIL,user.getEmail(),mContext);
+                            updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.

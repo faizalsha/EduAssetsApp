@@ -7,6 +7,9 @@ import android.os.Bundle;
 import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.UserPOJO;
 import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
@@ -120,6 +123,12 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
         } else if (id == R.id.nav_logout) {
             mAuth.signOut();
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build();
+            GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+            mGoogleSignInClient.signOut();
             SharedPreferenceImpl.getInstance().save(Constants.USER_ID, Constants.NOT_FOUND, context);
             startActivity(new Intent(context, LoginActivity.class));
             finish();
