@@ -36,6 +36,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
         mAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.loadingProgressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -60,6 +61,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                 getOldUserDetails();
             } else {
                 getNewUserDetails();
+                if(mAuth.getCurrentUser().getEmail()!=userPOJO.getEmail()){
+                    Toast.makeText(this, "You are logged out.", Toast.LENGTH_SHORT).show();
+                   SharedPreferenceImpl.getInstance().clearAll(SplashScreenActivity.this);
+                    startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
+                    finish();
+                }
 
             }
 

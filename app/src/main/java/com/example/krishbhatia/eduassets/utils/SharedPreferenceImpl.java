@@ -43,7 +43,12 @@ public class SharedPreferenceImpl {
         editor.remove(key);
         editor.apply();
     }
-
+    public void clearAll(Context context){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
+        editor.apply();
+    }
 
     public Boolean contains(String key, Context context){
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);

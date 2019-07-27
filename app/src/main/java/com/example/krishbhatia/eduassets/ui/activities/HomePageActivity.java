@@ -17,6 +17,7 @@ import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
@@ -42,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "HomePageActivity";
     private String userName;
     private Toolbar toolbar;
     private NavigationView navigationView;
@@ -61,11 +63,13 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        mAuth=FirebaseAuth.getInstance();
         context = HomePageActivity.this;
         if (SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, context) == Constants.NOT_FOUND) {
             getOldUserDetails();
         } else {
             getNewUserDetails();
+
 
         }
         initializingComponents();
@@ -145,7 +149,12 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onResume() {
         super.onResume();
-getNewUserDetails();
+        if (SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, context) == Constants.NOT_FOUND) {
+            getOldUserDetails();
+        } else {
+            getNewUserDetails();
+
+        }
         navEmail.setText(SharedPreferenceImpl.getInstance().get(Constants.EMAIL, context));
         navName.setText(userPOJO.getName());
 
@@ -172,9 +181,11 @@ getNewUserDetails();
     }
 
     private void getNewUserDetails() {
-        Gson gson = new Gson();
-        userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, context), UserPOJO.class);
 
+            Gson gson = new Gson();
+        Log.d(TAG, "getNewUserDetails: bfoudaphadp"+SharedPreferenceImpl.getInstance().get(Constants.USER_ID,context));
+            userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, context), UserPOJO.class);
+        Log.d(TAG, "getNewUserDetails: user"+userPOJO.toString());
     }
 
     private void initializingComponents() {

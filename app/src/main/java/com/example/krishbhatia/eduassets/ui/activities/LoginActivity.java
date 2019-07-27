@@ -160,32 +160,38 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(final FirebaseUser user) {
         if (user != null) {
-            userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
-            userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (user.isEmailVerified()) {
+            if (mAuth.getCurrentUser().getEmail() != SharedPreferenceImpl.getInstance().get(Constants.EMAIL, mContext)) {
+                SharedPreferenceImpl.getInstance().clearAll(mContext);
+//                startActivity(new Intent(mContext, LoginActivity.class));
+//                finish();
+            } else {
+                userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
+                userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (user.isEmailVerified()) {
 
-                        Log.d(TAG, "onDataChange: " + dataSnapshot);
-                        if (!dataSnapshot.hasChild("name")) {
+                            Log.d(TAG, "onDataChange: " + dataSnapshot);
+                            if (!dataSnapshot.hasChild("name")) {
 
-                            startActivity(new Intent(mContext, DetailsActivity.class));
-                            finish();
+                                startActivity(new Intent(mContext, DetailsActivity.class));
+                                finish();
+                            } else {
+                                Intent i = new Intent(mContext, HomePageActivity.class);
+                                startActivity(i);
+                                finish();
+                            }
                         } else {
-                            Intent i = new Intent(mContext, HomePageActivity.class);
-                            startActivity(i);
-                            finish();
+                            Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+                    }
+                });
+            }
         }
     }
 
