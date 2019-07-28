@@ -14,8 +14,8 @@
             android:id="@+id/cart_product_image_view"
             android:layout_width="@dimen/dimen_150dp"
             android:layout_height="@dimen/dimen_150dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
             android:scaleType="centerCrop"
              />
 
@@ -36,8 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cart_product_title_text_view"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
             android:text="Book by Alfred Aho and Jeffrey Ullman"
             android:textSize="@dimen/dimen_14sp"
             android:layout_toEndOf="@id/cart_product_image_view"/>
@@ -47,8 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cart_product_desc_text_view"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
             android:text="INR 300"
             android:textSize="@dimen/dimen_24sp"
             android:layout_toEndOf="@id/cart_product_image_view" />

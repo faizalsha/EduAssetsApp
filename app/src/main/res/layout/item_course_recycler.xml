@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="@dimen/dimen_8dp"
                 android:text="Fundamental of Computer Science"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#000000" />
@@ -32,8 +32,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_below="@id/allcourse_fragment_course_title_text_view"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
                 android:text="B.Tech Computer Science and Engineering"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 

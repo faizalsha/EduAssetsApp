@@ -9,16 +9,16 @@
         android:id="@+id/res_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_8dp"
         android:src="@drawable/ic_pdf" />
 
     <TextView
         android:id="@+id/res_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_8dp"
         android:text="Resource by EduAssests"
         android:layout_toEndOf="@id/res_icon"/>
 </RelativeLayout>
