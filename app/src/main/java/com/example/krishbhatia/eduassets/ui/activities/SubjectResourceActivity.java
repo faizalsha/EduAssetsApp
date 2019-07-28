@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +31,7 @@ public class SubjectResourceActivity extends AppCompatActivity {
     private SubjectResPOJO subjectRes;
     private RecyclerView recyclerView;
     private String selectedSubject;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class SubjectResourceActivity extends AppCompatActivity {
         }
         selectedSubject = getIntent().getStringExtra("SELECTED_SUBJECT");
         getSupportActionBar().setTitle(selectedSubject);
+        progressBar = findViewById(R.id.subjectResourceProgressBar);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
         recyclerView = findViewById(R.id.main_recycler_view);
 
@@ -55,11 +63,15 @@ public class SubjectResourceActivity extends AppCompatActivity {
                 subjectRes = dataSnapshot.getValue(SubjectResPOJO.class);
                 MainRecyclerViewAdapter adapter = new MainRecyclerViewAdapter(SubjectResourceActivity.this, subjectRes);
                 recyclerView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(SubjectResourceActivity.this, "Query failed", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
         });
     }

@@ -61,12 +61,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                 getOldUserDetails();
             } else {
                 getNewUserDetails();
-                if(mAuth.getCurrentUser().getEmail()!=userPOJO.getEmail()){
-                    Toast.makeText(this, "You are logged out.", Toast.LENGTH_SHORT).show();
-                   SharedPreferenceImpl.getInstance().clearAll(SplashScreenActivity.this);
-                    startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
-                    finish();
-                }
+//                if(mAuth.getCurrentUser().getEmail()!=userPOJO.getEmail()){
+//                    Toast.makeText(this, "You are logged out.", Toast.LENGTH_SHORT).show();
+//                   SharedPreferenceImpl.getInstance().clearAll(SplashScreenActivity.this);
+//                    startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
+//                    finish();
+//                }
 
             }
 

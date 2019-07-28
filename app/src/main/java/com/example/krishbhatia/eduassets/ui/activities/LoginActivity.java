@@ -160,12 +160,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(final FirebaseUser user) {
         if (user != null) {
-            if (mAuth.getCurrentUser().getEmail() != SharedPreferenceImpl.getInstance().get(Constants.EMAIL, mContext)) {
-                Toast.makeText(this, "You are logged out.", Toast.LENGTH_SHORT).show();
-                SharedPreferenceImpl.getInstance().clearAll(mContext);
-//                startActivity(new Intent(mContext, LoginActivity.class));
-//                finish();
-            } else {
+
                 userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
                 userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -194,7 +189,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         }
-    }
+
 
 
     private void sendToRegisterActivity() {

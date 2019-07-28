@@ -21,7 +21,8 @@
         <activity
             android:name=".ui.activities.CartActivity"
             android:exported="true" />
-        <activity android:name=".ui.activities.VideoPlayerActivity" />
+        <activity android:name=".ui.activities.VideoPlayerActivity"
+            android:screenOrientation="landscape" />
         <activity android:name=".ui.activities.PdfViewerActivity" />
         <activity android:name=".ui.activities.ProfileActivity" />
         <activity android:name=".ui.activities.DetailsActivity" />

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 
 import com.example.krishbhatia.eduassets.POJO.CourseBasicInfoPOJO;
@@ -29,6 +30,7 @@ public class AllCoursesFragment extends Fragment {
 
     private static final String TAG = "AllCoursesFragment";
 
+    private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private ArrayList<CourseBasicInfoPOJO> courseList;
 
@@ -41,6 +43,7 @@ public class AllCoursesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_all_courses, container, false);
+        progressBar = view.findViewById(R.id.allCourseProgressBar);
 
         recyclerView = view.findViewById(R.id.allCourse_fragment_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -61,11 +64,12 @@ public class AllCoursesFragment extends Fragment {
                 }
                 CourseAdapter adapter = new CourseAdapter(getContext(), courseList);
                 recyclerView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
 
