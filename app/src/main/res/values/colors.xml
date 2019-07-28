@@ -69,4 +69,6 @@
     <color name="selectedTab">#10b3bc</color>
     <color name="profileOuter">#556080</color>
 
+    <color name="toolbarColor">#BF00a1ff</color>
+
 </resources>

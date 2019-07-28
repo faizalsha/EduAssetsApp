@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.ProgressBar;
 
 
 import com.example.krishbhatia.eduassets.POJO.SubjectBasicInfoPOJO;
@@ -34,6 +34,7 @@ public class MySubjectsFragment extends Fragment {
     private static final String TAG = "MySubjectsFragment";
     private static final String SELECTED_COURSE = "BBA";
 
+    private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private ArrayList<SubjectBasicInfoPOJO> subjectList;
 
@@ -44,7 +45,7 @@ public class MySubjectsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_my_subjects, container, false);
-
+        progressBar = view.findViewById(R.id.mySubjectProgressBar);
         recyclerView = view.findViewById(R.id.mySubject_fragment_recycler_view);
 
         recyclerView.setHasFixedSize(true);
@@ -64,11 +65,12 @@ public class MySubjectsFragment extends Fragment {
                 }
                 SubjectAdapter adapter = new SubjectAdapter(getContext(), subjectList);
                 recyclerView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
 
