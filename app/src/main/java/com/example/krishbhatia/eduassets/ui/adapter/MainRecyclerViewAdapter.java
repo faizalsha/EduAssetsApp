@@ -45,7 +45,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         holder.innerRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         holder.innerRecyclerView.setAdapter(innerRecyclerViewAdapter);
 
-        holder.topText.setText(section.getSectionName());
+        holder.sectionName.setText(section.getSectionName());
     }
 
     @Override
@@ -56,13 +56,13 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     class MainRecyclerViewHolder extends RecyclerView.ViewHolder {
         RecyclerView innerRecyclerView;
         ImageView arrow;
-        TextView topText;
+        TextView sectionName;
 
         public MainRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             innerRecyclerView = itemView.findViewById(R.id.inner_recycler);
-            arrow = itemView.findViewById(R.id.img_arrow);
-            topText = itemView.findViewById(R.id.top_text);
+            arrow = itemView.findViewById(R.id.arrow);
+            sectionName = itemView.findViewById(R.id.sectionName);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

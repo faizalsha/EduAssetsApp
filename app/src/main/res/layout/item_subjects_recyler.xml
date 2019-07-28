@@ -13,28 +13,34 @@
             android:layout_height="wrap_content"
             android:padding="8dp">
 
+            <ImageView
+                android:id="@+id/subjectImage"
+                android:layout_width="@dimen/dimen_80dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:src="@drawable/logo"/>
 
 
             <TextView
-                android:id="@+id/textViewCourseSubjectsTitle"
+                android:id="@+id/subjectTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@id/subjectImage"
                 android:text="Fundamental of Computer Science"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/textViewCourseSubjectsCode"
+                android:id="@+id/subjectCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textViewCourseSubjectsTitle"
+                android:layout_marginStart="3dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/subjectImage"
+                android:layout_below="@id/subjectTitle"
                 android:text="B.Tech Computer Science and Engineering"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
-
-
 
 
         </RelativeLayout>
