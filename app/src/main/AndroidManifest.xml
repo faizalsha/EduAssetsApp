@@ -43,11 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.SubjectResourceActivity">
-            <meta-data
-                 android:name="android.support.PARENT_ACTIVITY"
-                 android:value=".ui.activities.HomePageActivity"/>
-        </activity>
+        <activity android:name=".ui.activities.SubjectResourceActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
