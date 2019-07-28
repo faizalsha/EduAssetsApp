@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -39,7 +40,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     public SubjectViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.course_layout, null);
+        View view = inflater.inflate(R.layout.item_subjects_recyler, viewGroup, false);
         return new SubjectViewHolder(view);
     }
 
@@ -69,12 +70,14 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     class SubjectViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewTitle, textViewCode;
+        ImageView imageView;
 
         public SubjectViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewTitle = itemView.findViewById(R.id.all_courses_fragment_title_text_view);
-            textViewCode = itemView.findViewById(R.id.all_courses_fragment_course_code_text_view);
+            textViewTitle = itemView.findViewById(R.id.subjectTitle);
+            textViewCode = itemView.findViewById(R.id.subjectCode);
+            imageView = itemView.findViewById(R.id.subjectImage);
         }
     }
 }

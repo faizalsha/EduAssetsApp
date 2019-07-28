@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.krishbhatia.eduassets.POJO.SubjectBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.ui.activities.CourseSubjectsActivity;
 import com.example.krishbhatia.eduassets.ui.activities.SubjectResourceActivity;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class CourseSubjectsAdapter extends RecyclerView.Adapter<CourseSubjectsAd
     @Override
     public CourseSubjectsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.item_course_subjects_recyler_view, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_subjects_recyler, parent, false);
         return new CourseSubjectsHolder(view);
     }
 
@@ -59,8 +58,8 @@ public class CourseSubjectsAdapter extends RecyclerView.Adapter<CourseSubjectsAd
         private TextView subjectCode;
         public CourseSubjectsHolder(@NonNull View itemView) {
             super(itemView);
-            subjectName = itemView.findViewById(R.id.textViewCourseSubjectsTitle);
-            subjectCode = itemView.findViewById(R.id.textViewCourseSubjectsCode);
+            subjectName = itemView.findViewById(R.id.subjectTitle);
+            subjectCode = itemView.findViewById(R.id.subjectCode);
         }
     }
 }
