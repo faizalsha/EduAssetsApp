@@ -1,11 +1,10 @@
 package com.example.krishbhatia.eduassets.ui.activities;
 
 import android.content.Context;
-import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -36,9 +35,9 @@ public class RegisterActivity extends AppCompatActivity{
 
     private static final String TAG = "RegisterAcitvity";
     //UI Related
-    private EditText editTextRegisterEmail;
+    private EditText emailRegister;
 
-    private EditText editTextRegisterPassword;
+    private EditText passwordRegister;
     private Button buttonRegisterButton;
     private Context mContext;
 
@@ -53,9 +52,9 @@ public class RegisterActivity extends AppCompatActivity{
 
         mContext = RegisterActivity.this;
         checkBoxShowPassword=findViewById(R.id.checkBoxShowPassword);
-        editTextRegisterEmail = findViewById(R.id.registerEmail);
+        emailRegister = findViewById(R.id.registerEmail);
 
-        editTextRegisterPassword = findViewById(R.id.registerPassword);
+        passwordRegister = findViewById(R.id.registerPassword);
         buttonRegisterButton = findViewById(R.id.regbutton);
         buttonRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +66,10 @@ public class RegisterActivity extends AppCompatActivity{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                   editTextRegisterPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                   passwordRegister.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 }
                 else {
-                    editTextRegisterPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    passwordRegister.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
         });
@@ -79,8 +78,8 @@ public class RegisterActivity extends AppCompatActivity{
 
 
     private void registerUser() {
-        final String registerEmail = editTextRegisterEmail.getText().toString();
-        String registerPassword = editTextRegisterPassword.getText().toString();
+        final String registerEmail = emailRegister.getText().toString();
+        String registerPassword = passwordRegister.getText().toString();
 
         if(!TextUtils.isEmpty(registerEmail) && !TextUtils.isEmpty(registerPassword)){
 

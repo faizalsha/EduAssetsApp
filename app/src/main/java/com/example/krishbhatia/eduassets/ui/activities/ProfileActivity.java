@@ -234,4 +234,10 @@ public class ProfileActivity extends AppCompatActivity {
         userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
         initStrings();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        saveChangesDialog();
+    }
 }

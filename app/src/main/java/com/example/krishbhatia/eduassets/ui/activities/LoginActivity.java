@@ -183,15 +183,15 @@ public class LoginActivity extends AppCompatActivity {
                         if (user.isEmailVerified()) {
 
                             Log.d(TAG, "onDataChange: " + dataSnapshot);
-                            if (!dataSnapshot.hasChild("name")) {
+                            if (dataSnapshot.hasChild("name")) {
 
-                                startActivity(new Intent(mContext, DetailsActivity.class));
-                                finish();
-                            } else {
+//                                startActivity(new Intent(mContext, DetailsActivity.class));
+//                                finish();
                                 Intent i = new Intent(mContext, HomePageActivity.class);
                                 startActivity(i);
                                 finish();
                             }
+
                         } else {
                             Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
                         }
