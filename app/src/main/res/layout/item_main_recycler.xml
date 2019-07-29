@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/dimen_8dp"
-   app:cardElevation="@dimen/dimen_2dp"
+    app:cardElevation="@dimen/dimen_2dp"
     app:cardUseCompatPadding="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 

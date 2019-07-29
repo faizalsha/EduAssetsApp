@@ -47,7 +47,8 @@ public class AllCoursesFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.allCourse_fragment_recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.VERTICAL,false));
+        //recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         courseList = new ArrayList<>();
 
 
