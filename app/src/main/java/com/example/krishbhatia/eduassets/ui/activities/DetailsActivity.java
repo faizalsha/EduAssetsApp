@@ -59,7 +59,7 @@ public class DetailsActivity extends AppCompatActivity {
                 }else {
                     course = detailsActivityBinding.courseSpinner.getSelectedItem().toString();
                 }
-                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(college) && !TextUtils.isEmpty(semester)){
+                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(college) && !TextUtils.isEmpty(semester) && detailsActivityBinding.courseSpinner.getSelectedItemPosition()!=0){
 
                     if (NetworkUtils.isConnectedToInternert(mContext)){
 
@@ -93,7 +93,12 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==5){
-                    detailsActivityBinding.courseEdit.setEnabled(true);
+                    detailsActivityBinding.courseEditParent.setVisibility(View.VISIBLE);
+                    detailsActivityBinding.courseEditParent.setEnabled(true);
+                }
+                else {
+                    detailsActivityBinding.courseEditParent.setVisibility(View.GONE);
+
                 }
             }
 

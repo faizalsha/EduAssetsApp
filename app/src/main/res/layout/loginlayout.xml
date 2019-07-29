@@ -46,50 +46,108 @@
             android:orientation="vertical">
 
 
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_marginTop="@dimen/dimen_50dp"
-
-                android:id="@+id/emailEditText"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:hint="@string/textEmail"
-                android:textColor="@color/colorTextView"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="@dimen/dimen_15sp"
-           style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelAnimating="true"
                 app:met_floatingLabelText="@string/textEmail"
+                app:boxCornerRadiusTopEnd="@dimen/dimen_4dp"
+                app:boxCornerRadiusBottomEnd="@dimen/dimen_4dp"
+                app:boxCornerRadiusBottomStart="@dimen/dimen_4dp"
+                app:boxCornerRadiusTopStart="@dimen/dimen_4dp"
                 app:met_floatingLabelTextColor="@color/black"
-                app:met_hideUnderline="true" />
+                app:met_hideUnderline="true"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:id="@+id/emailEditTextParent"
+                >
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/emailEditText"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/textEmail"
+                    android:textSize="@dimen/dimen_15sp"
+                    />
 
-                android:id="@+id/passwordEditText"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/emailEditTextParent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_below="@id/emailEditText"
-                android:hint="@string/textPassword"
-                android:inputType="textPassword"
-                android:layout_marginTop="@dimen/dimen_10dp"
-                android:textColor="@color/colorTextView"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="@dimen/dimen_15sp"
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelAnimating="true"
                 app:met_floatingLabelText="@string/textPassword"
+                app:boxCornerRadiusTopEnd="@dimen/dimen_4dp"
+                app:boxCornerRadiusBottomEnd="@dimen/dimen_4dp"
+                app:boxCornerRadiusBottomStart="@dimen/dimen_4dp"
+                app:boxCornerRadiusTopStart="@dimen/dimen_4dp"
                 app:met_floatingLabelTextColor="@color/black"
+                app:met_hideUnderline="true"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:id="@+id/passwordEditTextParent"
+                >
 
-                app:met_hideUnderline="true" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:id="@+id/passwordEditText"
+                    android:hint="@string/textPassword"
+                    android:textSize="@dimen/dimen_15sp"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--            <com.rengwuxian.materialedittext.MaterialEditText-->
+<!--                android:layout_marginTop="@dimen/dimen_50dp"-->
+
+<!--                android:id="@+id/emailEditText"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+
+<!--                android:hint="@string/textEmail"-->
+<!--                android:textColor="@color/colorTextView"-->
+<!--                android:textColorHint="@color/colorAccent"-->
+<!--                android:textSize="@dimen/dimen_15sp"-->
+<!--           style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"-->
+<!--                app:met_floatingLabel="highlight"-->
+<!--                app:met_floatingLabelAnimating="true"-->
+<!--                app:met_floatingLabelText="@string/textEmail"-->
+<!--                app:met_floatingLabelTextColor="@color/black"-->
+<!--                app:met_hideUnderline="true" />-->
+
+
+<!--            <com.rengwuxian.materialedittext.MaterialEditText-->
+
+<!--                android:id="@+id/passwordEditText"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                android:layout_below="@id/emailEditTextParent"-->
+<!--                android:hint="@string/textPassword"-->
+<!--                android:inputType="textPassword"-->
+<!--                android:layout_marginTop="@dimen/dimen_10dp"-->
+<!--                android:textColor="@color/colorTextView"-->
+<!--                android:textColorHint="@color/colorAccent"-->
+<!--                android:textSize="@dimen/dimen_15sp"-->
+<!--                app:met_floatingLabel="highlight"-->
+<!--                app:met_floatingLabelAnimating="true"-->
+<!--                app:met_floatingLabelText="@string/textPassword"-->
+<!--                app:met_floatingLabelTextColor="@color/black"-->
+
+<!--                app:met_hideUnderline="true" />-->
                 <CheckBox
                     android:id="@+id/checkBoxShowPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Show Password"
-                    android:layout_below="@id/passwordEditText"
+                    android:layout_below="@id/passwordEditTextParent"
                     android:layout_marginTop="@dimen/dimen_8dp"
                     />
             <TextView
@@ -134,7 +192,7 @@
 
         <Button
             android:layout_width="match_parent"
-
+android:layout_marginBottom="@dimen/dimen_4dp"
             android:layout_height="wrap_content"
             android:text="@string/google_sign_in"
             android:layout_below="@id/loginButton"

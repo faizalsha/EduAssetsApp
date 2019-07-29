@@ -49,6 +49,13 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
 
+                if(mAuth.getCurrentUser()!=null){
+
+                }
+                else {
+                    startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
+                    finish();
+                }
             }
 
             @Override
@@ -81,36 +88,44 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void getOldUserDetails() {
-        userPOJO = new UserPOJO();
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userPOJO = dataSnapshot.child("users").child(mAuth.getUid()).getValue(UserPOJO.class);
-                if(userPOJO==null){
-                    startActivity(new Intent(SplashScreenActivity.this,DetailsActivity.class));
-                    finish();
+        if (mAuth == null) {
+            userPOJO = new UserPOJO();
+            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    userPOJO = dataSnapshot.child("users").child(mAuth.getUid()).getValue(UserPOJO.class);
+                    if (userPOJO == null) {
+                        mAuth.signOut();
+
+                        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+                        finish();
+                    } else {
+                        SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, SplashScreenActivity.this);
+                        startActivity(new Intent(SplashScreenActivity.this, HomePageActivity.class));
+                        finish();
+                    }
+
                 }
-                else {
-                    SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, SplashScreenActivity.this);
-                    startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
-                    finish();
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
+            });
+        } else {
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+            startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+            finish();
+        }
     }
 
     private void getNewUserDetails() {
         Gson gson = new Gson();
         userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
         if(userPOJO==null){
-            startActivity(new Intent(SplashScreenActivity.this,DetailsActivity.class));
+
+            startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
             finish();
 
         }
