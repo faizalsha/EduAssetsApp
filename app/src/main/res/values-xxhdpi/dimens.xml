@@ -99,10 +99,11 @@
 	<dimen name="dimen_112dp">112dp</dimen>
 	<dimen name="dimen_n17dp">-17.1dp</dimen>
 	<dimen name="dimen_168dp">168dp</dimen>
-    <dimen name="dimen_34sp">34sp</dimen>
+	<dimen name="dimen_34sp">34sp</dimen>
 	<dimen name="dimen_15sp">15.1sp</dimen>
 	<dimen name="dimen_75dp">75.1dp</dimen>
 	<dimen name="dimen_25sp">24.9sp</dimen>
 	<dimen name="dimen_300dp">352.9dp</dimen>
-    <dimen name="dimen_5dp">5dp</dimen>
+	<dimen name="dimen_5dp">5dp</dimen>
+	<dimen name="dimen_250">294.1dp</dimen>
 </resources>

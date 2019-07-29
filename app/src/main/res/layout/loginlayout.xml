@@ -124,12 +124,22 @@
 
         <Button
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
             android:text="@string/google_sign_in"
             android:layout_below="@id/loginButton"
+            android:drawableStart="@drawable/ic_google_plus_circular_button"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="@dimen/dimen_16sp"
+            android:drawablePadding="2dip"
+            android:paddingLeft="@dimen/dimen_30dp"
+            android:paddingRight="@dimen/dimen_26dp"
+            android:singleLine="true"
+            android:gravity="center"
             android:id="@+id/google_sign_in_button"
             android:layout_marginTop="@dimen/dimen_25dp"
-            android:background="@drawable/btn_google_signin_light_pressed"
+            android:background="@drawable/login_button"
         />
 
 

@@ -18,6 +18,7 @@ import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,18 +26,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
+import bolts.Task;
+
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = "SplashScreenActivity";
     private ProgressBar progressBar;
     private UserPOJO userPOJO;
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
+        databaseReference=FirebaseDatabase.getInstance().getReference();
         mAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.loadingProgressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -61,12 +66,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                 getOldUserDetails();
             } else {
                 getNewUserDetails();
-//                if(mAuth.getCurrentUser().getEmail()!=userPOJO.getEmail()){
-//                    Toast.makeText(this, "You are logged out.", Toast.LENGTH_SHORT).show();
-//                   SharedPreferenceImpl.getInstance().clearAll(SplashScreenActivity.this);
-//                    startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
-//                    finish();
-//                }
+
+
 
             }
 
@@ -75,7 +76,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             Log.d(TAG, "proceedingIntent: user is not logged in");
 
             startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
-
+            finish();
         }
     }
 
@@ -114,10 +115,29 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         }
         else {
-            SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, SplashScreenActivity.this);
+
+            databaseReference.child("users").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                       if(!dataSnapshot.child(userPOJO.getUserId()).exists()){
+                           Toast.makeText(SplashScreenActivity.this, "You are logged out.", Toast.LENGTH_SHORT).show();
+                mAuth.signOut();
+                SharedPreferenceImpl.getInstance().clearAll(SplashScreenActivity.this);
+                startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
+                finish();
+                       }
+                       else {
+                           SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, SplashScreenActivity.this);
             startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
             finish();
+                       }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
         }
     }

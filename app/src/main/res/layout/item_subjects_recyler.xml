@@ -11,7 +11,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="@dimen/dimen_8dp">
 
             <ImageView
                 android:id="@+id/subjectImage"
@@ -24,8 +24,8 @@
                 android:id="@+id/subjectTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                android:layout_marginLeft="@dimen/dimen_4dp"
                 android:layout_toEndOf="@id/subjectImage"
                 android:text="Fundamental of Computer Science"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -35,8 +35,8 @@
                 android:id="@+id/subjectCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                android:layout_marginLeft="@dimen/dimen_4dp"
                 android:layout_toEndOf="@id/subjectImage"
                 android:layout_below="@id/subjectTitle"
                 android:text="B.Tech Computer Science and Engineering"

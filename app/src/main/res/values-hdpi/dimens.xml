@@ -102,4 +102,5 @@
 	<dimen name="dimen_25sp">18.7sp</dimen>
 	<dimen name="dimen_15sp">11.3sp</dimen>
 	<dimen name="dimen_300dp">264.7dp</dimen>
+	<dimen name="dimen_250">220.6dp</dimen>
 </resources>
