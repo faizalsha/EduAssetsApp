@@ -21,7 +21,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleTextAppearance="@android:color/transparent"
             android:fitsSystemWindows="true"
-            android:background="@color/blue"
+            android:background="@color/logoBack"
             >
 
 <!--            <ImageView-->

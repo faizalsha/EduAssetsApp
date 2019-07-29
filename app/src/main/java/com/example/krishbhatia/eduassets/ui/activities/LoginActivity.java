@@ -11,10 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -53,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference userDatabaseReference;
     private FirebaseMethods firebaseMethods;
     private AlertDialog alertDialog;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,7 +103,17 @@ public class LoginActivity extends AppCompatActivity {
                 showForgotPasswordDialog();
             }
         });
-
+        loginlayoutBinding.checkBoxShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    loginlayoutBinding.passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+                else {
+                    loginlayoutBinding.passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))

@@ -7,9 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatButton;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -40,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity{
 
     //Firebase Related
     private FirebaseAuth mAuth;
+    private CheckBox checkBoxShowPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity{
         setContentView(R.layout.activity_register);
 
         mContext = RegisterActivity.this;
-
+        checkBoxShowPassword=findViewById(R.id.checkBoxShowPassword);
         editTextRegisterEmail = findViewById(R.id.registerEmail);
 
         editTextRegisterPassword = findViewById(R.id.registerPassword);
@@ -58,7 +63,17 @@ public class RegisterActivity extends AppCompatActivity{
                 registerUser();
             }
         });
-
+        checkBoxShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                   editTextRegisterPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+                else {
+                    editTextRegisterPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
     }
 

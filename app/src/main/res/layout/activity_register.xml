@@ -65,19 +65,27 @@
         android:textColor="@color/colorTextView"
         android:textColorHint="@color/colorAccent"
         android:textSize="@dimen/dimen_15sp"
-        android:drawableRight="@drawable/ic_email"
+        android:inputType="textPassword"
         app:met_floatingLabel="highlight"
         app:met_floatingLabelAnimating="true"
         app:met_floatingLabelText="@string/textPassword"
         app:met_floatingLabelTextColor="@color/black"
 
         app:met_hideUnderline="true" />
+    <CheckBox
+        android:id="@+id/checkBoxShowPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Password"
+        android:layout_below="@id/registerPassword"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        />
 
     <Button
         android:id="@+id/regbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/registerPassword"
+        android:layout_below="@id/checkBoxShowPassword"
         android:layout_marginTop="@dimen/dimen_50dp"
         android:background="@drawable/login_button"
         android:text="@string/textSignIn"

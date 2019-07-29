@@ -16,7 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.krishbhatia.eduassets.POJO.SubjectResPOJO;
 import com.example.krishbhatia.eduassets.R;
-import com.example.krishbhatia.eduassets.ui.adapter.MainRecyclerViewAdapter;
+import com.example.krishbhatia.eduassets.ui.adapter.SectionsRecyclerViewAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,7 +61,7 @@ public class SubjectResourceActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(TAG, "onDataChange: " + dataSnapshot);
                 subjectRes = dataSnapshot.getValue(SubjectResPOJO.class);
-                MainRecyclerViewAdapter adapter = new MainRecyclerViewAdapter(SubjectResourceActivity.this, subjectRes);
+                SectionsRecyclerViewAdapter adapter = new SectionsRecyclerViewAdapter(SubjectResourceActivity.this, subjectRes);
                 recyclerView.setAdapter(adapter);
                 progressBar.setVisibility(View.GONE);
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);

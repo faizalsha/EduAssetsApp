@@ -16,14 +16,14 @@ import com.example.krishbhatia.eduassets.R;
 
 import java.util.ArrayList;
 
-public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.MainRecyclerViewHolder> {
+public class SectionsRecyclerViewAdapter extends RecyclerView.Adapter<SectionsRecyclerViewAdapter.MainRecyclerViewHolder> {
 
     private Context mContext;
     //private List<ResourcePOJO> mList;
     private SubjectResPOJO subjectRes;
     private ArrayList<SectionPOJO> sectionList;
 
-    public MainRecyclerViewAdapter(Context mContext, SubjectResPOJO subjectRes) {
+    public SectionsRecyclerViewAdapter(Context mContext, SubjectResPOJO subjectRes) {
         this.mContext = mContext;
         this.subjectRes = subjectRes;
         this.sectionList = this.subjectRes.getSection();
@@ -60,7 +60,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
         public MainRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            innerRecyclerView = itemView.findViewById(R.id.inner_recycler);
+            innerRecyclerView = itemView.findViewById(R.id.expandedRecyclerView);
             arrow = itemView.findViewById(R.id.arrow);
             sectionName = itemView.findViewById(R.id.sectionName);
 

@@ -71,4 +71,7 @@
 
     <color name="toolbarColor">#BF00a1ff</color>
 
+    <color name="logoBack">#0B3D48</color>
+    <color name="logoFront">#65E8F2</color>
+
 </resources>

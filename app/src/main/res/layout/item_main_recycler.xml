@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/dimen_8dp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/dimen_16dp">
+
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/dimen_8dp"
+   app:cardElevation="@dimen/dimen_2dp"
+    app:cardUseCompatPadding="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_10dp">
+            android:paddingTop="@dimen/dimen_16dp"
+            android:paddingBottom="@dimen/dimen_16dp">
 
             <TextView
                 android:id="@+id/sectionName"
+                android:layout_marginStart="@dimen/dimen_16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:textSize="@dimen/dimen_16sp"
                 android:text="this_is_custom_card_expanded_view" />
 
             <ImageView
@@ -29,15 +29,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/arrow_up" />
+                android:src="@drawable/arrow_down" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/inner_recycler"
-                android:layout_width="match_parent"
+                android:id="@+id/expandedRecyclerView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/sectionName"
                 android:visibility="gone"/>
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-</RelativeLayout>
