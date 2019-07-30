@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.Constants;
+import com.example.krishbhatia.eduassets.POJO.UserPOJO;
 import com.example.krishbhatia.eduassets.R;
 
 import com.example.krishbhatia.eduassets.databinding.LoginlayoutBinding;
@@ -88,7 +89,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 //     a           loginWithEmailPwd();
                 firebaseMethods.loginWithEmailPwd(loginlayoutBinding.emailEditText.getText().toString(), loginlayoutBinding.passwordEditText.getText().toString());
-                loginlayoutBinding.loginButton.setEnabled(false);
+                if(mAuth.getCurrentUser()!=null) {
+                    getDataFromFirebase(mContext);
+                }
+                loginlayoutBinding.loginButton.setClickable(false);
             }
         });
         loginlayoutBinding.textsignup.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +130,27 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+    private void getDataFromFirebase(final Context context) {
+        Log.d(TAG, "getDataFromFirebase: dataaaaaaa bring");
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
 
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                Toast.makeText(context, "data added", Toast.LENGTH_SHORT).show();
+                UserPOJO userPOJO=dataSnapshot.child(Constants.USERS_FIREBASE).child(mAuth.getUid()).getValue(UserPOJO.class);
+                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, context);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "onCancelled: dataaaaaaaa cancel");
+
+            }
+        });
+    }
     private void showForgotPasswordDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("Recover Password");

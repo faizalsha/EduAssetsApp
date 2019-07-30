@@ -19,4 +19,5 @@ public class Constants {
     public static final String VIDEO = "video";
     public static final String ALL_COURSES = "All Courses";
     public static final String MY_SUBJECTS = "My Subjects";
+    public static final String USERS_FIREBASE = "users";
 }

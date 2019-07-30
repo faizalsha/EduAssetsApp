@@ -65,16 +65,17 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_home_page);
         mAuth=FirebaseAuth.getInstance();
         context = HomePageActivity.this;
-        if (SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, context) == Constants.NOT_FOUND) {
-            getOldUserDetails();
-        } else {
-            getNewUserDetails();
+        getDatabase();
 
-
-        }
         initializingComponents();
 
 
+
+    }
+
+    private void getDatabase() {
+        Gson gson = new Gson();
+        userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
 
     }
 
@@ -133,7 +134,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                     .build();
             GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
             mGoogleSignInClient.signOut();
-            SharedPreferenceImpl.getInstance().save(Constants.USER_ID, Constants.NOT_FOUND, context);
+            SharedPreferenceImpl.getInstance().clearAll(context);
             startActivity(new Intent(context, LoginActivity.class));
             finish();
         }
@@ -149,13 +150,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onResume() {
         super.onResume();
-        if (SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, context) == Constants.NOT_FOUND) {
-            getOldUserDetails();
-        } else {
-            getNewUserDetails();
 
-        }
-        navEmail.setText(SharedPreferenceImpl.getInstance().get(Constants.EMAIL, context));
+        getDatabase();
+        navEmail.setText(userPOJO.getEmail());
         navName.setText(userPOJO.getName());
 
     }
@@ -166,10 +163,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userPOJO = dataSnapshot.child("users").child(mAuth.getUid()).getValue(UserPOJO.class);
+                userPOJO = dataSnapshot.child("users").child(mAuth.getCurrentUser().getUid()).getValue(UserPOJO.class);
                 SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, context);
-                Toast.makeText(context, "cvjckdckjfifog", Toast.LENGTH_SHORT).show();
-                
+
 
             }
 
@@ -217,7 +213,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         navName = headerView.findViewById(R.id.nav_header_username_text_view);
 
         navEmail = headerView.findViewById(R.id.nav_header_email_text_view);
-        navEmail.setText(SharedPreferenceImpl.getInstance().get(Constants.EMAIL, context));
+        navEmail.setText(userPOJO.getEmail());
         navName.setText(userPOJO.getName());
     }
 }
