@@ -66,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.USERS).child(mAuth.getUid());
 
         profileActivityBinding.doneButton.setOnClickListener(new View.OnClickListener() {
 
@@ -172,11 +172,11 @@ public class ProfileActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(course) && !TextUtils.isEmpty(semester)
                 && !TextUtils.isEmpty(college)/* && !TextUtils.isEmpty(enrolledCourse)*/) {
 
-            mDatabaseReference.child("name").setValue(name);
-            mDatabaseReference.child("course").setValue(course);
-            mDatabaseReference.child("semester").setValue(semester);
-            mDatabaseReference.child("college").setValue(college);
-            mDatabaseReference.child("courseId").setValue(courseId);
+            mDatabaseReference.child(Constants.NAME).setValue(name);
+            mDatabaseReference.child(Constants.COURSE).setValue(course);
+            mDatabaseReference.child(Constants.SEMESTER).setValue(semester);
+            mDatabaseReference.child(Constants.COLLEGE).setValue(college);
+            mDatabaseReference.child(Constants.COURSE_ID).setValue(courseId);
             userPOJO.setCollege(college);
             userPOJO.setCourse(course);
             userPOJO.setCourseId(profileActivityBinding.courseSpinner.getSelectedItemPosition());
@@ -194,7 +194,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void saveChangesDialog() {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Save Changes?");
+        alertDialogBuilder.setTitle(Constants.SAVE_CHANGES);
         alertDialogBuilder
 
                 .setCancelable(false)

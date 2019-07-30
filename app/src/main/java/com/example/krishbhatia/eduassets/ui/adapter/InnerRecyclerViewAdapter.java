@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.ResourcePOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.PdfViewerActivity;
@@ -40,7 +41,7 @@ public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecycler
     public void onBindViewHolder(@NonNull final InnerRecyclerViewHolder holder, int position) {
         final ResourcePOJO res = resourceList.get(position);
         holder.textView.setText(res.getResName());
-        if (res.getResType().equals("pdf")){
+        if (res.getResType().equals(Constants.PDF)){
             holder.imageView.setImageResource(R.drawable.ic_pdf);
         } else {
             holder.imageView.setImageResource(R.drawable.ic_video);
@@ -49,13 +50,13 @@ public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecycler
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (res.getResType().equals("pdf")){
+                if (res.getResType().equals(Constants.PDF)){
                     Intent intent = new Intent(mContext, PdfViewerActivity.class);
-                    intent.putExtra("url", res.getResUrl());
+                    intent.putExtra(Constants.URL, res.getResUrl());
                     mContext.startActivity(intent);
-                } else if (res.getResType().equals("video")){
+                } else if (res.getResType().equals(Constants.VIDEO)){
                     Intent intent = new Intent(mContext, VideoPlayerActivity.class);
-                    intent.putExtra("url", res.getResUrl());
+                    intent.putExtra(Constants.URL, res.getResUrl());
                     mContext.startActivity(intent);
                 }
             }

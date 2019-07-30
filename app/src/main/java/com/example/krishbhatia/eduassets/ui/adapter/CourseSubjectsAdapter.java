@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.SubjectBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.SubjectResourceActivity;
@@ -42,7 +43,7 @@ public class CourseSubjectsAdapter extends RecyclerView.Adapter<CourseSubjectsAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, SubjectResourceActivity.class);
-                intent.putExtra("SELECTED_SUBJECT", subject.getSubjectName());
+                intent.putExtra(Constants.SELECTED_SUBJECT, subject.getSubjectName());
                 mContext.startActivity(intent);
             }
         });

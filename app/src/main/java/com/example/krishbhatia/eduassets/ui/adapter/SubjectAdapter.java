@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.SubjectBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.SubjectResourceActivity;
@@ -56,7 +56,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mCtx, SubjectResourceActivity.class);
-                intent.putExtra("SELECTED_SUBJECT", subject.getSubjectName());
+                intent.putExtra(Constants.SELECTED_SUBJECT, subject.getSubjectName());
                 mCtx.startActivity(intent);
             }
         });
