@@ -62,7 +62,6 @@ public class SubjectResourceActivity extends AppCompatActivity {
         resRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d(TAG, "onDataChange: " + dataSnapshot);
                 subjectRes = dataSnapshot.getValue(SubjectResPOJO.class);
                 SectionsRecyclerViewAdapter adapter = new SectionsRecyclerViewAdapter(SubjectResourceActivity.this, subjectRes);
                 recyclerView.setAdapter(adapter);

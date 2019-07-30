@@ -91,44 +91,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-<!--    <com.rengwuxian.materialedittext.MaterialEditText-->
-<!--        android:layout_marginTop="@dimen/dimen_50dp"-->
-
-<!--        android:id="@+id/registerEmail"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/readItTogetherTextView"-->
-<!--        android:hint="@string/textEmail"-->
-<!--        android:textColor="@color/colorTextView"-->
-<!--        android:textColorHint="@color/colorAccent"-->
-<!--        android:textSize="@dimen/dimen_15sp"-->
-<!--        style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"-->
-<!--        app:met_floatingLabel="highlight"-->
-<!--        app:met_floatingLabelAnimating="true"-->
-<!--        app:met_floatingLabelText="@string/textEmail"-->
-<!--        app:met_floatingLabelTextColor="@color/black"-->
-<!--        app:met_hideUnderline="true" />-->
-
-<!--    <com.rengwuxian.materialedittext.MaterialEditText-->
-
-<!--        android:id="@+id/registerPassword"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:layout_below="@id/registerEmail"-->
-<!--        android:hint="@string/textPassword"-->
-<!--        android:layout_marginTop="@dimen/dimen_20dp"-->
-<!--        android:textColor="@color/colorTextView"-->
-<!--        android:textColorHint="@color/colorAccent"-->
-<!--        android:textSize="@dimen/dimen_15sp"-->
-<!--        android:inputType="textPassword"-->
-<!--        app:met_floatingLabel="highlight"-->
-<!--        app:met_floatingLabelAnimating="true"-->
-<!--        app:met_floatingLabelText="@string/textPassword"-->
-<!--        app:met_floatingLabelTextColor="@color/black"-->
-
-<!--        app:met_hideUnderline="true" />-->
     <CheckBox
         android:id="@+id/checkBoxShowPassword"
         android:layout_width="wrap_content"

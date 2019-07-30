@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activities.CourseSubjectsActivity"></activity>
-        <activity android:name=".SubjectsActivity" />
         <activity android:name=".ui.activities.PurchasedCourseActivity" />
         <activity
             android:name=".ui.activities.CartActivity"

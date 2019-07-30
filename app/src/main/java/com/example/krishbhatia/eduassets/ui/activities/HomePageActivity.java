@@ -166,11 +166,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userPOJO = dataSnapshot.child("users").child(mAuth.getUid()).getValue(UserPOJO.class);
+                userPOJO = dataSnapshot.child(Constants.USERS).child(mAuth.getUid()).getValue(UserPOJO.class);
                 SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, context);
-                Toast.makeText(context, "cvjckdckjfifog", Toast.LENGTH_SHORT).show();
-                
-
             }
 
             @Override

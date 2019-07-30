@@ -52,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileActivityBinding.courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //TODO: static value
                 if(position==5) {
                     profileActivityBinding.courseEdit.setVisibility(View.VISIBLE);
                 }
@@ -69,19 +70,17 @@ public class ProfileActivity extends AppCompatActivity {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.USERS).child(mAuth.getUid());
 
         profileActivityBinding.doneButton.setOnClickListener(new View.OnClickListener() {
-
-                                                                 @Override
-                                                                 public void onClick(View v) {
-                                                                     if (somethingChanged) {
-                                                                         applyDetailsChanges();
-                                                                         getUserPojo();
-                                                                     } else {
-                                                                         Toast.makeText(ProfileActivity.this, "Fields must not be empty", Toast.LENGTH_SHORT).show();
-                                                                     }
-                                                                     finish();
-                                                                 }
-
-                                                             }
+            @Override
+            public void onClick(View v) {
+                if (somethingChanged) {
+                    applyDetailsChanges();
+                    getUserPojo();
+                } else {
+                    Toast.makeText(ProfileActivity.this, Constants.EMPTY_FIELD_TOAST, Toast.LENGTH_SHORT).show();
+                }
+                finish();
+            }
+        }
 
 
         );
@@ -143,9 +142,7 @@ public class ProfileActivity extends AppCompatActivity {
                 profileActivityBinding.semesterEdit.setText(semester);
                 profileActivityBinding.collegeEdit.setText(college);
         profileActivityBinding.courseSpinner.setSelection(courseId);
-
-
-
+        //TODO: static value
         if(courseId==5){
                     profileActivityBinding.courseEdit.setEnabled(true);
                     profileActivityBinding.courseEdit.setVisibility(View.VISIBLE);
@@ -161,6 +158,7 @@ public class ProfileActivity extends AppCompatActivity {
          semester = profileActivityBinding.semesterEdit.getText().toString();
          college = profileActivityBinding.collegeEdit.getText().toString();
          courseId=profileActivityBinding.courseSpinner.getSelectedItemPosition();
+         //TODO: static value
          if(courseId==5){
              course=profileActivityBinding.courseEdit.getText().toString();
          }
@@ -184,7 +182,7 @@ public class ProfileActivity extends AppCompatActivity {
             userPOJO.setName(name);
             SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,ProfileActivity.this);
             //          mDatabaseReference.child("enrolledCourse").setValue(enrolledCourse);
-            Toast.makeText(this, "jlnvpanpndpa", Toast.LENGTH_SHORT).show();
+
 
         }
         else {
@@ -198,7 +196,7 @@ public class ProfileActivity extends AppCompatActivity {
         alertDialogBuilder
 
                 .setCancelable(false)
-                .setPositiveButton("Yes",
+                .setPositiveButton(Constants.YES,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 applyDetailsChanges();
@@ -207,7 +205,7 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                         })
 
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(Constants.NO, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
                     dialog.cancel();

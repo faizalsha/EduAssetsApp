@@ -57,8 +57,6 @@ public class FirebaseMethods {
         };
     }
     public void signinWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         progressBar = ((Activity)mContext).findViewById(R.id.loginProgressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -118,10 +116,10 @@ public class FirebaseMethods {
                 });
 
             } else {
-                Toast.makeText(mContext, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, Constants.CHECK_YOUR_INTERNET_CONNECTION, Toast.LENGTH_SHORT).show();
             }
         }else {
-            Toast.makeText(mContext, "Error: Empty Fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, Constants.EMPTY_FIELD_TOAST, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -134,8 +132,7 @@ public class FirebaseMethods {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (user.isEmailVerified()) {
 
-                        Log.d(TAG, "onDataChange: " + dataSnapshot);
-                        if (!dataSnapshot.hasChild("name")) {
+                        if (!dataSnapshot.hasChild(Constants.NAME)) {
 //                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.USER_ID, user.getUid());
 //                            SharedPreferenceImpl.setSomeStringValue(mContext, Constants.EMAIL, user.getEmail());
 

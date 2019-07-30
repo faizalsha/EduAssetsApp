@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.utils.NetworkUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -101,8 +102,8 @@ public class RegisterActivity extends AppCompatActivity{
                                     try{
                                         throw task.getException();
                                     }catch (FirebaseAuthUserCollisionException e){
-                                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users");
-                                        Query query = userRef.orderByChild("email").equalTo(registerEmail);
+                                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child(Constants.USERS);
+                                        Query query = userRef.orderByChild(Constants.EMAIL_SMALL).equalTo(registerEmail);
                                         query.addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -130,11 +131,11 @@ public class RegisterActivity extends AppCompatActivity{
                             }
                         });
             } else {
-                Toast.makeText(mContext, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, Constants.CHECK_YOUR_INTERNET_CONNECTION, Toast.LENGTH_SHORT).show();
             }
 
         } else{
-            Toast.makeText(mContext, "Empty Fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, Constants.EMPTY_FIELD_TOAST, Toast.LENGTH_SHORT).show();
         }
     }
 
