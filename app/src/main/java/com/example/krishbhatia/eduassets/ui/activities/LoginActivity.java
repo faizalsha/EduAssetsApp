@@ -176,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(final FirebaseUser user) {
         if (user != null) {
 
-                userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid());
+                userDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.USERS).child(mAuth.getUid());
                 userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

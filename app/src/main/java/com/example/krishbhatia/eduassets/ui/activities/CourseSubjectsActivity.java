@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.SubjectBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.CourseSubjectsAdapter;
@@ -61,7 +62,7 @@ public class CourseSubjectsActivity extends AppCompatActivity {
 
         subjectList = new ArrayList<>();
         DatabaseReference subjectRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/subjectBasicInfo");
-        Query query = subjectRef.orderByChild("courseName").equalTo(course);
+        Query query = subjectRef.orderByChild(Constants.COURSE_NAME).equalTo(course);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override

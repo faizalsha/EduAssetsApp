@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.SubjectResPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.SectionsRecyclerViewAdapter;
@@ -43,7 +44,7 @@ public class SubjectResourceActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        selectedSubject = getIntent().getStringExtra("SELECTED_SUBJECT");
+        selectedSubject = getIntent().getStringExtra(Constants.SELECTED_SUBJECT);
         getSupportActionBar().setTitle(selectedSubject);
         progressBar = findViewById(R.id.subjectResourceProgressBar);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,

@@ -6,6 +6,8 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.ui.activities.DetailsActivity;
@@ -34,6 +36,7 @@ public class FirebaseMethods {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "FirebaseMethods";
+    private ProgressBar progressBar;
     public FirebaseMethods(Context mContext) {
         this.mContext = mContext;
         this.mAuth=FirebaseAuth.getInstance();
@@ -57,6 +60,8 @@ public class FirebaseMethods {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        progressBar = ((Activity)mContext).findViewById(R.id.loginProgressBar);
+        progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -75,12 +80,17 @@ public class FirebaseMethods {
                             Toast.makeText(mContext, "Authentication Failed.", Toast.LENGTH_SHORT).show();
                         }
 
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
     }
     public void loginWithEmailPwd(String email, String password ) {
+        progressBar = ((Activity)mContext).findViewById(R.id.loginProgressBar);
+
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
             if (NetworkUtils.isConnectedToInternert(mContext)){
+
+                progressBar.setVisibility(View.VISIBLE);
                 Toast.makeText(mContext, "Logging In...", Toast.LENGTH_SHORT).show();
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -103,10 +113,12 @@ public class FirebaseMethods {
                                 Toast.makeText(mContext, "Error:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                             }
-
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
 
+            } else {
+                Toast.makeText(mContext, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
             }
         }else {
             Toast.makeText(mContext, "Error: Empty Fields", Toast.LENGTH_SHORT).show();

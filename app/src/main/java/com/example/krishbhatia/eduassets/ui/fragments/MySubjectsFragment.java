@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.SubjectBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
 
@@ -32,7 +33,8 @@ import java.util.List;
 
 public class MySubjectsFragment extends Fragment {
     private static final String TAG = "MySubjectsFragment";
-    private static final String SELECTED_COURSE = "BBA";
+    //TODO: get selected subject from spinner
+    private static final String SELECTED_COURSE = "Bachelor of Business Administration";
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
@@ -54,7 +56,7 @@ public class MySubjectsFragment extends Fragment {
         subjectList = new ArrayList<>();
 
         DatabaseReference subjectRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/subjectBasicInfo");
-        Query selectedCourseSubjectsQuery = subjectRef.orderByChild("courseName").equalTo(SELECTED_COURSE);
+        Query selectedCourseSubjectsQuery = subjectRef.orderByChild(Constants.COURSE_NAME).equalTo(SELECTED_COURSE);
         selectedCourseSubjectsQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

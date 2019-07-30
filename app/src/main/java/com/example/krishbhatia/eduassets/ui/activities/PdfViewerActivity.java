@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.R;
 import com.github.barteksc.pdfviewer.PDFView;
 
@@ -31,7 +32,7 @@ public class PdfViewerActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.pdf_loading_progress_bar);
 
         pdfView = findViewById(R.id.pdf_view);
-        String url = getIntent().getStringExtra("url");
+        String url = getIntent().getStringExtra(Constants.URL);
         new RetrievePdfStream().execute(url);
     }
 
