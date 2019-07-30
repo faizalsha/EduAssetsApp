@@ -28,7 +28,7 @@
         <activity android:name=".ui.activities.DetailsActivity" />
         <activity
             android:name=".ui.activities.HomePageActivity"
-            android:label="@string/title_activity_home_page"
+            android:label="@string/edu_assets"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
