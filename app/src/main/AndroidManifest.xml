@@ -24,7 +24,8 @@
             android:screenOrientation="landscape" />
         <activity android:name=".ui.activities.PdfViewerActivity" />
         <activity android:name=".ui.activities.ProfileActivity" />
-        <activity android:name=".ui.activities.DetailsActivity" />
+        <activity android:name=".ui.activities.DetailsActivity"
+            android:exported="true"/>
         <activity
             android:name=".ui.activities.HomePageActivity"
             android:label="@string/edu_assets"

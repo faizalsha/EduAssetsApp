@@ -62,9 +62,13 @@ public class SubjectResourceActivity extends AppCompatActivity {
         resRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                subjectRes = dataSnapshot.getValue(SubjectResPOJO.class);
-                SectionsRecyclerViewAdapter adapter = new SectionsRecyclerViewAdapter(SubjectResourceActivity.this, subjectRes);
-                recyclerView.setAdapter(adapter);
+                if (dataSnapshot.exists()) {
+                    subjectRes = dataSnapshot.getValue(SubjectResPOJO.class);
+                    SectionsRecyclerViewAdapter adapter = new SectionsRecyclerViewAdapter(SubjectResourceActivity.this, subjectRes);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(SubjectResourceActivity.this, "Resources Coming Soon...", Toast.LENGTH_SHORT).show();
+                }
                 progressBar.setVisibility(View.GONE);
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
