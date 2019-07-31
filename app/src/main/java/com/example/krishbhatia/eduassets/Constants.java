@@ -27,4 +27,5 @@ public class Constants {
     public static final String EMPTY_FIELD_TOAST = "Fields must not be empty";
     public static final String EMAIL_SMALL = "email";
     public static final String CHECK_YOUR_INTERNET_CONNECTION = "Check Your Internet Connection";
+    public static final String SYLLABUS = "Syllabus";
 }

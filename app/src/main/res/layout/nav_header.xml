@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/side_nav_bar"
+    android:background="@color/logoBack"
     android:gravity="bottom"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
@@ -26,7 +26,7 @@
         android:layout_below="@id/nav_header_image_view"
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/dimen_16sp"
-        android:textColor="@color/profileOuter"
+        android:textColor="@color/white"
         android:text="@string/username"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -37,7 +37,7 @@
         android:layout_below="@id/nav_header_username_text_view"
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/dimen_16sp"
-        android:textColor="@color/profileOuter"
+        android:textColor="@color/offWhite"
 
         android:text="@string/user_example_com" />
 

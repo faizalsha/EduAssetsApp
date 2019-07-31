@@ -17,7 +17,6 @@ import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
@@ -27,10 +26,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.ViewPagerAdapter;
@@ -66,7 +63,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         mAuth=FirebaseAuth.getInstance();
         context = HomePageActivity.this;
         getDatabase();
-
+        getSyllabus();
         initializingComponents();
 
 
@@ -116,17 +113,16 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        String s="https://firebasestorage.googleapis.com/v0/b/expandingcard.appspot.com/o/ShadabFaizal_InternshalaResume.pdf?alt=media&token=f6eca077-3a08-4049-aa69-ee3f0233d8f4";
+
+        if (id == R.id.yourSyllabus) {
+            Intent intent=new Intent(HomePageActivity.this,PdfViewerActivity.class);
+            intent.putExtra(Constants.URL,SharedPreferenceImpl.getInstance().get(Constants.SYLLABUS,context));
+            startActivity(intent);
+        }
 
 
-        if (id == R.id.nav_home) {
-
-        } else if (id == R.id.cart) {
-
-
-        } else if (id == R.id.purchasedCourses) {
-            startActivity(new Intent(context, PurchasedCourseActivity.class));
-
-        } else if (id == R.id.nav_logout) {
+   else if (id == R.id.nav_logout) {
             mAuth.signOut();
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
@@ -157,18 +153,16 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     }
 
-    private void getOldUserDetails() {
-        userPOJO = new UserPOJO();
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.addValueEventListener(new ValueEventListener() {
+
+  private void getSyllabus(){
+        final DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
+        databaseReference.child(Constants.SYLLABUS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userPOJO = dataSnapshot.child("users").child(mAuth.getCurrentUser().getUid()).getValue(UserPOJO.class);
-                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, context);
 
-
-                userPOJO = dataSnapshot.child(Constants.USERS).child(mAuth.getUid()).getValue(UserPOJO.class);
-                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, context);
+                String syllabusUrl=(String) dataSnapshot.child(String.valueOf(userPOJO.getCourseId())).child("url").getValue();
+//                String syllabusUrl="https://firebasestorage.googleapis.com/v0/b/eduassets-63873.appspot.com/o/1.%20R.S%20Aggarwal%20Quantitative%20Aptitude%20(%20PDFDrive.com%20).pdf?alt=media&token=9d4ac881-847b-44b4-8582-f987ccb2ef5f";
+                SharedPreferenceImpl.getInstance().save(Constants.SYLLABUS,syllabusUrl,context);
             }
 
             @Override
@@ -176,8 +170,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
             }
         });
-    }
-
+  }
 
     private void initializingComponents() {
 

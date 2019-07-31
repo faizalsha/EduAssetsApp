@@ -71,6 +71,7 @@
     <string name="textOtherCourse">Other Course</string>
     <string name="edu_assets">EduAssets</string>
     <string name="enter_university">Enter University</string>
+    <string name="yourSyllabus">Your Syllabus</string>
     <!--<string name="default_web_client_id">592629978872-ua2gnpmquvs6bamqop7redls9e4kvufv.apps.googleusercontent.com</string>-->
 
     <string-array name="courses">
