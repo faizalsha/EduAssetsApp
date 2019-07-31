@@ -9,11 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
         tools:ignore="MissingConstraints"
-        android:id="@+id/toolbarHome"/>
+        android:id="@+id/toolbarHome"
+        android:theme="@style/ToolBarStyle"
+        android:background="@color/logoBack"/>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-
+        android:theme="@style/ToolBarStyle"
+        android:background="@color/logoBack"
         app:tabIndicatorColor="@color/selectedTab"
         android:layout_height="@dimen/dimen_50dp"
         android:layout_below="@id/toolbarHome"

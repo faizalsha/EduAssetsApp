@@ -4,11 +4,30 @@ public class UserPOJO {
     String name;
     String course;
     String college;
+    String university;
     String semester;
     String userId;
     String email;
     String enrolledCourse;
     int courseId;
+
+    public int getUniversityCode() {
+        return universityCode;
+    }
+
+    public void setUniversityCode(int universityCode) {
+        this.universityCode = universityCode;
+    }
+
+    int universityCode;
+
+    public String getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(String university) {
+        this.university = university;
+    }
 
     public int getCourseId() {
         return courseId;
@@ -48,26 +67,31 @@ public class UserPOJO {
 
     }
 
-    public UserPOJO(String name, String course, String college, String semester, String userId, String email, String enrolledCourse) {
+    public UserPOJO(String name, String course, String college, String university, String semester, String userId, String email, String enrolledCourse) {
         this.name = name;
         this.course = course;
         this.college = college;
+        this.university = university;
         this.semester = semester;
         this.userId = userId;
         this.email = email;
         this.enrolledCourse = enrolledCourse;
     }
 
-    public UserPOJO(String name, String course, String college, String semester, String userId, String email, String enrolledCourse, int courseId) {
+    public UserPOJO(String name, String course, String college, String university, String semester, String userId, String email, String enrolledCourse, int courseId, int universityCode) {
         this.name = name;
         this.course = course;
         this.college = college;
+        this.university = university;
         this.semester = semester;
         this.userId = userId;
         this.email = email;
         this.enrolledCourse = enrolledCourse;
         this.courseId = courseId;
+        this.universityCode = universityCode;
     }
+
+
 
     public void setName(String name) {
         this.name = name;

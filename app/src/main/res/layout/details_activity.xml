@@ -111,10 +111,45 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:id="@+id/universitySpinner"
+        android:background="@drawable/spinner_design"
+        android:layout_below="@id/collegeEditParent"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/collegeEditParent"
+        android:layout_below="@id/universitySpinner"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelAnimating="true"
+        app:met_floatingLabelText="@string/textCourse"
+        app:met_floatingLabelTextColor="@color/black"
+        app:met_hideUnderline="true"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:id="@+id/universityEditParent"
+        android:visibility="gone"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/universityEdit"
+            android:hint="@string/enter_university"
+            android:textSize="@dimen/dimen_15sp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/universityEditParent"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:met_floatingLabel="highlight"
         app:met_floatingLabelAnimating="true"

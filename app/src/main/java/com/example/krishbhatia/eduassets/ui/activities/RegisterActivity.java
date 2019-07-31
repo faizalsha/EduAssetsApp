@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.Constants;
@@ -41,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity{
     private EditText passwordRegister;
     private Button buttonRegisterButton;
     private Context mContext;
+    private ProgressBar progressBar;
 
     //Firebase Related
     private FirebaseAuth mAuth;
@@ -85,6 +87,8 @@ public class RegisterActivity extends AppCompatActivity{
         if(!TextUtils.isEmpty(registerEmail) && !TextUtils.isEmpty(registerPassword)){
 
             if (NetworkUtils.isConnectedToInternert(mContext)){
+                progressBar = findViewById(R.id.registerProgressBar);
+                progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(registerEmail, registerPassword)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -128,6 +132,8 @@ public class RegisterActivity extends AppCompatActivity{
                                         //updateUI(null);
                                     }
                                 }
+
+                                progressBar.setVisibility(View.GONE);
                             }
                         });
             } else {
