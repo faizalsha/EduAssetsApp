@@ -48,113 +48,62 @@ public class SplashScreenActivity extends AppCompatActivity {
         final CountDownTimer countDownTimer = new CountDownTimer(2000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-
-                if(mAuth.getCurrentUser()!=null){
-
-                }
-                else {
-                    startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
-                    finish();
-                }
+                if(mAuth.getCurrentUser()!=null) {
+                    }
             }
 
             @Override
             public void onFinish() {
                 Log.d(TAG, "onTick: initialising");
-                proceedingIntent();
+                if(mAuth.getCurrentUser()!=null) {
+                    getDataBase();
+                    Toast.makeText(SplashScreenActivity.this, "sa" + userPOJO.getName(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
+finish();
+                }
+                else {
+                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+               finish();
+                }
+
             }
         };
         countDownTimer.start();
     }
-    private void proceedingIntent(){
-        if(SharedPreferenceImpl.getInstance().get(Constants.USER_ID,this)!=null && !SharedPreferenceImpl.getInstance().get(Constants.USER_ID,this).equals(Constants.NOT_FOUND)){
-            Log.d(TAG, "proceedingIntent: user is logged in");
-            if (SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this) == Constants.NOT_FOUND) {
-                getOldUserDetails();
-            } else {
-                getNewUserDetails();
 
+    private void getDataBase() {
+        Toast.makeText(this, "getting", Toast.LENGTH_SHORT).show();
+        if(mAuth.getCurrentUser()!=null){
+            getDataFromSharedPreference();
+        }
+        else {
 
+            getDataFromFirebase();
+        }
+
+    }
+
+    private void getDataFromFirebase() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userPOJO=dataSnapshot.child(Constants.USERS_FIREBASE).child(mAuth.getUid()).getValue(UserPOJO.class);
+                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,SplashScreenActivity.this);
+                        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
-        }
-        else {
-            Log.d(TAG, "proceedingIntent: user is not logged in");
-
-            startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
-            finish();
-        }
+        });
     }
 
-    private void getOldUserDetails() {
-        if (mAuth == null) {
-            userPOJO = new UserPOJO();
-            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    userPOJO = dataSnapshot.child("users").child(mAuth.getUid()).getValue(UserPOJO.class);
-                    if (userPOJO == null) {
-                        mAuth.signOut();
-
-                        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-                        finish();
-                    } else {
-                        SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, SplashScreenActivity.this);
-                        startActivity(new Intent(SplashScreenActivity.this, HomePageActivity.class));
-                        finish();
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        } else {
-
-            startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-            finish();
-        }
-    }
-
-    private void getNewUserDetails() {
+    private void getDataFromSharedPreference() {
         Gson gson = new Gson();
         userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
-        if(userPOJO==null){
 
-            startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
-            finish();
-
-        }
-        else {
-
-            databaseReference.child("users").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       if(!dataSnapshot.child(userPOJO.getUserId()).exists()){
-                           Toast.makeText(SplashScreenActivity.this, "You are logged out.", Toast.LENGTH_SHORT).show();
-                mAuth.signOut();
-                SharedPreferenceImpl.getInstance().clearAll(SplashScreenActivity.this);
-                startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
-                finish();
-                       }
-                       else {
-                           SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, SplashScreenActivity.this);
-            startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
-            finish();
-                       }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-        }
     }
+
+
     }
 
