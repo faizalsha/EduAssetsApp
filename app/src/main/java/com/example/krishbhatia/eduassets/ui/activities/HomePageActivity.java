@@ -167,6 +167,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, context);
 
 
+                userPOJO = dataSnapshot.child(Constants.USERS).child(mAuth.getUid()).getValue(UserPOJO.class);
+                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, context);
             }
 
             @Override
@@ -176,13 +178,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         });
     }
 
-    private void getNewUserDetails() {
-
-            Gson gson = new Gson();
-        Log.d(TAG, "getNewUserDetails: bfoudaphadp"+SharedPreferenceImpl.getInstance().get(Constants.USER_ID,context));
-            userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, context), UserPOJO.class);
-        Log.d(TAG, "getNewUserDetails: user"+userPOJO.toString());
-    }
 
     private void initializingComponents() {
 

@@ -20,4 +20,11 @@ public class Constants {
     public static final String ALL_COURSES = "All Courses";
     public static final String MY_SUBJECTS = "My Subjects";
     public static final String USERS_FIREBASE = "users";
+    public static final String  SUBJECT_BASIC_INFO = "subjectBasicInfo";
+    public static final String MY_ROOT = "MyRoot";
+    public static final String YES = "Yes";
+    public static final String NO = "No";
+    public static final String EMPTY_FIELD_TOAST = "Fields must not be empty";
+    public static final String EMAIL_SMALL = "email";
+    public static final String CHECK_YOUR_INTERNET_CONNECTION = "Check Your Internet Connection";
 }

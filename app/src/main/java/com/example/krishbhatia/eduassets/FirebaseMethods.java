@@ -42,9 +42,10 @@ public class FirebaseMethods {
     private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "FirebaseMethods";
     private ProgressBar progressBar;
+
     public FirebaseMethods(Context mContext) {
         this.mContext = mContext;
-        this.mAuth=FirebaseAuth.getInstance();
+        this.mAuth = FirebaseAuth.getInstance();
     }
 
     public void setupFirebaseAuth() {
@@ -61,11 +62,10 @@ public class FirebaseMethods {
             }
         };
     }
-    public void signinWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
+    public void signinWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        progressBar = ((Activity)mContext).findViewById(R.id.loginProgressBar);
+        progressBar = ((Activity) mContext).findViewById(R.id.loginProgressBar);
         progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
@@ -75,7 +75,7 @@ public class FirebaseMethods {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                                       updateUI(user);
+                            updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -87,11 +87,12 @@ public class FirebaseMethods {
                     }
                 });
     }
-    public void loginWithEmailPwd(String email, String password ) {
-        progressBar = ((Activity)mContext).findViewById(R.id.loginProgressBar);
 
-        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
-            if (NetworkUtils.isConnectedToInternert(mContext)){
+    public void loginWithEmailPwd(String email, String password) {
+        progressBar = ((Activity) mContext).findViewById(R.id.loginProgressBar);
+
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            if (NetworkUtils.isConnectedToInternert(mContext)) {
 
                 progressBar.setVisibility(View.VISIBLE);
                 Toast.makeText(mContext, "Logging In...", Toast.LENGTH_SHORT).show();
@@ -102,27 +103,26 @@ public class FirebaseMethods {
                         if (task.isSuccessful()) {
                             if (mAuth.getCurrentUser().isEmailVerified()) {
                                 Toast.makeText(mContext, "Signed In", Toast.LENGTH_SHORT).show();
-                                 updateUI(mAuth.getCurrentUser());
+                                updateUI(mAuth.getCurrentUser());
 //                                mContext.startActivity(new Intent(mContext, HomePageActivity.class));
 //                                ((Activity)mContext).finish();
 
                             } else {
                                 Toast.makeText(mContext, "Your email is not verified", Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        else{
-                                Toast.makeText(mContext, "Error:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(mContext, "Error:" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
-                            }
+                        }
                         progressBar.setVisibility(View.GONE);
                     }
                 });
 
             } else {
-                Toast.makeText(mContext, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, Constants.CHECK_YOUR_INTERNET_CONNECTION, Toast.LENGTH_SHORT).show();
             }
-        }else {
-            Toast.makeText(mContext, "Error: Empty Fields", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, Constants.EMPTY_FIELD_TOAST, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -137,30 +137,31 @@ public class FirebaseMethods {
                     if (user.isEmailVerified()) {
 
                         Log.d(TAG, "onDataChange: " + dataSnapshot);
-                        if (!dataSnapshot.hasChild("name")) {
 
-                            mContext.startActivity(new Intent(mContext,DetailsActivity.class));
-                            ((Activity)mContext).finish();
+                            if (!dataSnapshot.hasChild(Constants.NAME)) {
+                               mContext.startActivity(new Intent(mContext, DetailsActivity.class));
+                                ((Activity) mContext).finish();
 
+                            } else {
+                                UserPOJO userPOJO = dataSnapshot.getValue(UserPOJO.class);
+                                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, mContext);
+                                Log.d(TAG, "onDataChange: valeeu" + userPOJO.getEmail());
+                                Intent intent = new Intent(mContext, HomePageActivity.class);
+                                mContext.startActivity(intent);
+                            }
                         } else {
-                            UserPOJO userPOJO=dataSnapshot.getValue(UserPOJO.class);
-                            SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,mContext);
-                            Log.d(TAG, "onDataChange: valeeu"+userPOJO.getEmail());
-                       Intent intent = new Intent(mContext, HomePageActivity.class);
-                            mContext.startActivity(intent);
+                            Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
                     }
-                }
+
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
+
+
         }
     }
-
-
 }

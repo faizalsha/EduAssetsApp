@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.CourseBasicInfoPOJO;
 
 import com.example.krishbhatia.eduassets.R;
@@ -67,9 +68,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "njocsnaphndcpa", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(mContext, CourseSubjectsActivity.class);
-                intent.putExtra("course", course.getCourseFullTitle());
+                intent.putExtra(Constants.COURSE, course.getCourseFullTitle());
                 mContext.startActivity(intent);
             }
         });

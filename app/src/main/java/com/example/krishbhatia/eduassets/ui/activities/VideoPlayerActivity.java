@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.R;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -42,7 +43,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video_player);
         exoPlayerView = findViewById(R.id.exo_player_view);
         progressBar = findViewById(R.id.video_player_progress_bar);
-        videoUrl = getIntent().getStringExtra("url");
+        videoUrl = getIntent().getStringExtra(Constants.URL);
         initializePlayer();
     }
 

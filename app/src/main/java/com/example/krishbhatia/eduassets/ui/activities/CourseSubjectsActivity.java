@@ -42,7 +42,7 @@ public class CourseSubjectsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_subjects);
         mContext = CourseSubjectsActivity.this;
-        String course = getIntent().getStringExtra("course");
+        String course = getIntent().getStringExtra(Constants.COURSE);
         progressBar = findViewById(R.id.subjectProgressBar);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -61,7 +61,7 @@ public class CourseSubjectsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         subjectList = new ArrayList<>();
-        DatabaseReference subjectRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/subjectBasicInfo");
+        DatabaseReference subjectRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.SUBJECT_BASIC_INFO);
         Query query = subjectRef.orderByChild(Constants.COURSE_NAME).equalTo(course);
 
         query.addValueEventListener(new ValueEventListener() {

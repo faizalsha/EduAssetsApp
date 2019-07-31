@@ -206,8 +206,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (user.isEmailVerified()) {
 
-                            Log.d(TAG, "onDataChange: " + dataSnapshot);
-                            if (dataSnapshot.hasChild("name")) {
+                            if (dataSnapshot.hasChild(Constants.NAME)) {
 
 //                                startActivity(new Intent(mContext, DetailsActivity.class));
 //                                finish();

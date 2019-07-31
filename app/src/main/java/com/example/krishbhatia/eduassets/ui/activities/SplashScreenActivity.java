@@ -74,11 +74,9 @@ finish();
     private void getDataBase() {
         Toast.makeText(this, "getting", Toast.LENGTH_SHORT).show();
         if(mAuth.getCurrentUser()!=null){
-            Toast.makeText(this, "SharedPref", Toast.LENGTH_SHORT).show();
             getDataFromSharedPreference();
         }
         else {
-            Toast.makeText(this, "firebase", Toast.LENGTH_SHORT).show();
 
             getDataFromFirebase();
         }
@@ -106,98 +104,6 @@ finish();
 
     }
 
-    private void proceedingIntent(){
-        if(mAuth.getCurrentUser()!=null){
 
-        }
-        else {
-            if (SharedPreferenceImpl.getInstance().get(Constants.USER_ID, this) != null && !SharedPreferenceImpl.getInstance().get(Constants.USER_ID, this).equals(Constants.NOT_FOUND)) {
-                Log.d(TAG, "proceedingIntent: user is logged in");
-                if (SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this) == Constants.NOT_FOUND) {
-                    getOldUserDetails();
-                } else {
-                    getNewUserDetails();
-
-
-                }
-
-            } else {
-                Log.d(TAG, "proceedingIntent: user is not logged in");
-
-//                startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-//                finish();
-            }
-        }
-    }
-
-    private void getOldUserDetails() {
-        if (mAuth == null) {
-            userPOJO = new UserPOJO();
-            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    userPOJO = dataSnapshot.child("users").child(mAuth.getUid()).getValue(UserPOJO.class);
-                    if (userPOJO == null) {
-                        mAuth.signOut();
-
-//                        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-//                        finish();
-                    } else {
-                        SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, SplashScreenActivity.this);
-//                        startActivity(new Intent(SplashScreenActivity.this, HomePageActivity.class));
-//                        finish();
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        } else {
-
-//            startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-//            finish();
-        }
-    }
-
-    private void getNewUserDetails() {
-        Gson gson = new Gson();
-        userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
-        if(userPOJO==null){
-
-//            startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
-//            finish();
-
-        }
-        else {
-
-            databaseReference.child("users").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       if(!dataSnapshot.child(userPOJO.getUserId()).exists()){
-                           Toast.makeText(SplashScreenActivity.this, "You are logged out.", Toast.LENGTH_SHORT).show();
-                mAuth.signOut();
-                SharedPreferenceImpl.getInstance().clearAll(SplashScreenActivity.this);
-//                startActivity(new Intent(SplashScreenActivity.this,LoginActivity.class));
-//                finish();
-                       }
-                       else {
-                           SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, SplashScreenActivity.this);
-//            startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
-//            finish();
-                       }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-        }
-    }
     }
 
