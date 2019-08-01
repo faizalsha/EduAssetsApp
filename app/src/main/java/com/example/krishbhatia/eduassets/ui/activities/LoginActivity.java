@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(TAG, "onDataChange: dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 Toast.makeText(context, "data added", Toast.LENGTH_SHORT).show();
-                UserPOJO userPOJO=dataSnapshot.child(Constants.USERS_FIREBASE).child(mAuth.getUid()).getValue(UserPOJO.class);
+                UserPOJO userPOJO=dataSnapshot.child(Constants.USERS).child(mAuth.getUid()).getValue(UserPOJO.class);
                 SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, context);
             }
 

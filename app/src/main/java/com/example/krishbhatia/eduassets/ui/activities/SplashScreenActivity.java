@@ -85,9 +85,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userPOJO = dataSnapshot.child(Constants.USERS_FIREBASE).child(mAuth.getUid()).getValue(UserPOJO.class);
-                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO, SplashScreenActivity.this);
-            }
+
+                userPOJO=dataSnapshot.child(Constants.USERS).child(mAuth.getUid()).getValue(UserPOJO.class);
+                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,SplashScreenActivity.this);
+                        }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

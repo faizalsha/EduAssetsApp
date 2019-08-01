@@ -10,9 +10,11 @@ public class Constants {
     public static final String URL = "url";
     public static final String NAME = "name";
     public static final String COURSE = "course";
+    public static final String UNIVERSITY = "university";
     public static final String SEMESTER = "semester";
     public static final String COLLEGE = "college";
     public static final String COURSE_ID = "courseId";
+    public static final String UNIVERSITY_CODE = "universityCode";
     public static final String SAVE_CHANGES = "Save Changes?";
     public static final String SELECTED_SUBJECT = "SELECTED_SUBJECT";
     public static final String PDF = "pdf";
