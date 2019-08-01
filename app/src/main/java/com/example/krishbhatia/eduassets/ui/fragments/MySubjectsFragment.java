@@ -1,6 +1,5 @@
 package com.example.krishbhatia.eduassets.ui.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,7 @@ import com.example.krishbhatia.eduassets.POJO.SubjectBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
 
 import com.example.krishbhatia.eduassets.ui.adapter.SubjectAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,13 +29,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MySubjectsFragment extends Fragment {
     private static final String TAG = "MySubjectsFragment";
     //TODO: get selected subject from spinner
-    private static final String SELECTED_COURSE = "Bachelor of Business Administration";
+    private String selectedCourse;
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
@@ -55,27 +55,43 @@ public class MySubjectsFragment extends Fragment {
 
         subjectList = new ArrayList<>();
 
-        DatabaseReference subjectRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/subjectBasicInfo");
-        Query selectedCourseSubjectsQuery = subjectRef.orderByChild(Constants.COURSE_NAME).equalTo(SELECTED_COURSE);
-        selectedCourseSubjectsQuery.addValueEventListener(new ValueEventListener() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child(Constants.USERS).child(mAuth.getUid()).child(Constants.COURSE_ABBREVIATION);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                SubjectBasicInfoPOJO subject;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    subject = snapshot.getValue(SubjectBasicInfoPOJO.class);
-                    subjectList.add(subject);
-                }
-                SubjectAdapter adapter = new SubjectAdapter(getContext(), subjectList);
-                recyclerView.setAdapter(adapter);
-                progressBar.setVisibility(View.GONE);
+                selectedCourse = dataSnapshot.getValue(String.class);
+                DatabaseReference subjectRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.SUBJECT_BASIC_INFO);
+                Query selectedCourseSubjectsQuery = subjectRef.orderByChild(Constants.COURSE_ABBREVIATION).equalTo(selectedCourse);
+                selectedCourseSubjectsQuery.addValueEventListener(valueEventListener);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                progressBar.setVisibility(View.GONE);
+                Log.d(TAG, "onCancelled: "+databaseError.getMessage());
             }
         });
 
+
         return view;
     }
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            SubjectBasicInfoPOJO subject;
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                subject = snapshot.getValue(SubjectBasicInfoPOJO.class);
+                subjectList.add(subject);
+            }
+            SubjectAdapter adapter = new SubjectAdapter(getContext(), subjectList);
+            recyclerView.setAdapter(adapter);
+            progressBar.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+            progressBar.setVisibility(View.GONE);
+        }
+    };
 }

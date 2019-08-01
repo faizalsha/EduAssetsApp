@@ -2,7 +2,7 @@ package com.example.krishbhatia.eduassets.POJO;
 
 public class UserPOJO {
     String name;
-    String course;
+    String courseAbbreviation;
     String college;
     String university;
     String semester;
@@ -67,9 +67,9 @@ public class UserPOJO {
 
     }
 
-    public UserPOJO(String name, String course, String college, String university, String semester, String userId, String email, String enrolledCourse) {
+    public UserPOJO(String name, String courseAbbreviation, String college, String university, String semester, String userId, String email, String enrolledCourse) {
         this.name = name;
-        this.course = course;
+        this.courseAbbreviation = courseAbbreviation;
         this.college = college;
         this.university = university;
         this.semester = semester;
@@ -78,9 +78,9 @@ public class UserPOJO {
         this.enrolledCourse = enrolledCourse;
     }
 
-    public UserPOJO(String name, String course, String college, String university, String semester, String userId, String email, String enrolledCourse, int courseId, int universityCode) {
+    public UserPOJO(String name, String courseAbbreviation, String college, String university, String semester, String userId, String email, String enrolledCourse, int courseId, int universityCode) {
         this.name = name;
-        this.course = course;
+        this.courseAbbreviation = courseAbbreviation;
         this.college = college;
         this.university = university;
         this.semester = semester;
@@ -97,8 +97,8 @@ public class UserPOJO {
         this.name = name;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setCourseAbbreviation(String courseAbbreviation) {
+        this.courseAbbreviation = courseAbbreviation;
     }
 
     public void setCollege(String college) {
@@ -113,8 +113,8 @@ public class UserPOJO {
         return name;
     }
 
-    public String getCourse() {
-        return course;
+    public String getCourseAbbreviation() {
+        return courseAbbreviation;
     }
 
     public String getCollege() {
