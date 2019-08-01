@@ -81,18 +81,20 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signIn();
-                loginlayoutBinding.googleSignInButton.setEnabled(false);
+                loginlayoutBinding.googleSignInButton.setClickable(false);
             }
         });
         loginlayoutBinding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //     a           loginWithEmailPwd();
+                loginlayoutBinding.loginButton.setClickable(false);
+
                 firebaseMethods.loginWithEmailPwd(loginlayoutBinding.emailEditText.getText().toString(), loginlayoutBinding.passwordEditText.getText().toString());
                 if(mAuth.getCurrentUser()!=null) {
                     getDataFromFirebase(mContext);
                 }
-                loginlayoutBinding.loginButton.setClickable(false);
+
             }
         });
         loginlayoutBinding.textsignup.setOnClickListener(new View.OnClickListener() {

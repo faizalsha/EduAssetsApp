@@ -14,18 +14,27 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_8dp">
 
-            <ImageView
-                android:id="@+id/subjectImage"
-                android:layout_width="@dimen/dimen_80dp"
-                android:layout_height="@dimen/dimen_80dp"
-                android:src="@drawable/logo"/>
-
+<!--            <ImageView-->
+<!--                android:id="@+id/subjectImage"-->
+<!--                android:layout_width="@dimen/dimen_80dp"-->
+<!--                android:layout_height="@dimen/dimen_80dp"-->
+<!--                android:src="@drawable/logo"/>-->
+                <TextView
+                    android:layout_width="@dimen/dimen_80dp"
+                    android:layout_height="@dimen/dimen_80dp"
+                    android:textSize="@dimen/dimen_18sp"
+                    android:id="@+id/subjectImageTextView"
+                    android:background="@color/logoBack"
+                    android:text="@string/college"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textAllCaps="true"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_toEndOf="@id/subjectImage"
+                android:layout_toEndOf="@id/subjectImageTextView"
                 android:layout_centerVertical="true">
 
                 <TextView

@@ -3,23 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_8dp">
+        android:layout_margin="@dimen/dimen_8dp"
+
+        app:cardCornerRadius="@dimen/dimen_10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/dimen_8dp">
+            android:paddingBottom="@dimen/dimen_8dp"
 
-            <ImageView
-                android:id="@+id/courseImage"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_200dp"
-                app:srcCompat="@drawable/com_facebook_button_like_background" />
+            >
+
+
+                <TextView
+                    android:layout_width="match_parent"
+
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:id="@+id/courseImageTextView"
+                    android:background="@color/logoBack"
+                    android:text="@string/textEmail"
+                    android:textColor="@color/white"
+                    android:textSize="80sp"
+                    android:gravity="center"
+                    android:textAllCaps="true"/>
 
             <TextView
                 android:id="@+id/courseFullTitle"
@@ -28,7 +40,7 @@
                 android:gravity="start"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_below="@id/courseImage"
+                android:layout_below="@id/courseImageTextView"
                 android:text="Fundamental of Computer Science"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#000000" />

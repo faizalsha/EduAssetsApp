@@ -28,6 +28,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.ViewPagerAdapter;
@@ -148,6 +149,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         super.onResume();
 
         getDatabase();
+        getSyllabus();
+
         navEmail.setText(userPOJO.getEmail());
         navName.setText(userPOJO.getName());
 
@@ -162,6 +165,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
                 String syllabusUrl=(String) dataSnapshot.child(String.valueOf(userPOJO.getCourseId())).child("url").getValue();
 //                String syllabusUrl="https://firebasestorage.googleapis.com/v0/b/eduassets-63873.appspot.com/o/1.%20R.S%20Aggarwal%20Quantitative%20Aptitude%20(%20PDFDrive.com%20).pdf?alt=media&token=9d4ac881-847b-44b4-8582-f987ccb2ef5f";
+//               String syllabusUrl="https://firebasestorage.googleapis.com/v0/b/eduassets-63873.appspot.com/o/BBA%20-%202%20QTOR%20UNIT%20-%20I%20THEORY%20NOTES%20(1).pdf?alt=media&token=87248ebb-e926-4a09-9e3f-72486fe41a63";
                 SharedPreferenceImpl.getInstance().save(Constants.SYLLABUS,syllabusUrl,context);
             }
 

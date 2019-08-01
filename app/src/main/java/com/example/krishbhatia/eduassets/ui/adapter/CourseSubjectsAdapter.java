@@ -39,6 +39,7 @@ public class CourseSubjectsAdapter extends RecyclerView.Adapter<CourseSubjectsAd
         final SubjectBasicInfoPOJO subject = subjectList.get(position);
         holder.subjectName.setText(subject.getSubjectName());
         holder.subjectCode.setText(String.valueOf(subject.getSubjectCode()));
+        holder.subjectImageTextView.setText(subject.getSubjectName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,10 +58,12 @@ public class CourseSubjectsAdapter extends RecyclerView.Adapter<CourseSubjectsAd
     class CourseSubjectsHolder extends RecyclerView.ViewHolder {
         private TextView subjectName;
         private TextView subjectCode;
+        private TextView subjectImageTextView;
         public CourseSubjectsHolder(@NonNull View itemView) {
             super(itemView);
             subjectName = itemView.findViewById(R.id.subjectTitle);
             subjectCode = itemView.findViewById(R.id.subjectCode);
+            subjectImageTextView=itemView.findViewById(R.id.subjectImageTextView);
         }
     }
 }

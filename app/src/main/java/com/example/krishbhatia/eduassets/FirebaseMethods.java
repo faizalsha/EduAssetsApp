@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -122,6 +123,8 @@ public class FirebaseMethods {
                 Toast.makeText(mContext, Constants.CHECK_YOUR_INTERNET_CONNECTION, Toast.LENGTH_SHORT).show();
             }
         } else {
+            Button button=((Activity) mContext).findViewById(R.id.loginButton);
+            button.setClickable(true);
             Toast.makeText(mContext, Constants.EMPTY_FIELD_TOAST, Toast.LENGTH_SHORT).show();
         }
 
@@ -148,6 +151,7 @@ public class FirebaseMethods {
                                 Log.d(TAG, "onDataChange: valeeu" + userPOJO.getEmail());
                                 Intent intent = new Intent(mContext, HomePageActivity.class);
                                 mContext.startActivity(intent);
+                                ((Activity)mContext).finish();
                             }
                         } else {
                             Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
