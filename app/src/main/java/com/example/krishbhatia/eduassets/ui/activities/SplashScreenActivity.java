@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -36,34 +37,32 @@ public class SplashScreenActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        databaseReference=FirebaseDatabase.getInstance().getReference();
-        mAuth=FirebaseAuth.getInstance();
-        progressBar=findViewById(R.id.loadingProgressBar);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.loadingProgressBar);
         progressBar.setVisibility(View.VISIBLE);
         final CountDownTimer countDownTimer = new CountDownTimer(2000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(mAuth.getCurrentUser()!=null) {
-                    }
+                if (mAuth.getCurrentUser() != null) {
+                }
             }
 
             @Override
             public void onFinish() {
                 Log.d(TAG, "onTick: initialising");
-                if(mAuth.getCurrentUser()!=null) {
+                if (mAuth.getCurrentUser() != null) {
                     getDataBase();
                     Toast.makeText(SplashScreenActivity.this, "sa" + userPOJO.getName(), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
-finish();
-                }
-                else {
+                    startActivity(new Intent(SplashScreenActivity.this, HomePageActivity.class));
+                    finish();
+                } else {
                     startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-               finish();
+                    finish();
                 }
 
             }
@@ -73,10 +72,9 @@ finish();
 
     private void getDataBase() {
         Toast.makeText(this, "getting", Toast.LENGTH_SHORT).show();
-        if(mAuth.getCurrentUser()!=null){
+        if (mAuth.getCurrentUser() != null) {
             getDataFromSharedPreference();
-        }
-        else {
+        } else {
 
             getDataFromFirebase();
         }
@@ -87,9 +85,11 @@ finish();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 userPOJO=dataSnapshot.child(Constants.USERS).child(mAuth.getUid()).getValue(UserPOJO.class);
                 SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,SplashScreenActivity.this);
                         }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -105,5 +105,5 @@ finish();
     }
 
 
-    }
+}
 

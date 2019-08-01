@@ -18,7 +18,7 @@
         android:theme="@style/ToolBarStyle"
         android:background="@color/logoBack"
         app:tabIndicatorColor="@color/selectedTab"
-        android:layout_height="@dimen/dimen_50dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/toolbarHome"
         tools:ignore="MissingConstraints"
         android:clickable="true"/>
@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tab_layout"
 android:background="@color/offWhite"
-
         app:layout_constraintBottom_toBottomOf="@id/tab_layout"
         />
 

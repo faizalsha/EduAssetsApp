@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -52,6 +51,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         //binding the data with the viewholder views
         subjectViewHolder.textViewTitle.setText(subject.getSubjectName());
         subjectViewHolder.textViewCode.setText(String.valueOf(subject.getSubjectCode()));
+        subjectViewHolder.subjectImageTextView.setText(subject.getSubjectName());
         subjectViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,14 +70,14 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     class SubjectViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewTitle, textViewCode;
-        ImageView imageView;
+        TextView subjectImageTextView;
 
         public SubjectViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.subjectTitle);
             textViewCode = itemView.findViewById(R.id.subjectCode);
-            imageView = itemView.findViewById(R.id.subjectImage);
+            subjectImageTextView = itemView.findViewById(R.id.subjectImageTextView);
         }
     }
 }

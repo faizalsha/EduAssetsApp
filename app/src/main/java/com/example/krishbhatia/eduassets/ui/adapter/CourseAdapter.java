@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.krishbhatia.eduassets.Constants;
@@ -19,7 +17,6 @@ import com.example.krishbhatia.eduassets.POJO.CourseBasicInfoPOJO;
 
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.activities.CourseSubjectsActivity;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -58,13 +55,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         //binding the data with the viewHolder views
         holder.courseTitle.setText(course.getCourseFullTitle());
         holder.textViewCode.setText(String.valueOf(course.getCourseId()));
-        Picasso.with(mContext)
-                .load(course.getCourseUrl())
-                .fit()
-                .centerCrop()
-                .placeholder(R.drawable.com_facebook_button_background)
-                .into(holder.courseImage);
-
+//        Picasso.with(mContext)
+//                .load(course.getCourseUrl())
+//                .fit()
+//                .centerCrop()
+//                .placeholder(R.drawable.com_facebook_button_background)
+//                .into(holder.courseImageTextView);
+        holder.courseImageTextView.setText(course.getCourseName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +81,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     class CourseViewHolder extends RecyclerView.ViewHolder{
 
         TextView courseTitle, textViewCode;
-        ImageView courseImage;
+        TextView courseImageTextView;
         ProgressBar progressBar;
 
         public CourseViewHolder(@NonNull View itemView, ViewGroup viewGroup) {
@@ -95,7 +92,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
             textViewCode = itemView.findViewById(R.id.all_courses_fragment_course_code_text_view);
 
-            courseImage = itemView.findViewById(R.id.courseImage);
+            courseImageTextView = itemView.findViewById(R.id.courseImageTextView);
             progressBar = viewGroup.findViewById(R.id.allCourseProgressBar);
         }
     }

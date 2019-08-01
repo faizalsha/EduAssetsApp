@@ -63,7 +63,7 @@
     <!--<color name="colorAccent">#B9BBBD</color>-->
     <color name="colorBackground">#000</color>
     <color name="colorSplashText">#F0F0F0</color>
-    <color name="colorProgressBar">#FFCE511C</color>
+    <color name="colorProgressBar">#65E8F2</color>
     <color name="colorTextView">#83898E</color>
     <color name="cherry">#3B0B17</color>
     <color name="selectedTab">#10b3bc</color>
