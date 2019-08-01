@@ -87,7 +87,7 @@ finish();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userPOJO=dataSnapshot.child(Constants.USERS_FIREBASE).child(mAuth.getUid()).getValue(UserPOJO.class);
+                userPOJO=dataSnapshot.child(Constants.USERS).child(mAuth.getUid()).getValue(UserPOJO.class);
                 SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,SplashScreenActivity.this);
                         }
 
