@@ -172,7 +172,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void initStrings() {
         name=userPOJO.getName();
-        course=userPOJO.getCourse();
+        course=userPOJO.getCourseAbbreviation();
         university = userPOJO.getUniversity();
         semester=userPOJO.getSemester();
         college=userPOJO.getCollege();
@@ -238,7 +238,7 @@ public class ProfileActivity extends AppCompatActivity {
             mDatabaseReference.child(Constants.COURSE_ID).setValue(courseId);
             mDatabaseReference.child(Constants.UNIVERSITY_CODE).setValue(universityCode);
             userPOJO.setCollege(college);
-            userPOJO.setCourse(course);
+            userPOJO.setCourseAbbreviation(course);
             userPOJO.setUniversity(university);
             userPOJO.setCourseId(profileActivityBinding.courseSpinner.getSelectedItemPosition());
             userPOJO.setUniversityCode(profileActivityBinding.universitySpinner.getSelectedItemPosition());

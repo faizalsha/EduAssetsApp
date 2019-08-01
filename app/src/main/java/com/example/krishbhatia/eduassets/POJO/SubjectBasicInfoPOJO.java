@@ -2,16 +2,26 @@ package com.example.krishbhatia.eduassets.POJO;
 
 public class SubjectBasicInfoPOJO {
     private String courseName;
+    private String courseAbbreviation;
     private String subjectName;
     private Long subjectCode;
 
     public SubjectBasicInfoPOJO() {
     }
 
-    public SubjectBasicInfoPOJO(String courseName, String subjectName, Long subjectCode) {
+    public SubjectBasicInfoPOJO(String courseName, String courseAbbreviation, String subjectName, Long subjectCode) {
         this.courseName = courseName;
+        this.courseAbbreviation = courseAbbreviation;
         this.subjectName = subjectName;
         this.subjectCode = subjectCode;
+    }
+
+    public String getCourseAbbreviation() {
+        return courseAbbreviation;
+    }
+
+    public void setCourseAbbreviation(String courseAbbreviation) {
+        this.courseAbbreviation = courseAbbreviation;
     }
 
     public String getCourseName() {

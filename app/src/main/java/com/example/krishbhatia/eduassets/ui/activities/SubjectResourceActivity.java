@@ -55,9 +55,11 @@ public class SubjectResourceActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.main_recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        selectedSubject  = selectedSubject.replaceAll(" ", "_");
+
         //TODO: in firebase store two fields subjectName and course_subject
         DatabaseReference resRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/res").child(ENROLLED_COURSE + "_" + selectedSubject);
-
 
         resRef.addValueEventListener(new ValueEventListener() {
             @Override

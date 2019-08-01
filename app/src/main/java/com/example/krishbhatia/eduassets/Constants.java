@@ -10,6 +10,7 @@ public class Constants {
     public static final String URL = "url";
     public static final String NAME = "name";
     public static final String COURSE = "course";
+    public static final String COURSE_ABBREVIATION = "courseAbbreviation";
     public static final String UNIVERSITY = "university";
     public static final String SEMESTER = "semester";
     public static final String COLLEGE = "college";

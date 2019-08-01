@@ -12,8 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.POJO.UserPOJO;
@@ -41,11 +40,15 @@ public class DetailsActivity extends AppCompatActivity {
 
     private ArrayAdapter<CharSequence> universityAdapter;
 
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = DetailsActivity.this;
         detailsActivityBinding = DataBindingUtil.setContentView(this, R.layout.details_activity);
+
+        progressBar = findViewById(R.id.detailsProgressBar);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -78,7 +81,7 @@ public class DetailsActivity extends AppCompatActivity {
                         && !TextUtils.isEmpty(university) && detailsActivityBinding.universitySpinner.getSelectedItemPosition() != 0) {
 
                     if (NetworkUtils.isConnectedToInternert(mContext)) {
-
+                        progressBar.setVisibility(View.VISIBLE);
 //                        final UserPOJO user = new UserPOJO(name, course, college, semester, mAuth.getUid(), mAuth.getCurrentUser().getEmail(), null);
                         final UserPOJO user = new UserPOJO(name, course, college, university, semester, mAuth.getUid(), mAuth.getCurrentUser().getEmail(), null, detailsActivityBinding.courseSpinner.getSelectedItemPosition(), detailsActivityBinding.universitySpinner.getSelectedItemPosition());
 
@@ -87,6 +90,7 @@ public class DetailsActivity extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(mContext, "Details Saved Successfully", Toast.LENGTH_SHORT).show();
                                 SharedPreferenceImpl.getInstance().addUserPojo(user, DetailsActivity.this);
+                                progressBar.setVisibility(View.GONE);
                                 startActivity(new Intent(mContext, HomePageActivity.class));
                                 finish();
                             }
@@ -94,6 +98,7 @@ public class DetailsActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(mContext, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
                             }
                         });
                     } else {
