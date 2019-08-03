@@ -1,6 +1,5 @@
 package com.example.krishbhatia.eduassets.ui.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -19,11 +18,8 @@ import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.databinding.ProfileActivityBinding;
 import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -172,7 +168,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void initStrings() {
         name=userPOJO.getName();
-        course=userPOJO.getCourseAbbreviation();
+        course=userPOJO.getCourse();
         university = userPOJO.getUniversity();
         semester=userPOJO.getSemester();
         college=userPOJO.getCollege();
@@ -238,7 +234,7 @@ public class ProfileActivity extends AppCompatActivity {
             mDatabaseReference.child(Constants.COURSE_ID).setValue(courseId);
             mDatabaseReference.child(Constants.UNIVERSITY_CODE).setValue(universityCode);
             userPOJO.setCollege(college);
-            userPOJO.setCourseAbbreviation(course);
+            userPOJO.setCourse(course);
             userPOJO.setUniversity(university);
             userPOJO.setCourseId(profileActivityBinding.courseSpinner.getSelectedItemPosition());
             userPOJO.setUniversityCode(profileActivityBinding.universitySpinner.getSelectedItemPosition());

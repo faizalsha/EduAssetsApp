@@ -2,13 +2,12 @@ package com.example.krishbhatia.eduassets.POJO;
 
 public class UserPOJO {
     String name;
-    String courseAbbreviation;
+    String course;
     String college;
     String university;
     String semester;
     String userId;
     String email;
-    String enrolledCourse;
     int courseId;
 
     public int getUniversityCode() {
@@ -38,14 +37,6 @@ public class UserPOJO {
     }
 
 
-    public void setEnrolledCourse(String enrolledCourse) {
-        this.enrolledCourse = enrolledCourse;
-    }
-
-    public String getEnrolledCourse() {
-        return enrolledCourse;
-    }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -67,26 +58,24 @@ public class UserPOJO {
 
     }
 
-    public UserPOJO(String name, String courseAbbreviation, String college, String university, String semester, String userId, String email, String enrolledCourse) {
+    public UserPOJO(String name, String course, String college, String university, String semester) {
         this.name = name;
-        this.courseAbbreviation = courseAbbreviation;
+        this.course = course;
         this.college = college;
         this.university = university;
         this.semester = semester;
         this.userId = userId;
         this.email = email;
-        this.enrolledCourse = enrolledCourse;
     }
 
-    public UserPOJO(String name, String courseAbbreviation, String college, String university, String semester, String userId, String email, String enrolledCourse, int courseId, int universityCode) {
+    public UserPOJO(String name, String course, String college, String university, String semester, String userId, String email, int courseId, int universityCode) {
         this.name = name;
-        this.courseAbbreviation = courseAbbreviation;
+        this.course = course;
         this.college = college;
         this.university = university;
         this.semester = semester;
         this.userId = userId;
         this.email = email;
-        this.enrolledCourse = enrolledCourse;
         this.courseId = courseId;
         this.universityCode = universityCode;
     }
@@ -97,8 +86,8 @@ public class UserPOJO {
         this.name = name;
     }
 
-    public void setCourseAbbreviation(String courseAbbreviation) {
-        this.courseAbbreviation = courseAbbreviation;
+    public void setCourse(String course) {
+        this.course = course;
     }
 
     public void setCollege(String college) {
@@ -113,8 +102,8 @@ public class UserPOJO {
         return name;
     }
 
-    public String getCourseAbbreviation() {
-        return courseAbbreviation;
+    public String getCourse() {
+        return course;
     }
 
     public String getCollege() {
