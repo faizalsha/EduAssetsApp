@@ -73,40 +73,40 @@ public class SplashScreenActivity extends AppCompatActivity {
         countDownTimer.start();
     }
 
-    private void getDataBase() {
-        Toast.makeText(this, "getting", Toast.LENGTH_SHORT).show();
-        if (SharedPreferenceImpl.getInstance().contains("name",this)) {
-            getDataFromSharedPreference();
-        } else {
-
-            getDataFromFirebase();
-        }
-
-    }
-
-    private void getDataFromFirebase() {
-        Log.d(TAG, "getDataFromFirebase: getDataFromFirebase");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                userPOJO=dataSnapshot.child(Constants.USERS).child(mAuth.getUid()).getValue(UserPOJO.class);
-                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,SplashScreenActivity.this);
-                        }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void getDataFromSharedPreference() {
-        Gson gson = new Gson();
-        userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
-
-    }
+//    private void getDataBase() {
+//        Toast.makeText(this, "getting", Toast.LENGTH_SHORT).show();
+//        if (SharedPreferenceImpl.getInstance().contains("name",this)) {
+//            getDataFromSharedPreference();
+//        } else {
+//
+//            getDataFromFirebase();
+//        }
+//
+//    }
+//
+//    private void getDataFromFirebase() {
+//        Log.d(TAG, "getDataFromFirebase: getDataFromFirebase");
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                userPOJO=dataSnapshot.child(Constants.USERS).child(mAuth.getUid()).getValue(UserPOJO.class);
+//                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,SplashScreenActivity.this);
+//                        }
+//
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
+//
+//    private void getDataFromSharedPreference() {
+//        Gson gson = new Gson();
+//        userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
+//
+//    }
 
 
 }

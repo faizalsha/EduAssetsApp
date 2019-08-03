@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectResPOJO {
-    private String subjectName;
+    private int subjectCode;
     private ArrayList<SectionPOJO> section;
 
     public SubjectResPOJO() {
     }
 
-    public SubjectResPOJO(String subjectName, ArrayList<SectionPOJO> section) {
-        this.subjectName = subjectName;
+    public SubjectResPOJO(int subjectCode, ArrayList<SectionPOJO> section) {
+        this.subjectCode = subjectCode;
         this.section = section;
     }
 
-    public String getSubjectName() {
-        return subjectName;
+    public int getSubjectCode() {
+        return subjectCode;
     }
 
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
+    public void setSubjectCode(int subjectCode) {
+        this.subjectCode = subjectCode;
     }
 
     public ArrayList<SectionPOJO> getSection() {

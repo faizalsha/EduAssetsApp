@@ -171,6 +171,7 @@ public class FirebaseMethods {
 
     public void getUserDetails() {
         if (mAuth.getCurrentUser() != null){
+            Log.d(TAG, "getUserDetails: name exist"+SharedPreferenceImpl.getInstance().get(Constants.NAME, mContext));
             if (SharedPreferenceImpl.getInstance().contains(Constants.NAME,mContext)){
                 mContext.startActivity(new Intent(mContext, HomePageActivity.class));
                 ((Activity)mContext).finish();

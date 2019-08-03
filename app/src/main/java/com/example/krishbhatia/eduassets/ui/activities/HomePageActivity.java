@@ -17,6 +17,7 @@ import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
@@ -74,7 +75,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private void getDatabase() {
         Gson gson = new Gson();
         userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
-
     }
 
     @Override
@@ -150,6 +150,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
         getDatabase();
         getSyllabus();
+        Log.d(TAG, "onResume:");
 
         navEmail.setText(userPOJO.getEmail());
         navName.setText(userPOJO.getName());

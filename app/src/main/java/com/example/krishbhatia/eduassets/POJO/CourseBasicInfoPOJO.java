@@ -3,13 +3,13 @@ package com.example.krishbhatia.eduassets.POJO;
 public class CourseBasicInfoPOJO {
     private String courseName;
     private String courseFullTitle;
-    private Long courseId;
+    private int courseId;
     private String courseUrl;
 
     public CourseBasicInfoPOJO() {
     }
 
-    public CourseBasicInfoPOJO(String courseName, String courseFullTitle, Long courseId, String courseUrl) {
+    public CourseBasicInfoPOJO(String courseName, String courseFullTitle, int courseId, String courseUrl) {
         this.courseName = courseName;
         this.courseFullTitle = courseFullTitle;
         this.courseId = courseId;
@@ -32,11 +32,11 @@ public class CourseBasicInfoPOJO {
         this.courseFullTitle = courseFullTitle;
     }
 
-    public Long getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 
