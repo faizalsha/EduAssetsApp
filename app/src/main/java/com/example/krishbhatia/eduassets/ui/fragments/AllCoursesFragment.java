@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 
+import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.CourseBasicInfoPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.CourseAdapter;
@@ -53,7 +54,7 @@ public class AllCoursesFragment extends Fragment {
 
 
 
-        final DatabaseReference courseRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/courseBasicInfo");
+        final DatabaseReference courseRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.COURSE_BASIC_INFO);
 
         courseRef.addValueEventListener(new ValueEventListener() {
             @Override

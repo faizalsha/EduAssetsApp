@@ -25,10 +25,14 @@ public class Constants {
     public static final String USERS_FIREBASE = "users";
     public static final String  SUBJECT_BASIC_INFO = "subjectBasicInfo";
     public static final String MY_ROOT = "MyRoot";
+    public static final String RES = "res";
     public static final String YES = "Yes";
     public static final String NO = "No";
     public static final String EMPTY_FIELD_TOAST = "Fields must not be empty";
     public static final String EMAIL_SMALL = "email";
     public static final String CHECK_YOUR_INTERNET_CONNECTION = "Check Your Internet Connection";
     public static final String SYLLABUS = "Syllabus";
+    public static final String COURSE_BASIC_INFO = "courseBasicInfo";
+    public static final String SUBJECT_CODE = "subjectCode";
+    public static final int DEFAULT_VALUE = 0;
 }

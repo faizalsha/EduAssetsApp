@@ -3,7 +3,6 @@ package com.example.krishbhatia.eduassets.ui.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class SubjectResourceActivity extends AppCompatActivity {
@@ -33,6 +33,7 @@ public class SubjectResourceActivity extends AppCompatActivity {
     private SubjectResPOJO subjectRes;
     private RecyclerView recyclerView;
     private String selectedSubject;
+    private int subjectCode;
     private ProgressBar progressBar;
 
     @Override
@@ -46,6 +47,7 @@ public class SubjectResourceActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         selectedSubject = getIntent().getStringExtra(Constants.SELECTED_SUBJECT);
+        subjectCode = getIntent().getIntExtra(Constants.SUBJECT_CODE, Constants.DEFAULT_VALUE);
         getSupportActionBar().setTitle(selectedSubject);
 
         progressBar = findViewById(R.id.subjectResourceProgressBar);
@@ -58,8 +60,9 @@ public class SubjectResourceActivity extends AppCompatActivity {
 
         selectedSubject  = selectedSubject.replaceAll(" ", "_");
 
-        //TODO: in firebase store two fields subjectName and course_subject
         DatabaseReference resRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/res").child(ENROLLED_COURSE + "_" + selectedSubject);
+//        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.RES);
+//        Query query = dbRef.orderByChild(Constants.SUBJECT_CODE).equalTo(subjectCode);
 
         resRef.addValueEventListener(new ValueEventListener() {
             @Override
