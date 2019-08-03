@@ -16,25 +16,25 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.krishbhatia.eduassets.Constants;
 import com.example.krishbhatia.eduassets.POJO.SubjectResPOJO;
+import com.example.krishbhatia.eduassets.POJO.UserPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.ui.adapter.SectionsRecyclerViewAdapter;
+import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 public class SubjectResourceActivity extends AppCompatActivity {
-    // TODO: update value of ENROLLED_COURSE using shared preferences
-    private static final String ENROLLED_COURSE = "BBA";
 
     private static final String TAG = "SubjectResourceActivity";
     private SubjectResPOJO subjectRes;
     private RecyclerView recyclerView;
-    private String selectedSubject;
-    private int subjectCode;
     private ProgressBar progressBar;
+    private UserPOJO userPOJO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,11 @@ public class SubjectResourceActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getDatabase();
+        // TODO: update value of course using shared preferences
+        String course = userPOJO.getCourse();
+        String selectedSubject = getIntent().getStringExtra(Constants.SELECTED_SUBJECT);
 
-        selectedSubject = getIntent().getStringExtra(Constants.SELECTED_SUBJECT);
-        subjectCode = getIntent().getIntExtra(Constants.SUBJECT_CODE, Constants.DEFAULT_VALUE);
         getSupportActionBar().setTitle(selectedSubject);
 
         progressBar = findViewById(R.id.subjectResourceProgressBar);
@@ -58,9 +60,9 @@ public class SubjectResourceActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        selectedSubject  = selectedSubject.replaceAll(" ", "_");
+        selectedSubject = selectedSubject.replaceAll(" ", "_");
 
-        DatabaseReference resRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/res").child(ENROLLED_COURSE + "_" + selectedSubject);
+        DatabaseReference resRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/res").child(course + "_" + selectedSubject);
 //        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.RES);
 //        Query query = dbRef.orderByChild(Constants.SUBJECT_CODE).equalTo(subjectCode);
 
@@ -93,5 +95,11 @@ public class SubjectResourceActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getDatabase() {
+        Gson gson = new Gson();
+        userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, this), UserPOJO.class);
+
     }
 }
