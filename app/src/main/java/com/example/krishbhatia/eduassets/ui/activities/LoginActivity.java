@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        updateUI(mAuth.getCurrentUser());
+        //updateUI(mAuth.getCurrentUser());
 
 
         loginlayoutBinding.googleSignInButton.setOnClickListener(new View.OnClickListener() {
@@ -199,36 +199,36 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void updateUI(final FirebaseUser user) {
-        if (user != null) {
-
-                userDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.USERS).child(mAuth.getUid());
-                userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (user.isEmailVerified()) {
-
-                            if (dataSnapshot.hasChild(Constants.NAME)) {
-
-//                                startActivity(new Intent(mContext, DetailsActivity.class));
+//    private void updateUI(final FirebaseUser user) {
+//        if (user != null) {
+//
+//                userDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.USERS).child(mAuth.getUid());
+//                userDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        if (user.isEmailVerified()) {
+//
+//                            if (dataSnapshot.hasChild(Constants.NAME)) {
+//
+////                                startActivity(new Intent(mContext, DetailsActivity.class));
+////                                finish();
+//                                Intent i = new Intent(mContext, HomePageActivity.class);
+//                                startActivity(i);
 //                                finish();
-                                Intent i = new Intent(mContext, HomePageActivity.class);
-                                startActivity(i);
-                                finish();
-                            }
-
-                        } else {
-                            Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        }
+//                            }
+//
+//                        } else {
+//                            Toast.makeText(mContext, "Your email is not Verified", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
+//            }
+//        }
 
 
 

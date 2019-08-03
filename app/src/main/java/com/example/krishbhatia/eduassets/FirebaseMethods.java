@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.logging.SocketHandler;
 
@@ -43,6 +44,7 @@ public class FirebaseMethods {
     private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "FirebaseMethods";
     private ProgressBar progressBar;
+    private UserPOJO userPOJO;
 
     public FirebaseMethods(Context mContext) {
         this.mContext = mContext;
@@ -164,8 +166,60 @@ public class FirebaseMethods {
 
                 }
             });
-
-
         }
     }
+
+    public void getUserDetails() {
+        if (mAuth.getCurrentUser() != null){
+            if (SharedPreferenceImpl.getInstance().contains(Constants.NAME,mContext)){
+                mContext.startActivity(new Intent(mContext, HomePageActivity.class));
+                ((Activity)mContext).finish();
+            }else {
+                updateUI(mAuth.getCurrentUser());
+            }
+        }else {
+            mContext.startActivity(new Intent(mContext, LoginActivity.class));
+            ((Activity)mContext).finish();
+        }
+    }
+
+//    private void getDataBase() {
+//        Toast.makeText(mContext, "getting", Toast.LENGTH_SHORT).show();
+////        if (SharedPreferenceImpl.getInstance().contains("name",mContext)) {
+////            getDataFromSharedPreference();
+////            mContext.startActivity(new Intent(mContext, HomePageActivity.class));
+////            ((Activity)mContext).finish();
+////        }
+//
+//        updateUI(mAuth.getCurrentUser());
+//
+//
+//    }
+
+//    private void getDataFromSharedPreference() {
+//        Gson gson = new Gson();
+//        userPOJO = gson.fromJson(SharedPreferenceImpl.getInstance().get(Constants.USERPOJO, mContext), UserPOJO.class);
+//
+//    }
+
+//    private void getDataFromFirebase() {
+//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.USERS).child(mAuth.getUid());
+//        Log.d(TAG, "getDataFromFirebase: getDataFromFirebase");
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                userPOJO=dataSnapshot.getValue(UserPOJO.class);
+//                SharedPreferenceImpl.getInstance().addUserPojo(userPOJO,mContext);
+//                mContext.startActivity(new Intent(mContext, HomePageActivity.class));
+//                ((Activity)mContext).finish();
+//            }
+//
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                Toast.makeText(mContext, "Error"+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 }

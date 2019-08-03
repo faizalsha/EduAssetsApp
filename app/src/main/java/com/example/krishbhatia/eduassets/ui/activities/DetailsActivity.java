@@ -83,7 +83,7 @@ public class DetailsActivity extends AppCompatActivity {
                     if (NetworkUtils.isConnectedToInternert(mContext)) {
                         progressBar.setVisibility(View.VISIBLE);
 //                        final UserPOJO user = new UserPOJO(name, course, college, semester, mAuth.getUid(), mAuth.getCurrentUser().getEmail(), null);
-                        final UserPOJO user = new UserPOJO(name, course, college, university, semester, mAuth.getUid(), mAuth.getCurrentUser().getEmail(), null, detailsActivityBinding.courseSpinner.getSelectedItemPosition(), detailsActivityBinding.universitySpinner.getSelectedItemPosition());
+                        final UserPOJO user = new UserPOJO(name, course, college, university, semester, mAuth.getUid(), mAuth.getCurrentUser().getEmail(), detailsActivityBinding.courseSpinner.getSelectedItemPosition(), detailsActivityBinding.universitySpinner.getSelectedItemPosition());
 
                         mDatabaseReference.child("users").child(mAuth.getUid()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
