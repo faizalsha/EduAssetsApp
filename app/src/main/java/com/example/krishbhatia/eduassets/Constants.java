@@ -6,6 +6,7 @@ public class Constants {
     public static final String EMAIL ="EMAIL" ;
     public static final String USERPOJO = "USER_POJO";
     public static final String COURSE_NAME = "courseName";
+    public static final String UNIVERSITY_NAME = "universityName";
     public static final String USERS = "users";
     public static final String URL = "url";
     public static final String NAME = "name";
@@ -33,6 +34,10 @@ public class Constants {
     public static final String CHECK_YOUR_INTERNET_CONNECTION = "Check Your Internet Connection";
     public static final String SYLLABUS = "Syllabus";
     public static final String COURSE_BASIC_INFO = "courseBasicInfo";
+    public static final String UNIVERSITY_INFO = "universityInfo";
     public static final String SUBJECT_CODE = "subjectCode";
-    public static final int DEFAULT_VALUE = 0;
+    public static final long DEFAULT_VALUE = -1;
+    public static final String SELECT_COURSE = "Select Course";
+    public static final String SELECT_UNIVERSITY = "Select University";
+    public static final String OTHER = "Other";
 }

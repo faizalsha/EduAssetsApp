@@ -1,5 +1,6 @@
 package com.example.krishbhatia.eduassets.ui.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -18,9 +19,14 @@ import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.databinding.ProfileActivityBinding;
 import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
     private ProfileActivityBinding profileActivityBinding;
@@ -30,8 +36,10 @@ public class ProfileActivity extends AppCompatActivity {
     String name ,course,college,semester;
     private String university;
     private UserPOJO userPOJO;
-    private ArrayAdapter<CharSequence> courseAdapter, universityAdapter;
+    private ArrayAdapter<String> courseAdapter, universityAdapter;
     private int courseId, universityCode;
+    private ArrayList<String> courseList;
+    private ArrayList<String> universityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +48,74 @@ public class ProfileActivity extends AppCompatActivity {
         profileActivityBinding = DataBindingUtil.setContentView(this, R.layout.profile_activity);
         clearFocus();
         mAuth = FirebaseAuth.getInstance();
-        courseAdapter= ArrayAdapter.createFromResource(this,R.array.courses,android.R.layout.simple_spinner_item);
+
+
+        courseAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        courseList = new ArrayList<>();
+        courseList.add(Constants.SELECT_COURSE);
+        DatabaseReference courseDB = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.COURSE_BASIC_INFO);
+        courseDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    String courseName;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        courseName = snapshot.child(Constants.COURSE_NAME).getValue(String.class);
+                        courseList.add(courseName);
+                    }
+
+                    courseAdapter.addAll(courseList);
+                    courseAdapter.add(Constants.OTHER);
+                    profileActivityBinding.courseSpinner.setAdapter(courseAdapter);
+
+
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Course Data doesn't exist", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                courseList.add("Something is wrong");
+            }
+        });
+
         courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        universityAdapter = ArrayAdapter.createFromResource(this, R.array.university, android.R.layout.simple_spinner_item);
+
+        universityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        universityList = new ArrayList<>();
+        universityList.add(Constants.SELECT_UNIVERSITY);
+        final DatabaseReference universityDB = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.UNIVERSITY_INFO);
+        universityDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    String universityName;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        universityName = snapshot.child(Constants.UNIVERSITY_NAME).getValue(String.class);
+                        universityList.add(universityName);
+                    }
+
+                    universityAdapter.addAll(universityList);
+                    universityAdapter.add(Constants.OTHER);
+                    profileActivityBinding.universitySpinner.setAdapter(universityAdapter);
+
+
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Course Data doesn't exist", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                courseList.add("Something is wrong");
+            }
+        });
         universityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         profileActivityBinding.courseSpinner.setEnabled(false);
-        profileActivityBinding.courseSpinner.setAdapter(courseAdapter);
+
         profileActivityBinding.universitySpinner.setEnabled(false);
-        profileActivityBinding.universitySpinner.setAdapter(universityAdapter);
         getUserPojo();
 
 //        profileActivityBinding.courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -124,7 +192,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileActivityBinding.universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position==3){
+                if(position==universityList.size()){
                     profileActivityBinding.universityEditParent.setVisibility(View.VISIBLE);
 
                     profileActivityBinding.universityEditParent.setEnabled(true);
@@ -184,7 +252,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileActivityBinding.courseSpinner.setSelection(courseId);
         profileActivityBinding.universitySpinner.setSelection(universityCode);
         //TODO: static value
-        if(courseId==5){
+        if(courseId==courseList.size()){
                     profileActivityBinding.courseEdit.setEnabled(true);
                     profileActivityBinding.courseEdit.setVisibility(View.VISIBLE);
                     profileActivityBinding.courseEdit.setText(course);
@@ -192,7 +260,7 @@ public class ProfileActivity extends AppCompatActivity {
                 else {
                     profileActivityBinding.courseEdit.setVisibility(View.GONE);
                 }
-        if(universityCode==3){
+        if(universityCode==universityList.size()){
             profileActivityBinding.universityEdit.setEnabled(true);
             profileActivityBinding.universityEdit.setVisibility(View.VISIBLE);
             profileActivityBinding.universityEdit.setText(university);
@@ -209,13 +277,13 @@ public class ProfileActivity extends AppCompatActivity {
          courseId=profileActivityBinding.courseSpinner.getSelectedItemPosition();
          universityCode = profileActivityBinding.universitySpinner.getSelectedItemPosition();
          //TODO: static value
-         if(courseId==5){
+         if(courseId==courseList.size()){
              course=profileActivityBinding.courseEdit.getText().toString();
          }
          else {
              course = profileActivityBinding.courseSpinner.getSelectedItem().toString();
          }
-        if(universityCode==3){
+        if(universityCode==universityList.size()){
             university=profileActivityBinding.universityEdit.getText().toString();
         }
         else {

@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.krishbhatia.eduassets.Constants;
+import com.example.krishbhatia.eduassets.FirebaseMethods;
 import com.example.krishbhatia.eduassets.POJO.UserPOJO;
 import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.databinding.DetailsActivityBinding;
@@ -26,8 +28,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DetailsActivity extends AppCompatActivity {
@@ -39,9 +47,12 @@ public class DetailsActivity extends AppCompatActivity {
     private String course, name, college, semester;
     private String university;
     private FirebaseAuth mAuth;
-    private ArrayAdapter<CharSequence> courseAdapter;
+    private ArrayAdapter<String> courseAdapter;
+    private ArrayAdapter<String> universityAdapter;
 
-    private ArrayAdapter<CharSequence> universityAdapter;
+    private ArrayList<String> courseList;
+    private ArrayList<String> universityList;
+
 
     private ProgressBar progressBar;
 
@@ -52,15 +63,84 @@ public class DetailsActivity extends AppCompatActivity {
         detailsActivityBinding = DataBindingUtil.setContentView(this, R.layout.details_activity);
 
         progressBar = findViewById(R.id.detailsProgressBar);
+        FirebaseMethods firebaseMethods = new FirebaseMethods(DetailsActivity.this);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        courseAdapter = ArrayAdapter.createFromResource(this, R.array.courses, android.R.layout.simple_spinner_item);
+//        courseAdapter = ArrayAdapter.createFromResource(this, R.array.courses, android.R.layout.simple_spinner_item);
+//        courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        courseAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        courseList = new ArrayList<>();
+        courseList.add(Constants.SELECT_COURSE);
+        DatabaseReference courseDB = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.COURSE_BASIC_INFO);
+        courseDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    String courseName;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        courseName = snapshot.child(Constants.COURSE_NAME).getValue(String.class);
+                        courseList.add(courseName);
+                    }
+
+                    courseAdapter.addAll(courseList);
+                    courseAdapter.add(Constants.OTHER);
+                    detailsActivityBinding.courseSpinner.setAdapter(courseAdapter);
+
+
+                } else {
+                    Toast.makeText(mContext, "Course Data doesn't exist", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                courseList.add("Something is wrong");
+            }
+        });
+
+
         courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        universityAdapter = ArrayAdapter.createFromResource(this, R.array.university, android.R.layout.simple_spinner_item);
+
+
+
+//        universityAdapter = ArrayAdapter.createFromResource(this, R.array.university, android.R.layout.simple_spinner_item);
+//        universityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        universityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        universityList = new ArrayList<>();
+        universityList.add(Constants.SELECT_UNIVERSITY);
+        final DatabaseReference universityDB = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.UNIVERSITY_INFO);
+        universityDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    String universityName;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        universityName = snapshot.child(Constants.UNIVERSITY_NAME).getValue(String.class);
+                        universityList.add(universityName);
+                    }
+
+                    universityAdapter.addAll(universityList);
+                    universityAdapter.add(Constants.OTHER);
+                    detailsActivityBinding.universitySpinner.setAdapter(universityAdapter);
+
+
+                } else {
+                    Toast.makeText(mContext, "Course Data doesn't exist", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                courseList.add("Something is wrong");
+            }
+        });
         universityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        detailsActivityBinding.courseSpinner.setAdapter(courseAdapter);
+
+        //detailsActivityBinding.courseSpinner.setAdapter(courseAdapter);
         detailsActivityBinding.universitySpinner.setAdapter(universityAdapter);
         detailsActivityBinding.doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,12 +148,12 @@ public class DetailsActivity extends AppCompatActivity {
                 name = detailsActivityBinding.nameEditText.getText().toString();
                 college = detailsActivityBinding.collegeEdit.getText().toString();
                 semester = detailsActivityBinding.semesterEdit.getText().toString();
-                if (detailsActivityBinding.courseSpinner.getSelectedItemPosition() == 5) {
+                if (detailsActivityBinding.courseSpinner.getSelectedItemPosition() == courseList.size()) {
                     course = detailsActivityBinding.courseEdit.getText().toString();
                 } else {
                     course = detailsActivityBinding.courseSpinner.getSelectedItem().toString();
                 }
-                if (detailsActivityBinding.universitySpinner.getSelectedItemPosition() == 3) {
+                if (detailsActivityBinding.universitySpinner.getSelectedItemPosition() == universityList.size()) {
                     university = detailsActivityBinding.universityEdit.getText().toString();
                 } else {
                     university = detailsActivityBinding.universitySpinner.getSelectedItem().toString();
@@ -132,7 +212,7 @@ public class DetailsActivity extends AppCompatActivity {
         detailsActivityBinding.courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 5) {
+                if (position == courseList.size()) {
                     detailsActivityBinding.courseEditParent.setVisibility(View.VISIBLE);
                     detailsActivityBinding.courseEditParent.setEnabled(true);
                 } else {
@@ -150,7 +230,7 @@ public class DetailsActivity extends AppCompatActivity {
         detailsActivityBinding.universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 3) {
+                if (position == universityList.size()) {
                     detailsActivityBinding.universityEditParent.setVisibility(View.VISIBLE);
                     detailsActivityBinding.universityEditParent.setEnabled(true);
                 } else {

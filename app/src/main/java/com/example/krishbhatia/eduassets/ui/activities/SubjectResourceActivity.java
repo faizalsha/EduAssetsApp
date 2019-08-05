@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -60,17 +61,17 @@ public class SubjectResourceActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        selectedSubject = selectedSubject.replaceAll(" ", "_");
 
-        DatabaseReference resRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/res").child(course + "_" + selectedSubject);
-//        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.RES);
-//        Query query = dbRef.orderByChild(Constants.SUBJECT_CODE).equalTo(subjectCode);
 
-        resRef.addValueEventListener(new ValueEventListener() {
+        long subjectCode = getIntent().getLongExtra(Constants.SUBJECT_CODE, Constants.DEFAULT_VALUE);
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.RES).child(String.valueOf(subjectCode));
+
+        dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     subjectRes = dataSnapshot.getValue(SubjectResPOJO.class);
+                    Log.d(TAG, "onDataChange: "+ dataSnapshot);
                     SectionsRecyclerViewAdapter adapter = new SectionsRecyclerViewAdapter(SubjectResourceActivity.this, subjectRes);
                     recyclerView.setAdapter(adapter);
                 } else {
