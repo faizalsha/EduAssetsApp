@@ -196,6 +196,14 @@
         android:background="@drawable/login_button"
         android:text="@string/Done"
         android:layout_below="@id/semesterEditParent" />
+    <TextView
+        android:id="@+id/signInWithDifferentAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/doneButton"
+        android:text="Sign In With Different Account Click here"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:gravity="center_horizontal"/>
 
     <ProgressBar
         android:id="@+id/detailsProgressBar"

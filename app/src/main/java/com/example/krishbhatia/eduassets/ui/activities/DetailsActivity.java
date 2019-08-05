@@ -20,6 +20,9 @@ import com.example.krishbhatia.eduassets.R;
 import com.example.krishbhatia.eduassets.databinding.DetailsActivityBinding;
 import com.example.krishbhatia.eduassets.utils.NetworkUtils;
 import com.example.krishbhatia.eduassets.utils.SharedPreferenceImpl;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -107,6 +110,22 @@ public class DetailsActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(mContext, "Please Fill AllCourseActivity Details", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        detailsActivityBinding.signInWithDifferentAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
+                GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(DetailsActivity.this, gso);
+                mGoogleSignInClient.signOut();
+                SharedPreferenceImpl.getInstance().clearAll(DetailsActivity.this);
+                startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
+                finish();
             }
         });
 
