@@ -5,44 +5,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:focusableInTouchMode="true"
     >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
+        android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        tools:context=".ui.activities.ProfileActivity">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_alignTop="@id/profile_text"
+            android:id="@+id/backImageView"
+            android:src="@drawable/ic_arrow_left_black_48dp"/>
+
+        <TextView
+            android:id="@+id/profile_text"
+            android:layout_width="wrap_content"
+            android:paddingTop="@dimen/dimen_5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_32dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:text="@string/edit_details"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/dimen_24sp"
+            android:textStyle="bold|italic" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_40dp"
+            android:id="@+id/editDetailsImage"
+            android:layout_alignTop="@id/profile_text"
+            android:src="@drawable/ic_edit_black"/>
+
+
+    </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <RelativeLayout
     android:paddingRight="@dimen/dimen_20dp"
     android:paddingLeft="@dimen/dimen_20dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activities.ProfileActivity">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dimen_40dp"
-        android:layout_alignTop="@id/profile_text"
-        android:id="@+id/backImageView"
-        android:src="@drawable/ic_arrow_left_black_48dp"/>
-
-    <TextView
-        android:id="@+id/profile_text"
-        android:layout_width="wrap_content"
-        android:paddingTop="@dimen/dimen_5dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_32dp"
-        android:layout_marginTop="@dimen/dimen_10dp"
-        android:text="@string/edit_details"
-        android:textColor="@color/black"
-        android:layout_centerHorizontal="true"
-        android:textSize="@dimen/dimen_24sp"
-        android:textStyle="bold|italic" />
-    <ImageView
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dimen_40dp"
-        android:id="@+id/editDetailsImage"
-        android:layout_alignTop="@id/profile_text"
-        android:src="@drawable/ic_edit_black"/>
+    android:layout_height="wrap_content"
+    >
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editDetailsImage"
+
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:met_floatingLabel="highlight"
         app:met_floatingLabelAnimating="true"
@@ -54,14 +74,14 @@
         app:met_floatingLabelTextColor="@color/black"
         app:met_hideUnderline="true"
         android:layout_marginTop="@dimen/dimen_20dp"
-
         android:id="@+id/nameParent"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:enabled="false"
+            android:layout_height="wrap_content"
             android:id="@+id/nameEditText"
             android:hint="@string/textEnterName"
             android:textSize="@dimen/dimen_15sp"
@@ -69,48 +89,31 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-<!--    <com.rengwuxian.materialedittext.MaterialEditText-->
-<!--        android:layout_below="@id/profile_text"-->
-<!--        android:id="@+id/nameEditText"-->
-<!--        android:enabled="false"-->
-<!--        android:focusableInTouchMode="true"-->
-
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/dimen_20dp"-->
-<!--        android:hint="@string/textEnterName"-->
-<!--        android:textColor="@color/colorTextView"-->
-<!--        android:textColorHint="@color/colorAccent"-->
-<!--        android:textSize="@dimen/dimen_15sp"-->
-<!--        style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"-->
-<!--        app:met_floatingLabel="highlight"-->
-<!--        app:met_floatingLabelAnimating="true"-->
-<!--        app:met_floatingLabelText="@string/textName"-->
-<!--        app:met_floatingLabelTextColor="@color/black"-->
-<!--        app:met_hideUnderline="true" />-->
-
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
         android:id="@+id/courseSpinner"
+        android:enabled="false"
         android:background="@drawable/spinner_design"
         android:layout_below="@id/nameParent"
         android:layout_marginTop="@dimen/dimen_15dp"
         />
+/>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:enabled="false"
+
         android:layout_height="wrap_content"
         android:layout_below="@id/courseSpinner"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:met_floatingLabel="highlight"
         app:met_floatingLabelAnimating="true"
-        app:met_floatingLabelText="@string/textCourse"
+        app:met_floatingLabelText="@string/textOtherCourse"
         app:met_floatingLabelTextColor="@color/black"
         app:met_hideUnderline="true"
         android:layout_marginTop="@dimen/dimen_20dp"
         android:id="@+id/courseEditParent"
-        android:visibility="gone"
 
         >
 
@@ -120,29 +123,13 @@
             android:id="@+id/courseEdit"
             android:enabled="false"
 
-            android:hint="@string/EnterCourse"
+            android:hint="@string/textOtherCourse"
             android:textSize="@dimen/dimen_15sp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!--    <com.rengwuxian.materialedittext.MaterialEditText-->
-<!--        android:layout_below="@id/courseSpinner"-->
-<!--        android:id="@+id/courseEdit"-->
-<!--        app:boxStrokeWidth="4dp"-->
-<!--        android:enabled="false"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/dimen_15dp"-->
-<!--        android:hint="@string/textOtherCourse"-->
-<!--        android:textColor="@color/colorTextView"-->
-<!--        android:textColorHint="@color/colorAccent"-->
-<!--        android:textSize="@dimen/dimen_15sp"-->
-<!--        app:met_floatingLabel="highlight"-->
-<!--        app:met_floatingLabelAnimating="true"-->
-<!--        app:met_floatingLabelText="@string/textCourse"-->
-<!--        app:met_floatingLabelTextColor="@color/black"-->
-<!--        app:met_hideUnderline="true" />-->
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -163,9 +150,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/collegeEdit"
+            android:hint="@string/textEnterCollege"
             android:enabled="false"
 
-            android:hint="@string/textEnterCollege"
             android:textSize="@dimen/dimen_15sp"
             />
 
@@ -177,8 +164,11 @@
         android:id="@+id/universitySpinner"
         android:background="@drawable/spinner_design"
         android:layout_below="@id/collegeEditParent"
+        android:enabled="false"
+
         android:layout_marginTop="@dimen/dimen_15dp"
         />
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -186,12 +176,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:met_floatingLabel="highlight"
         app:met_floatingLabelAnimating="true"
-        app:met_floatingLabelText="@string/textCourse"
+        app:met_floatingLabelText="@string/otherUniversity"
         app:met_floatingLabelTextColor="@color/black"
         app:met_hideUnderline="true"
         android:layout_marginTop="@dimen/dimen_20dp"
         android:id="@+id/universityEditParent"
-        android:visibility="gone"
 
         >
 
@@ -200,8 +189,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/universityEdit"
             android:enabled="false"
-
-            android:hint="@string/enter_university"
+            android:hint="@string/otherUniversity"
             android:textSize="@dimen/dimen_15sp"
             />
 
@@ -226,61 +214,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/semesterEdit"
-            android:hint="@string/EnterSem"
-            android:textSize="@dimen/dimen_15sp"
             android:enabled="false"
 
+            android:hint="@string/EnterSem"
+            android:textSize="@dimen/dimen_15sp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
-<!--    <com.rengwuxian.materialedittext.MaterialEditText-->
-<!--        android:layout_below="@id/courseEditParent"-->
-<!--        android:id="@+id/collegeEdit"-->
-<!--        android:clickable="false"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:enabled="false"-->
-
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/dimen_15dp"-->
-<!--        android:hint="@string/textEnterCollege"-->
-<!--        android:textColor="@color/colorTextView"-->
-<!--        android:textColorHint="@color/colorAccent"-->
-<!--        android:textSize="@dimen/dimen_15sp"-->
-<!--        style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"-->
-<!--        app:met_floatingLabel="highlight"-->
-<!--        app:met_floatingLabelAnimating="true"-->
-<!--        app:met_floatingLabelText="@string/college"-->
-<!--        app:met_floatingLabelTextColor="@color/black"-->
-<!--        app:met_hideUnderline="true" />-->
-
-<!--    <com.rengwuxian.materialedittext.MaterialEditText-->
-<!--        android:layout_below="@id/collegeEdit"-->
-<!--        android:id="@+id/semesterEdit"-->
-<!--        android:clickable="false"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/dimen_15dp"-->
-<!--        android:enabled="false"-->
-<!--        android:hint="@string/EnterSem"-->
-<!--        android:textColor="@color/colorTextView"-->
-<!--        android:textColorHint="@color/colorAccent"-->
-<!--        android:textSize="@dimen/dimen_15sp"-->
-<!--        style="@style/ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense"-->
-<!--        app:met_floatingLabel="highlight"-->
-<!--        app:met_floatingLabelAnimating="true"-->
-<!--        app:met_floatingLabelText="@string/semester"-->
-<!--        app:met_floatingLabelTextColor="@color/black"-->
-<!--        app:met_hideUnderline="true" />-->
 
     <Button
         android:id="@+id/doneButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_50dp"
         android:layout_marginStart="@dimen/dimen_32dp"
-        android:layout_marginTop="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
         android:layout_marginEnd="@dimen/dimen_32dp"
         android:background="@drawable/login_button"
         android:text="@string/Done"
         android:layout_below="@id/semesterEditParent" />
 </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
 </layout>

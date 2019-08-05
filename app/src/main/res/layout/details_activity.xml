@@ -170,21 +170,7 @@
             />
 
     </com.google.android.material.textfield.TextInputLayout>
-<!--    <com.rengwuxian.materialedittext.MaterialEditText-->
-<!--        android:layout_below="@id/collegeEditParent"-->
-<!--        android:id="@+id/semesterEdit"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/dimen_15dp"-->
-<!--        android:hint="@string/EnterSem"-->
-<!--        android:textColor="@color/colorTextView"-->
-<!--        android:textColorHint="@color/colorAccent"-->
-<!--        android:textSize="@dimen/dimen_15sp"-->
-<!--        app:met_floatingLabel="highlight"-->
-<!--        app:met_floatingLabelAnimating="true"-->
-<!--        app:met_floatingLabelText="@string/semester"-->
-<!--        app:met_floatingLabelTextColor="@color/black"-->
-<!--        app:met_hideUnderline="true" />-->
+
 
     <Button
         android:id="@+id/doneButton"
