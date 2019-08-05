@@ -65,8 +65,10 @@ public class DetailsActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.detailsProgressBar);
         FirebaseMethods firebaseMethods = new FirebaseMethods(DetailsActivity.this);
 
+
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        detailsActivityBinding.emailEditText.setText(mAuth.getCurrentUser().getEmail());
 //        courseAdapter = ArrayAdapter.createFromResource(this, R.array.courses, android.R.layout.simple_spinner_item);
 //        courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

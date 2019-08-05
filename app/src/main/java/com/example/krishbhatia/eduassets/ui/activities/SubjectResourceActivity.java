@@ -2,6 +2,9 @@ package com.example.krishbhatia.eduassets.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -76,6 +80,25 @@ public class SubjectResourceActivity extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(SubjectResourceActivity.this, "Resources Coming Soon...", Toast.LENGTH_SHORT).show();
+                    RelativeLayout noDataFoundScreen = findViewById(R.id.noDataFoundScreen);
+                    noDataFoundScreen.setVisibility(View.VISIBLE);
+                    findViewById(R.id.appBarLayout).setVisibility(View.GONE);
+                    findViewById(R.id.nestedScrollView).setVisibility(View.GONE);
+
+                    findViewById(R.id.hereText).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                            startActivity(browserIntent);
+                        }
+                    });
+                    findViewById(R.id.backArrow).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
+
                 }
                 progressBar.setVisibility(View.GONE);
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
