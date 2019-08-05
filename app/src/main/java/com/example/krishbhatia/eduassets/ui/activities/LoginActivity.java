@@ -199,7 +199,14 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-//    private void updateUI(final FirebaseUser user) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!loginlayoutBinding.googleSignInButton.isClickable()){
+            loginlayoutBinding.googleSignInButton.setClickable(true);
+        }
+    }
+    //    private void updateUI(final FirebaseUser user) {
 //        if (user != null) {
 //
 //                userDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.USERS).child(mAuth.getUid());
