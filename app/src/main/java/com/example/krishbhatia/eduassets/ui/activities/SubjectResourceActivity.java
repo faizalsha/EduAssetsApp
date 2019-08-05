@@ -2,12 +2,17 @@ package com.example.krishbhatia.eduassets.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,21 +65,40 @@ public class SubjectResourceActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        selectedSubject = selectedSubject.replaceAll(" ", "_");
 
-        DatabaseReference resRef = FirebaseDatabase.getInstance().getReference().child("MyRoot/res").child(course + "_" + selectedSubject);
-//        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.RES);
-//        Query query = dbRef.orderByChild(Constants.SUBJECT_CODE).equalTo(subjectCode);
 
-        resRef.addValueEventListener(new ValueEventListener() {
+        long subjectCode = getIntent().getLongExtra(Constants.SUBJECT_CODE, Constants.DEFAULT_VALUE);
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.RES).child(String.valueOf(subjectCode));
+
+        dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     subjectRes = dataSnapshot.getValue(SubjectResPOJO.class);
+                    Log.d(TAG, "onDataChange: "+ dataSnapshot);
                     SectionsRecyclerViewAdapter adapter = new SectionsRecyclerViewAdapter(SubjectResourceActivity.this, subjectRes);
                     recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(SubjectResourceActivity.this, "Resources Coming Soon...", Toast.LENGTH_SHORT).show();
+                    RelativeLayout noDataFoundScreen = findViewById(R.id.noDataFoundScreen);
+                    noDataFoundScreen.setVisibility(View.VISIBLE);
+                    findViewById(R.id.appBarLayout).setVisibility(View.GONE);
+                    findViewById(R.id.nestedScrollView).setVisibility(View.GONE);
+
+                    findViewById(R.id.hereText).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                            startActivity(browserIntent);
+                        }
+                    });
+                    findViewById(R.id.backArrow).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
+
                 }
                 progressBar.setVisibility(View.GONE);
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);

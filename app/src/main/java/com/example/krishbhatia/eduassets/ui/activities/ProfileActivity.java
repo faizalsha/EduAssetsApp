@@ -60,7 +60,6 @@ public class ProfileActivity extends AppCompatActivity {
                     if (position == 5) {
                         profileActivityBinding.courseEdit.setEnabled(true);
                     } else {
-                        profileActivityBinding.courseEdit.setText("");
                         profileActivityBinding.courseEdit.setEnabled(false);
 
                     }
