@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.VideoPlayerActivity">
+    tools:context=".ui.activities.VideoPlayerActivity"
+    android:background="@color/black">
 
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/exo_player_view"
@@ -24,5 +25,30 @@
         android:layout_marginEnd="@dimen/dimen_8dp"
         android:visibility="visible"
         android:layout_centerInParent="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#BF000000"
+        android:padding="@dimen/dimen_24dp"
+        android:id="@+id/videoTitleParent">
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_arrow_white"/>
+        <TextView
+            android:id="@+id/videoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/backArrow"
+            android:text="Introduction to Business Management"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

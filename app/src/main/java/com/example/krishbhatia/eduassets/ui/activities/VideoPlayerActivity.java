@@ -3,8 +3,13 @@ package com.example.krishbhatia.eduassets.ui.activities;
 import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.krishbhatia.eduassets.Constants;
@@ -24,6 +29,7 @@ import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.PlaybackControlView;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -36,15 +42,28 @@ public class VideoPlayerActivity extends AppCompatActivity {
     SimpleExoPlayer exoPlayer;
     ProgressBar progressBar;
     String videoUrl;
+    RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_video_player);
+        TextView videoTitle = findViewById(R.id.videoTitle);
+        videoTitle.setText(getIntent().getStringExtra(Constants.RESOURCE_NAME));
         exoPlayerView = findViewById(R.id.exo_player_view);
         progressBar = findViewById(R.id.video_player_progress_bar);
         videoUrl = getIntent().getStringExtra(Constants.URL);
+        relativeLayout = findViewById(R.id.videoTitleParent);
         initializePlayer();
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
     }
 
     private void initializePlayer(){
@@ -97,8 +116,26 @@ public class VideoPlayerActivity extends AppCompatActivity {
                 }
             });
             exoPlayerView.setPlayer(exoPlayer);
+            exoPlayerView.setControllerVisibilityListener(new PlaybackControlView.VisibilityListener() {
+                @Override
+                public void onVisibilityChange(int visibility) {
+                    if (relativeLayout.getVisibility() == View.VISIBLE){
+                        relativeLayout.setVisibility(View.GONE);
+                    }else {
+                        relativeLayout.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
             exoPlayer.prepare(mediaSource);
             exoPlayer.setPlayWhenReady(true);
+
+            findViewById(R.id.backArrow).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+
         }catch (Exception e){
             Toast.makeText(this, "Error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }

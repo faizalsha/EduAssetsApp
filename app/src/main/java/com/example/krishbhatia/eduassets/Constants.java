@@ -40,4 +40,5 @@ public class Constants {
     public static final String SELECT_COURSE = "Select Course";
     public static final String SELECT_UNIVERSITY = "Select University";
     public static final String OTHER = "Other";
+    public static final String RESOURCE_NAME = "resource name";
 }

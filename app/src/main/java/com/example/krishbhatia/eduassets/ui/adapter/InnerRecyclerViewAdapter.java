@@ -57,6 +57,7 @@ public class InnerRecyclerViewAdapter extends RecyclerView.Adapter<InnerRecycler
                 } else if (res.getResType().equals(Constants.VIDEO)){
                     Intent intent = new Intent(mContext, VideoPlayerActivity.class);
                     intent.putExtra(Constants.URL, res.getResUrl());
+                    intent.putExtra(Constants.RESOURCE_NAME, res.getResName());
                     mContext.startActivity(intent);
                 }
             }
