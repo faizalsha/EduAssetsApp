@@ -58,6 +58,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
                 Intent intent = new Intent(mCtx, SubjectResourceActivity.class);
                 intent.putExtra(Constants.SELECTED_SUBJECT, subject.getSubjectName());
                 intent.putExtra(Constants.SUBJECT_CODE, subject.getSubjectCode());
+                intent.putExtra(Constants.COURSE_NAME, subject.getCourseName());
                 mCtx.startActivity(intent);
             }
         });

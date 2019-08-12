@@ -68,7 +68,8 @@ public class SubjectResourceActivity extends AppCompatActivity {
 
 
         long subjectCode = getIntent().getLongExtra(Constants.SUBJECT_CODE, Constants.DEFAULT_VALUE);
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.RES).child(String.valueOf(subjectCode));
+        String subjectCodeString = getIntent().getStringExtra(Constants.COURSE_NAME) + " " + subjectCode;
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Constants.MY_ROOT).child(Constants.RES).child(subjectCodeString);
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
